@@ -1,6 +1,6 @@
 {
 	"name": "@wpmvc/admin-sidebar",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "Professional React hooks for WordPress admin interfaces with complete sidebar management and responsive layout control.",
 	"author": "Md Al Amin",
 	"license": "MIT",
@@ -23,8 +23,11 @@
 		"sidebar"
 	],
 	"homepage": "https://github.com/wpmvc/jskit/tree/master/packages/admin-sidebar",
-	"repository": "git+https://github.com/wpmvc/jskit.git",
-	"bugs": {
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/wpmvc/jskit.git"
+	},
+  	"bugs": {
 		"url": "https://github.com/wpmvc/jskit/issues"
 	},
 	"devDependencies": {
