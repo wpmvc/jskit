@@ -2,7 +2,7 @@
 
 `ClassicEditor` is a React component that seamlessly integrates the WordPress Classic Editor using the `wp.editor` API. This component provides a fully customizable TinyMCE editor for your React applications, enabling rich text editing capabilities.
 
-[![npm](https://img.shields.io/npm/v/@wpmvc/classic-editor.svg)](https://www.npmjs.com/package/@wpmvc/classic-editor) [![downloads](http://img.shields.io/npm/dm/@wpmvc/classic-editor.svg?style=flat-square)](https://www.npmjs.com/package/@wpmvc/classic-editor) [![License](https://img.shields.io/npm/l/@wpmvc/classic-editor.svg)](https://www.npmjs.com/package/@wpmvc/classic-editor)
+[![npm](https://img.shields.io/npm/v/@wpmvc/classic-editor.svg)](https://www.npmjs.com/package/@wpmvc/classic-editor) [![downloads](https://img.shields.io/npm/dm/@wpmvc/classic-editor.svg)](https://www.npmjs.com/package/@wpmvc/classic-editor) [![License](https://img.shields.io/npm/l/@wpmvc/classic-editor.svg)](https://www.npmjs.com/package/@wpmvc/classic-editor) [![Bundle Size](https://img.shields.io/bundlephobia/minzip/@wpmvc/classic-editor)](https://bundlephobia.com/package/@wpmvc/classic-editor) [![TypeScript](https://img.shields.io/badge/types-Typescript-blue)](https://www.typescriptlang.org/)
 
 ## Installation
 
