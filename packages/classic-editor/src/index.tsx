@@ -1,31 +1,49 @@
 import { useEffect, useRef, useMemo, useState } from '@wordpress/element';
-import EditorWrapper from './EditorWrapper';
+import EditorWrapper from './editor-wrapper';
 
-const ClassicEditor = ( {
+type ClassicEditorProps = {
+	value: string;
+	onChange: ( value: string ) => void;
+	height?: number;
+	useExtendStyles?: boolean;
+	hasMedia?: boolean;
+};
+
+declare global {
+	interface Window {
+		wp: {
+			editor: {
+				initialize: ( id: string, settings: any ) => void;
+				remove: ( id: string ) => void;
+			};
+		};
+	}
+}
+
+export default function ClassicEditor( {
 	value,
 	onChange,
 	height = 250,
-	useExtendStyles = false, // Pass this prop to control extended styles,
+	useExtendStyles = false,
 	hasMedia = true,
-} ) => {
+}: ClassicEditorProps ) {
 	const [ isEditorReady, setIsEditorReady ] = useState( false );
-	const editorRef = useRef( null );
+	const editorRef = useRef< any >( null );
 
 	const editorId = useMemo(
-		() => `wp_editor_${ Date.now() + parseInt( Math.random() * 1000 ) }`,
+		() => `wp_editor_${ Date.now() + Math.floor( Math.random() * 1000 ) }`,
 		[]
 	);
 
 	const hasWpEditor = !! window.wp?.editor;
 
-	const setupEditor = ( editor ) => {
-		editorRef.current = editor; // Store the editor instance
+	const setupEditor = ( editor: any ) => {
+		editorRef.current = editor;
 
 		editor.on( 'init', () => {
-			editor.setContent( value ); // Set initial content when TinyMCE is ready
+			editor.setContent( value );
 		} );
 
-		// Handle content changes
 		editor.on( 'change', () => {
 			onChange( editor.getContent() );
 		} );
@@ -34,10 +52,8 @@ const ClassicEditor = ( {
 	};
 
 	const initEditor = () => {
-		// Clean up any previous instance
 		window.wp.editor.remove( editorId );
 
-		// Initialize TinyMCE editor
 		window.wp.editor.initialize( editorId, {
 			tinymce: {
 				height,
@@ -53,7 +69,7 @@ const ClassicEditor = ( {
 
 	useEffect( () => {
 		if ( editorRef.current && value !== editorRef.current.getContent() ) {
-			editorRef.current.setContent( value ); // Update editor content if value changes from outside
+			editorRef.current.setContent( value );
 		}
 	}, [ value ] );
 
@@ -70,7 +86,6 @@ const ClassicEditor = ( {
 			initEditor();
 		}
 
-		// Cleanup when component unmounts
 		return () => {
 			if ( hasWpEditor ) {
 				window.wp.editor.remove( editorId );
@@ -79,10 +94,8 @@ const ClassicEditor = ( {
 	}, [ hasWpEditor ] );
 
 	return (
-		<EditorWrapper extend={ useExtendStyles.toString() }>
+		<EditorWrapper $extend={ useExtendStyles }>
 			<textarea className="wpmvc-classic-editor" id={ editorId } />
 		</EditorWrapper>
 	);
-};
-
-export default ClassicEditor;
+}

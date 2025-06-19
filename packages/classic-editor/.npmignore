@@ -6,4 +6,3 @@ vite.config.mjs
 # Ignore source files
 src/
 tsconfig.json
-.gitignore

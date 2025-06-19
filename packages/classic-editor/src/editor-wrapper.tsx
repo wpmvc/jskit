@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
-const EditorWrapper = styled.div`
-	${ ( { extend } ) => extend === 'true' &&
+interface EditorWrapperProps {
+	$extend?: boolean;
+}
+
+const EditorWrapper = styled.div< EditorWrapperProps >`
+	${ ( props ) =>
+		props.$extend &&
 		`
 		border: 1px solid #dadbdd;
 		border-radius: 8px;

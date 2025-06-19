@@ -1,0 +1,57 @@
+{
+  "name": "@wpmvc/fields",
+  "version": "0.0.1",
+  "description": "Reusable fields package for WordPress MVC JSKit.",
+  "author": "Md Al Amin",
+  "license": "MIT",
+  "main": "build/fields.umd.js",
+  "module": "build/fields.es.js",
+  "types": "build-types/types/index.d.ts",
+  "scripts": {
+    "start": "vite build --watch",
+    "build": "vite build",
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "files": [
+    "build",
+    "build-types"
+  ],
+  "keywords": [
+    "wordpress",
+    "fields",
+    "react",
+    "gutenberg",
+    "wpmvc"
+  ],
+  "homepage": "https://github.com/wpmvc/jskit/tree/master/packages/fields",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wpmvc/jskit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wpmvc/jskit/issues"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/modifiers": "^9.0.0",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@wordpress/block-editor": "^14.20.0",
+    "@wordpress/components": "^29.11.0",
+    "@wordpress/element": "^6.25.0",
+    "@wordpress/i18n": "^5.25.0",
+    "@wordpress/icons": "^10.25.0",
+    "clsx": "^2.1.1",
+    "lodash": "^4.17.21",
+    "react-select": "^5.10.1",
+    "styled-components": "^6.1.18"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.17",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@wordpress/scripts": "^30.18.0",
+    "path": "^0.12.7",
+    "typescript": "^5.8.3"
+  }
+}

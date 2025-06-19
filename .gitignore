@@ -1,4 +1,4 @@
 node_modules
-yarn.lock
-package-lock.json
-lib
+build
+build-types
+.DS_Store
