@@ -29,7 +29,7 @@ import ToggleGroup from './toggle-group';
 import Repeater from './repeater';
 import Notice from './notice';
 import Tabs from './tabs';
-import styled from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 import Group from './group';
 import Row from './row';
 
@@ -148,10 +148,12 @@ export function PrivateFields( props: FieldProps ): JSX.Element | null {
  * @param {FieldRootProps} props Component props
  * @returns {JSX.Element | null} Rendered field components or null
  */
-export default function Fields( props: FieldRootProps ): JSX.Element | null {
+export default function Fields(
+	props: FieldRootProps & { style?: CSSProperties | undefined }
+): JSX.Element | null {
 	const { components = {} } = props;
 	return (
-		<StyledFields>
+		<StyledFields style={ props.style }>
 			{ /* @ts-ignore */ }
 			<PrivateFields
 				{ ...props }

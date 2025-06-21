@@ -41,12 +41,12 @@ export type FieldType =
 	| 'repeater'
 	| 'row';
 
+export type Option = { label: string; value: string; description?: string };
+
 // Options type used for select, radio, toggleGroup
-export type Options =
-	| Array< { label: string; value: string; description?: string } >
-	| ( (
-			attributes: Record< string, any >
-	  ) => Array< { label: string; value: string } > );
+export type Options< T = Option > =
+	| Array< T >
+	| ( ( attributes: Record< string, any > ) => Array< T > );
 
 export type Device = 'desktop' | 'tablet' | 'mobile';
 
