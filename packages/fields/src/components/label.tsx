@@ -61,10 +61,11 @@ function Responsive( { device = 'desktop', onChangeDevice }: ResponsiveProps ) {
 			onClick: () => onChangeDevice && onChangeDevice( 'mobile' ),
 		},
 	};
+	
 	return (
 		<StyledDropdown
-			popoverProps={ { className: 'x-currency-responsive-popover' } }
-			fields={
+			popoverProps={ { className: 'wpmvc-responsive-popover' } }
+			controls={
 				values( omit( responsiveOptions, device ) ) as DropdownOption[] // Remove current device from options
 			}
 			icon={ responsiveOptions[ device ].icon }
