@@ -43,6 +43,7 @@ function Responsive( { device = 'desktop', onChangeDevice }: ResponsiveProps ) {
 				</svg>
 			),
 			onClick: () => onChangeDevice && onChangeDevice( 'desktop' ),
+			isActive: device === 'desktop',
 		},
 		tablet: {
 			icon: (
@@ -51,6 +52,7 @@ function Responsive( { device = 'desktop', onChangeDevice }: ResponsiveProps ) {
 				</svg>
 			),
 			onClick: () => onChangeDevice && onChangeDevice( 'tablet' ),
+			isActive: device === 'tablet',
 		},
 		mobile: {
 			icon: (
@@ -59,6 +61,7 @@ function Responsive( { device = 'desktop', onChangeDevice }: ResponsiveProps ) {
 				</svg>
 			),
 			onClick: () => onChangeDevice && onChangeDevice( 'mobile' ),
+			isActive: device === 'mobile',
 		},
 	};
 
@@ -66,7 +69,8 @@ function Responsive( { device = 'desktop', onChangeDevice }: ResponsiveProps ) {
 		<StyledDropdown
 			popoverProps={ { className: 'wpmvc-responsive-popover' } }
 			controls={
-				values( omit( responsiveOptions, device ) ) as DropdownOption[] // Remove current device from options
+				values( responsiveOptions ) as DropdownOption[]
+				// values( omit( responsiveOptions, device ) ) as DropdownOption[] // Remove current device from options
 			}
 			icon={ responsiveOptions[ device ].icon }
 			label={ __( 'Responsive' ) }
