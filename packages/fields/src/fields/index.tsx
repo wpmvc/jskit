@@ -76,6 +76,10 @@ const StyledFields = styled.div`
 		.components-panel__body {
 			border-top: 0;
 		}
+
+		&.row {
+			padding-bottom: 0;
+		}
 	}
 `;
 /**

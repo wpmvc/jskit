@@ -11,11 +11,16 @@ import { __experimentalInputControl as InputControl } from '@wordpress/component
 /**
  * Internal dependencies
  */
-import { CommonFieldProps } from '../types/field';
-import { getValue, isDisabled, memoCallback, updateAttribute } from '../utils';
-import Label from '../components/label';
+import {
+	getValue,
+	isDisabled,
+	memoCallback,
+	updateAttribute,
+} from '../../utils';
+import Label from '../../components/label';
 import styled from 'styled-components';
 import { memo } from 'react';
+import { TextFieldProps } from './types';
 
 // const StyledInput = styled( InputControl )< { isInvalid: boolean } >`
 // 	${ ( { isInvalid } ) =>
@@ -31,31 +36,33 @@ import { memo } from 'react';
 // 		` }
 // `;
 const StyledInputField = styled( InputControl )< {
-	isDisabled: string;
+	$isDisabled: boolean;
 } >`
 	${ ( props ) =>
-		'true' === props.isDisabled &&
+		props.$isDisabled &&
 		`
 		pointer-events: none;
 		opacity: 0.5;
 	` }
 `;
 
-const Text = memo( ( props: CommonFieldProps ) => {
+const Text = memo( ( props: TextFieldProps ) => {
 	const { field } = props;
 	const { helpText } = field || {};
 
 	return (
 		<StyledInputField
+			//@ts-ignore
 			label={ <Label { ...props } /> }
 			help={ helpText }
 			size="__unstable-large"
 			value={ getValue( props ) }
 			onChange={ ( value: any ) => updateAttribute( value, props ) }
-			isDisabled={ isDisabled( props ) ? 'true' : 'false' }
+			$isDisabled={ isDisabled( props ) }
 			className={ field?.className }
 			onClick={ ( event: React.MouseEvent ) => event.stopPropagation() }
 			required={ field?.required }
+			labelPosition={ field?.labelPosition }
 		/>
 	);
 }, memoCallback );

@@ -39,6 +39,7 @@ export default function Number( props: NumberFieldProps ): JSX.Element {
 			min={ field?.min }
 			max={ field?.max }
 			required={ field?.required }
+			labelPosition={ field?.labelPosition }
 		/>
 	);
 }

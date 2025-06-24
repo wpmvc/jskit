@@ -31,8 +31,8 @@ export default function Border( props: BorderFieldProps ): JSX.Element {
 	 */
 	const hasValue = ( elementName: string ) =>
 		! isEqual(
-			(attribute?.[ elementName ]) ?? {},
-			(defaultValues?.[ elementName ]) ?? {}
+			attribute?.[ elementName ] ?? {},
+			defaultValues?.[ elementName ] ?? {}
 		);
 
 	/**

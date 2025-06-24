@@ -14,7 +14,7 @@ const StyledRow = styled.div< {
 	flex-wrap: wrap;
 	gap: 20px;
 
-	.components-base-field {
+	> .wpmvc-field {
 		flex: 0 0 100%;
 
 		@media ( min-width: 768px ) {

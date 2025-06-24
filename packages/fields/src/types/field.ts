@@ -18,6 +18,7 @@ import {
 	ToggleGroupFieldProps,
 	ToggleGroupFieldType,
 } from '../fields/toggle-group/types';
+import { TextFieldProps, TextFieldType } from '../fields/text/types';
 
 // Field types
 export type FieldType =
@@ -66,14 +67,7 @@ export type BaseField = {
 
 // All other field types (no options, no isMulti)
 export type OtherFieldType = BaseField & {
-	type:
-		| 'color'
-		| 'checkbox'
-		| 'dimension'
-		| 'height'
-		| 'slider'
-		| 'switch'
-		| 'text';
+	type: 'color' | 'checkbox' | 'dimension' | 'height' | 'slider' | 'switch';
 };
 
 // Union of all field types
@@ -90,6 +84,7 @@ export type Field =
 	| SelectFieldType
 	| SliderFieldType
 	| TabsFieldType
+	| TextFieldType
 	| ToggleGroupFieldType
 	| OtherFieldType;
 
@@ -135,5 +130,6 @@ export type FieldProps =
 	| SelectFieldProps
 	| SliderFieldProps
 	| TabsFieldProps
+	| TextFieldProps
 	| ToggleGroupFieldProps
 	| CommonFieldProps;
