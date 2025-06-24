@@ -10,7 +10,7 @@ import { useState } from '@wordpress/element';
  */
 import Label from '../components/label';
 import { CommonFieldProps } from '../types/field';
-import { isDisabled } from '../utils';
+import { getValue, isDisabled, updateAttribute } from '../utils';
 import styled from 'styled-components';
 
 const StyledBoxField = styled( BoxControl )< {
@@ -25,20 +25,13 @@ const StyledBoxField = styled( BoxControl )< {
 `;
 
 export default function Dimension( props: CommonFieldProps ): JSX.Element {
-	const { attrKey, field, attributes, setAttributes } = props;
-	const [ values, setValues ] = useState< any >( attributes[ attrKey ] );
-
-	const handleChange = ( value: any ) => {
-		setValues( value );
-		setAttributes( { [ attrKey ]: value } );
-	};
-
+	const { field } = props;
 	return (
 		<StyledBoxField
 			//@ts-ignore
 			label={ <Label { ...props } /> }
-			values={ values }
-			onChange={ handleChange }
+			values={ getValue( props, {} ) }
+			onChange={ ( value: any ) => updateAttribute( value, props ) }
 			isDisabled={ isDisabled( props ) ? 'true' : 'false' }
 			className={ field?.className }
 		/>

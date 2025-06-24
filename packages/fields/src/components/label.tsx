@@ -61,7 +61,7 @@ function Responsive( { device = 'desktop', onChangeDevice }: ResponsiveProps ) {
 			onClick: () => onChangeDevice && onChangeDevice( 'mobile' ),
 		},
 	};
-	
+
 	return (
 		<StyledDropdown
 			popoverProps={ { className: 'wpmvc-responsive-popover' } }

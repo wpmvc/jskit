@@ -31,8 +31,8 @@ export default function Border( props: BorderFieldProps ): JSX.Element {
 	 */
 	const hasValue = ( elementName: string ) =>
 		! isEqual(
-			attribute[ elementName ] ?? {},
-			defaultValues[ elementName ] ?? {}
+			(attribute?.[ elementName ]) ?? {},
+			(defaultValues?.[ elementName ]) ?? {}
 		);
 
 	/**
@@ -93,7 +93,7 @@ export default function Border( props: BorderFieldProps ): JSX.Element {
 				>
 					<BorderBoxControl
 						enableAlpha
-						value={ attribute.border ?? {} }
+						value={ attribute?.border ?? {} }
 						onChange={ ( value: any ) =>
 							onChange( 'border', value )
 						}
@@ -113,7 +113,7 @@ export default function Border( props: BorderFieldProps ): JSX.Element {
 					panelId={ panelId }
 				>
 					<BorderRadiusControl
-						values={ attribute.radius ?? {} }
+						values={ attribute?.radius ?? {} }
 						onChange={ ( value: any ) =>
 							onChange( 'radius', value )
 						}
