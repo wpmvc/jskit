@@ -16,10 +16,11 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 		path,
 		item: null,
 		items: [],
-		setIndexQueryParams: {
+		indexQueryParams: {
 			search: '',
 			page: 1,
 			perPage: 10,
+			sort: {}
 		},
 	};
 
@@ -53,7 +54,7 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 						draft.item = null;
 						break;
 					case 'SET_INDEX_QUERY_PARAMS':
-						draft.setIndexQueryParams = action.params;
+						draft.indexQueryParams = action.params;
 						break;
 				}
 			} );
@@ -118,6 +119,17 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 					dispatch.invalidateResolution( 'show' );
 				};
 			},
+			resetQueryParamsAndRefresh: () => {
+				return ( { dispatch }: { dispatch: typeof actions } ) => {
+					dispatch.setIndexQueryParams(
+						DEFAULT_STATE.indexQueryParams
+					);
+					//@ts-ignore
+					dispatch.invalidateResolution( 'get' );
+					//@ts-ignore
+					dispatch.invalidateResolution( 'show' );
+				};
+			},
 		},
 
 		selectors: {
@@ -126,7 +138,7 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 			},
 
 			getIndexQueryParams( state: State ) {
-				return state.setIndexQueryParams;
+				return state.indexQueryParams;
 			},
 
 			getItem( state: State ) {

@@ -22,8 +22,9 @@ export function useValuesStoreData( { name }: StoreConfig ) {
 }
 
 export function useCrudStore( { name }: StoreConfig ) {
-	const { refresh, store } = useDispatch( name );
-	return { refresh, store };
+	const { refresh, resetQueryParamsAndRefresh, store, update } =
+		useDispatch( name );
+	return { refresh, resetQueryParamsAndRefresh, store, update };
 }
 
 export function useCrudStoreData( {
@@ -45,4 +46,16 @@ export function useCrudStoreData( {
 	);
 
 	return { data, isResolved };
+}
+
+export function useCrudQueryParams({
+	name
+}: {name: string} ) {
+	return useSelect(
+		( select: any ) => {
+			const { getIndexQueryParams } = select( name );
+			return getIndexQueryParams();
+		},
+		[ name ]
+	);
 }
