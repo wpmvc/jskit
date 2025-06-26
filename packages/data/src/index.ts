@@ -7,5 +7,5 @@ export {
 	useValuesStoreData,
 	useCrudStore,
 	useCrudStoreData,
-	useCrudQueryParams
+	useCrudQueryParams,
 } from './hooks';

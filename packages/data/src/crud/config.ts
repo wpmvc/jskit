@@ -20,7 +20,7 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 			search: '',
 			page: 1,
 			perPage: 10,
-			sort: {}
+			sort: {},
 		},
 	};
 

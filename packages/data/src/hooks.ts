@@ -48,9 +48,7 @@ export function useCrudStoreData( {
 	return { data, isResolved };
 }
 
-export function useCrudQueryParams({
-	name
-}: {name: string} ) {
+export function useCrudQueryParams( { name }: { name: string } ) {
 	return useSelect(
 		( select: any ) => {
 			const { getIndexQueryParams } = select( name );
