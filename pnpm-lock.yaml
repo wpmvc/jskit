@@ -93,6 +93,49 @@ importers:
         specifier: ^5.8.3
         version: 5.8.3
 
+  packages/components:
+    dependencies:
+      '@wordpress/components':
+        specifier: ^29.12.0
+        version: 29.12.0(@emotion/is-prop-valid@1.3.1)(@types/react@19.1.8)(react-dom@18.3.1(react@19.1.0))(react@19.1.0)
+      '@wordpress/dataviews':
+        specifier: ^4.22.0
+        version: 4.22.0(@emotion/is-prop-valid@1.3.1)(@types/react@19.1.8)(react-dom@18.3.1(react@19.1.0))(react@19.1.0)
+      '@wordpress/element':
+        specifier: ^6.26.0
+        version: 6.26.0
+      '@wordpress/i18n':
+        specifier: ^5.26.0
+        version: 5.26.0
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      styled-components:
+        specifier: ^6.1.19
+        version: 6.1.19(react-dom@18.3.1(react@19.1.0))(react@19.1.0)
+    devDependencies:
+      '@types/lodash':
+        specifier: ^4.17.17
+        version: 4.17.19
+      '@types/react':
+        specifier: ^19.1.8
+        version: 19.1.8
+      '@types/react-dom':
+        specifier: ^19.1.6
+        version: 19.1.6(@types/react@19.1.8)
+      '@wordpress/scripts':
+        specifier: ^30.18.0
+        version: 30.19.0(@playwright/test@1.53.0)(@types/eslint@9.6.1)(@types/node@24.0.4)(@types/webpack@4.41.40)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@19.1.0))(react@19.1.0)(stylelint-scss@6.12.1(stylelint@16.21.0(typescript@5.8.3)))(type-fest@3.13.1)(typescript@5.8.3)
+      path:
+        specifier: ^0.12.7
+        version: 0.12.7
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
+
   packages/data:
     dependencies:
       '@wordpress/api-fetch':
@@ -2445,6 +2488,12 @@ packages:
 
   '@wordpress/data@10.26.0':
     resolution: {integrity: sha512-lT6VMSRkaXr08no3PlKaO/dzraQctZ0ZZQ9U+HPjMyyD+GPDxbNiY8ydaQcxJ4RV4hiu65yE2Qxq/FYf3tdSsQ==}
+    engines: {node: '>=18.12.0', npm: '>=8.19.2'}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@wordpress/dataviews@4.22.0':
+    resolution: {integrity: sha512-6nUE2vWjf4W0JueLhwLFyhhc+vQJWE/blavGdcpI+WfWCOTDlYPPiotIdadIwazUDFiy0Hf9VNNai0/6jAsCIw==}
     engines: {node: '>=18.12.0', npm: '>=8.19.2'}
     peerDependencies:
       react: ^18.0.0
@@ -10459,6 +10508,28 @@ snapshots:
       redux: 5.0.1
       rememo: 4.0.2
       use-memo-one: 1.1.3(react@19.1.0)
+
+  '@wordpress/dataviews@4.22.0(@emotion/is-prop-valid@1.3.1)(@types/react@19.1.8)(react-dom@18.3.1(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@ariakit/react': 0.4.17(react-dom@18.3.1(react@19.1.0))(react@19.1.0)
+      '@babel/runtime': 7.25.7
+      '@wordpress/components': 29.12.0(@emotion/is-prop-valid@1.3.1)(@types/react@19.1.8)(react-dom@18.3.1(react@19.1.0))(react@19.1.0)
+      '@wordpress/compose': 7.26.0(react@19.1.0)
+      '@wordpress/data': 10.26.0(react@19.1.0)
+      '@wordpress/element': 6.26.0
+      '@wordpress/i18n': 5.26.0
+      '@wordpress/icons': 10.26.0(react@19.1.0)
+      '@wordpress/primitives': 4.26.0(react@19.1.0)
+      '@wordpress/private-apis': 1.26.0
+      '@wordpress/warning': 3.26.0
+      clsx: 2.1.1
+      react: 19.1.0
+      remove-accents: 0.5.0
+    transitivePeerDependencies:
+      - '@emotion/is-prop-valid'
+      - '@types/react'
+      - react-dom
+      - supports-color
 
   '@wordpress/date@5.26.0':
     dependencies:

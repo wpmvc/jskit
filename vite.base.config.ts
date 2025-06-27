@@ -36,6 +36,8 @@ export const sharedConfig = {
           '@wordpress/api-fetch': 'wp.apiFetch',
           '@wordpress/url': 'wp.url',
           '@wordpress/viewport': 'wp.viewport',
+          '@wordpress/dataviews/wp': 'wp.dataviewsWp',
+          '@wordpress/dataviews': 'wp.dataviews',
           clsx: "clsx",
           "@dnd-kit/core": "core", 
           "@dnd-kit/sortable": "sortable", 
