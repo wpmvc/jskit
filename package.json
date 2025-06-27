@@ -11,10 +11,10 @@
     "format": "wp-scripts format 'packages/**/src/**/*.{js,jsx,ts,tsx,json,css,scss}'"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.5.2",
-    "@wordpress/scripts": "^30.18.0",
+    "@vitejs/plugin-react": "^4.6.0",
+    "@wordpress/scripts": "^30.19.0",
     "typescript": "^5.8.3",
-    "vite": "^6.3.5",
+    "vite": "^7.0.0",
     "vite-plugin-dts": "^4.5.4"
   }
 }
