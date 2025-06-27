@@ -132,7 +132,7 @@ export function PrivateFields( props: FieldProps ): JSX.Element | null {
 				return (
 					<div
 						key={ key }
-						className={ `wpmvc-field ${ field.type }` }
+						className={ `wpmvc-field ${ field.type }-field` }
 						style={ field.style }
 					>
 						<FieldView
