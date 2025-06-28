@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * External dependencies
  */
-import Select, { components } from 'react-select';
+import Select, { components, MultiValue, SingleValue } from 'react-select';
 import { isFunction } from 'lodash';
 
 /**
@@ -39,7 +39,7 @@ const DropdownIndicator = ( menuIsOpen: boolean ) => ( props: any ) => (
 
 export default function SelectComponent( props: SelectFieldProps ) {
 	const { field, attributes } = props;
-	const { options, helpText, label } = field || {};
+	const { options, description, label } = field || {};
 	const [ menuIsOpen, setMenuIsOpen ] = useState( false );
 
 	const isMulti = Boolean( field?.isMulti );
@@ -58,11 +58,11 @@ export default function SelectComponent( props: SelectFieldProps ) {
 
 	const handleChange = (
 		newValue:
-			| import('react-select').SingleValue< {
+			| SingleValue< {
 					value: any;
 					label: string;
 			  } >
-			| import('react-select').MultiValue< { value: any; label: string } >
+			| MultiValue< { value: any; label: string } >
 	) => {
 		if ( isMulti ) {
 			const values = Array.isArray( newValue )
@@ -118,9 +118,9 @@ export default function SelectComponent( props: SelectFieldProps ) {
 				/>
 			</Wrapper>
 
-			{ helpText && (
+			{ description && (
 				<StyledHelpText className="components-base-control__help">
-					{ helpText }
+					{ description }
 				</StyledHelpText>
 			) }
 		</div>

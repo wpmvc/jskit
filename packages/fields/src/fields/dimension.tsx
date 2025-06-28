@@ -2,8 +2,7 @@
  * External dependencies
  */
 //@ts-ignore
-import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
-import { useState } from '@wordpress/element';
+import { BoxControl } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -14,10 +13,10 @@ import { getValue, isDisabled, updateAttribute } from '../utils';
 import styled from 'styled-components';
 
 const StyledBoxField = styled( BoxControl )< {
-	isDisabled: string;
+	$disabled: boolean;
 } >`
-	${ ( props ) =>
-		'true' === props.isDisabled &&
+	${ ( { $disabled } ) =>
+		$disabled &&
 		`
 		pointer-events: none;
 		opacity: 0.5;
@@ -32,8 +31,7 @@ export default function Dimension( props: CommonFieldProps ): JSX.Element {
 			label={ <Label { ...props } /> }
 			values={ getValue( props, {} ) }
 			onChange={ ( value: any ) => updateAttribute( value, props ) }
-			isDisabled={ isDisabled( props ) ? 'true' : 'false' }
-			className={ field?.className }
+			$disabled={ isDisabled( props ) }
 		/>
 	);
 }

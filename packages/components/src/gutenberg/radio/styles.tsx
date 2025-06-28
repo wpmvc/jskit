@@ -2,7 +2,7 @@ import { __experimentalVStack as VStack } from '@wordpress/components';
 import styled from 'styled-components';
 
 const StyleRadioField = styled( VStack )< {
-	$isDisabled: boolean;
+	$disabled?: boolean;
 	$variation?: 'normal' | 'boxed';
 	$perRow?: number;
 } >`
@@ -34,7 +34,7 @@ const StyleRadioField = styled( VStack )< {
 	` }
 
 	${ ( props ) =>
-		props.$isDisabled &&
+		props.$disabled &&
 		`pointer-events: none;
 		opacity: 0.5;
 		` }

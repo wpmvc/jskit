@@ -1,12 +1,11 @@
-import { BaseField, BaseFieldProps, Field } from '../../types/field';
+import { BaseField, BaseFieldProps } from '../../types/field';
 
-export type NoticeFieldType = BaseField & {
+export type NoticeFieldType = Omit< BaseField, 'label' > & {
 	type: 'notice';
 	notice: string;
-	status: 'warning' | 'success' | 'error' | 'info';
+	status?: 'warning' | 'success' | 'error' | 'info';
 	isDismissible?: boolean;
-	onRemove: () => void;
-	addMarginBottom?: boolean;
+	onRemove?: () => void;
 };
 
 export type NoticeFieldProps = BaseFieldProps & {

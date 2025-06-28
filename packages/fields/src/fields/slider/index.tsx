@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { RangeControl } from '@wordpress/components';
+import { Slider as SliderComponent } from '@wpmvc/components';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -23,7 +23,7 @@ const Slider = memo( ( props: SliderFieldProps ) => {
 	const { max = 100, min = 0 } = field;
 
 	return (
-		<RangeControl
+		<SliderComponent
 			//@ts-ignore
 			label={ <Label { ...props } /> }
 			max={ max }
@@ -31,8 +31,10 @@ const Slider = memo( ( props: SliderFieldProps ) => {
 			value={ getValue( props ) }
 			onChange={ ( value: any ) => updateAttribute( value, props ) }
 			disabled={ isDisabled( props ) }
-			className={ field?.className }
 			required={ field?.required }
+			unit={ field.unit }
+			customUnits={ field.customUnits }
+			description={ field.description }
 		/>
 	);
 }, memoCallback );

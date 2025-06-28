@@ -29,7 +29,6 @@ export type FieldType =
 	| 'border'
 	| 'group'
 	| 'dimension'
-	| 'height'
 	| 'notice'
 	| 'number'
 	| 'panel'
@@ -56,8 +55,8 @@ export type BaseField = {
 	label: string;
 	condition?: ( attributes: Record< string, any > ) => boolean;
 	onChange?: ( props: FieldProps ) => void;
-	isDisabled?: ( props: FieldProps ) => boolean;
-	helpText?: string;
+	disabled?: boolean | ( ( attributes: Record< string, any > ) => boolean );
+	description?: string;
 	className?: string;
 	isResponsive?: boolean;
 	isPro?: boolean;
@@ -67,7 +66,7 @@ export type BaseField = {
 
 // All other field types (no options, no isMulti)
 export type OtherFieldType = BaseField & {
-	type: 'color' | 'checkbox' | 'dimension' | 'height' | 'slider' | 'switch';
+	type: 'color' | 'checkbox' | 'dimension' | 'slider' | 'switch';
 };
 
 // Union of all field types

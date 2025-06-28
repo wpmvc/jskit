@@ -1,7 +1,7 @@
 /**
- * WordPress dependencies
+ * External dependencies
  */
-import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
+import { Number as NumberComponent } from '@wpmvc/components';
 
 /**
  * Internal dependencies
@@ -27,15 +27,15 @@ export default function Number( props: NumberFieldProps ): JSX.Element {
 	};
 
 	return (
-		<NumberControl
+		<NumberComponent
 			//@ts-ignore
 			label={ <Label { ...props } /> }
+			description={ field.description }
 			size="__unstable-large"
 			step={ 1 }
 			value={ getValue( props ) }
 			onChange={ handleChange }
 			disabled={ isDisabled( props ) }
-			className={ field?.className }
 			min={ field?.min }
 			max={ field?.max }
 			required={ field?.required }

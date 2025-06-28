@@ -1,10 +1,6 @@
 /**
  * WordPress dependencies
  */
-import {
-	__experimentalToggleGroupControl as ToggleGroupControl,
-	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
-} from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -12,61 +8,34 @@ import { __ } from '@wordpress/i18n';
  */
 import Label from '../../components/label';
 import { getValue, isDisabled, updateAttribute } from '../../utils';
+import { ToggleGroupFieldProps } from './types';
 
 /**
  * External dependencies
  */
-import styled from 'styled-components';
 import { isFunction } from 'lodash';
-import { ToggleGroupFieldProps } from './types';
+import { ToggleGroup } from '@wpmvc/components';
 
-const StyledToggleGroup = styled( ToggleGroupControl )< {
-	isDisabled: string;
-} >`
-	button {
-		z-index: 0;
-	}
-	${ ( props ) =>
-		'true' === props.isDisabled &&
-		`
-		pointer-events: none;
-		opacity: 0.5;
-	` }
-`;
-
-export default function ToggleGroup(
+export default function ToggleGroupd(
 	props: ToggleGroupFieldProps
 ): JSX.Element {
 	const { field, attributes } = props;
-	const { options, helpText } = field;
+	const { options, description } = field;
 
 	const toggleOptions = isFunction( options )
 		? options( attributes )
 		: options;
 
 	return (
-		<StyledToggleGroup
+		<ToggleGroup
+			{ ...field }
 			//@ts-ignore
 			label={ <Label { ...props } /> }
-			help={ helpText }
-			isBlock
+			description={ description }
 			value={ getValue( props ) }
 			onChange={ ( value: any ) => updateAttribute( value, props ) }
-			size="__unstable-large"
-			isDisabled={ isDisabled( props ) ? 'true' : 'false' }
-			className={ field?.className }
-			required={ field?.required }
-			__nextHasNoMarginBottom
-		>
-			{ toggleOptions.map( ( option: any, index: any ) => {
-				return (
-					<ToggleGroupControlOption
-						key={ index }
-						value={ option.value }
-						label={ option.label }
-					/>
-				);
-			} ) }
-		</StyledToggleGroup>
+			disabled={ isDisabled( props ) }
+			options={ toggleOptions }
+		/>
 	);
 }

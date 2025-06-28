@@ -13,7 +13,7 @@ export const sharedConfig = {
     outDir: 'build',
     rollupOptions: {
       external: (id) =>
-        ['react', 'react-dom', 'lodash', 'react/jsx-runtime', 'immer', 'styled-components', 'clsx', 'react-select'].includes(id) || id.startsWith('@wordpress/') || id.startsWith('@dnd-kit/'),
+        ['react', 'react-dom', 'lodash', 'react/jsx-runtime', 'immer', 'styled-components', 'clsx', 'react-select'].includes(id) || id.startsWith('@wpmvc') || id.startsWith('@wordpress/') || id.startsWith('@dnd-kit/'),
       output: {
         globals: {
           react: 'React',
