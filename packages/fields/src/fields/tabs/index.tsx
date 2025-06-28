@@ -23,7 +23,7 @@ export default function Tabs( props: TabsFieldProps ): JSX.Element {
 			};
 			return acc;
 		},
-		{} as { [key: string]: any }
+		{} as { [ key: string ]: any }
 	);
 
 	return <TabsComponent items={ itemsWithChildren } />;

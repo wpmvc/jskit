@@ -43,7 +43,7 @@ import {
 
 export default function Repeater( props: RepeaterFieldProps ) {
 	const { field, attributes, attrKey, setAttributes } = props;
-	const attribute = attributes[ attrKey ];
+	const attribute = attributes[ attrKey ] ?? [];
 	const itemListRef = useRef< HTMLDivElement >( null ); // Ref for the scrollable list
 	const [ newItemAdded, setNewItemAdded ] = useState( false );
 
