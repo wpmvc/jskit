@@ -63,12 +63,12 @@ const defaultComponents: {
 
 const StyledFields = styled.div`
 	.wpmvc-field {
-		&:not( .panel ),
-		&:has( + :not( .panel ) ) {
+		&:not( .panel-field ),
+		&:has( + :not( .panel-field ) ) {
 			padding-bottom: 20px;
 		}
 
-		&:has( :last-child:not( .panel ) ):last-child {
+		&:has( :last-child:not( .panel-field ) ):last-child {
 			padding-bottom: 0px;
 		}
 
