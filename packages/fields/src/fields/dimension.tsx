@@ -2,8 +2,7 @@
  * External dependencies
  */
 //@ts-ignore
-import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
-import { useState } from '@wordpress/element';
+import { BoxControl } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -14,26 +13,44 @@ import { getValue, isDisabled, updateAttribute } from '../utils';
 import styled from 'styled-components';
 
 const StyledBoxField = styled( BoxControl )< {
-	isDisabled: string;
+	$disabled: boolean;
 } >`
-	${ ( props ) =>
-		'true' === props.isDisabled &&
+	${ ( { $disabled } ) =>
+		$disabled &&
 		`
 		pointer-events: none;
 		opacity: 0.5;
 	` }
 `;
 
+/**
+ * Normalize values: append 'px' if value is a non-empty string without a unit
+ */
+function normalizedValue( value: any ) {
+	return Object.fromEntries(
+		Object.entries( value ).map( ( [ key, val ] ) => {
+			if (
+				typeof val === 'string' &&
+				val.trim() !== '' &&
+				! /[a-z%]+$/i.test( val )
+			) {
+				return [ key, `${ val }px` ];
+			}
+			return [ key, val ];
+		} )
+	);
+}
+
 export default function Dimension( props: CommonFieldProps ): JSX.Element {
-	const { field } = props;
 	return (
 		<StyledBoxField
 			//@ts-ignore
 			label={ <Label { ...props } /> }
 			values={ getValue( props, {} ) }
-			onChange={ ( value: any ) => updateAttribute( value, props ) }
-			isDisabled={ isDisabled( props ) ? 'true' : 'false' }
-			className={ field?.className }
+			onChange={ ( value: any ) => {
+				updateAttribute( normalizedValue( value ), props );
+			} }
+			$disabled={ isDisabled( props ) }
 		/>
 	);
 }

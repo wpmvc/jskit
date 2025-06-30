@@ -15,7 +15,6 @@ import { FieldProps, Field, FieldRootProps } from '../types/field';
 import Checkbox from './checkbox';
 import Border from './border';
 import Dimension from './dimension';
-import Height from './height';
 import Number from './number';
 import Panel from './panel';
 import PickColor from './color-picker';
@@ -32,6 +31,7 @@ import Tabs from './tabs';
 import styled, { CSSProperties } from 'styled-components';
 import Group from './group';
 import Row from './row';
+import clsx from 'clsx';
 
 /**
  * Mapping of field types to their respective components
@@ -41,22 +41,21 @@ const defaultComponents: {
 	//@ts-ignore
 	[ key: string ]: ComponentType< FieldProps >;
 } = {
+	text: Text,
+	number: Number,
+	switch: Switch,
+	checkbox: Checkbox,
 	tabs: Tabs,
 	color: PickColor,
 	colors: Colors,
 	group: Group,
-	checkbox: Checkbox,
 	border: Border,
 	dimension: Dimension,
-	height: Height,
 	notice: Notice,
-	number: Number,
 	panel: Panel,
 	radio: Radio,
 	select: Select,
 	slider: Slider,
-	switch: Switch,
-	text: Text,
 	toggleGroup: ToggleGroup,
 	repeater: Repeater,
 	row: Row,
@@ -64,12 +63,12 @@ const defaultComponents: {
 
 const StyledFields = styled.div`
 	.wpmvc-field {
-		&:not( .panel ),
-		&:has( + :not( .panel ) ) {
+		&:not( .panel-field ),
+		&:has( + :not( .panel-field ) ) {
 			padding-bottom: 20px;
 		}
 
-		&:has( :last-child:not( .panel ) ):last-child {
+		&:has( :last-child:not( .panel-field ) ):last-child {
 			padding-bottom: 0px;
 		}
 
@@ -132,7 +131,11 @@ export function PrivateFields( props: FieldProps ): JSX.Element | null {
 				return (
 					<div
 						key={ key }
-						className={ `wpmvc-field ${ field.type }` }
+						className={ clsx(
+							'wpmvc-field',
+							`${ field.type }-field`,
+							field?.className
+						) }
 						style={ field.style }
 					>
 						<FieldView

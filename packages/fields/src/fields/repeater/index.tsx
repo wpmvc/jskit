@@ -43,7 +43,7 @@ import {
 
 export default function Repeater( props: RepeaterFieldProps ) {
 	const { field, attributes, attrKey, setAttributes } = props;
-	const attribute = attributes[ attrKey ];
+	const attribute = attributes[ attrKey ] ?? [];
 	const itemListRef = useRef< HTMLDivElement >( null ); // Ref for the scrollable list
 	const [ newItemAdded, setNewItemAdded ] = useState( false );
 
@@ -136,11 +136,7 @@ export default function Repeater( props: RepeaterFieldProps ) {
 	);
 
 	return (
-		<div
-			className={ `components-base-field wpmvc-repeater-wrapper ${
-				field?.className ?? ''
-			}` }
-		>
+		<div className={ `components-base-field wpmvc-repeater-wrapper` }>
 			<StyledLabel className="repeater-label">
 				{ /* @ts-ignore */ }
 				<Label { ...props } />

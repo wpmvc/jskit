@@ -6,21 +6,23 @@ import {
 	Options,
 } from '../../types/field';
 
-type Option = BaseOption & {
+export type Option = BaseOption & {
 	fields?: FieldsType;
 };
 
 type Field = BaseField & {
 	type: 'radio';
 	variation?: 'normal';
-	options: Options;
+	options: Options | ( ( attributes: Record< string, any > ) => Options );
 };
 
 type BoxedRadioFieldType = BaseField & {
 	type: 'radio';
 	variation: 'boxed';
 	perRow?: number;
-	options: Options< Option >;
+	options:
+		| Options< Option >
+		| ( ( attributes: Record< string, any > ) => Options< Option > );
 };
 
 export type RadioFieldType = Field | BoxedRadioFieldType;

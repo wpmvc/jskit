@@ -24,17 +24,19 @@ export function getValue(
 	return attributes[ attrKey ];
 }
 
-export function updateAttribute( value: any, fieldProps: FieldProps ): void {
+export function updateAttribute( value: any, fieldProps: FieldProps ) {
 	if ( isDisabled( fieldProps ) ) {
 		return;
 	}
 
 	const { attrKey, setAttributes, attributes, device, field } = fieldProps;
 
+	const updatedValues = isResponsive( fieldProps )
+		? { ...attributes[ attrKey ], [ device as string ]: value }
+		: value;
+
 	setAttributes( {
-		[ attrKey ]: isResponsive( fieldProps )
-			? { ...attributes[ attrKey ], [ device as string ]: value }
-			: value,
+		[ attrKey ]: updatedValues,
 	} );
 
 	//@ts-ignore
@@ -42,10 +44,12 @@ export function updateAttribute( value: any, fieldProps: FieldProps ): void {
 		//@ts-ignore
 		field.onChange( fieldProps );
 	}
+
+	return updatedValues;
 }
 
 export function isDisabled( fieldProps: FieldProps ): boolean {
-	const { field, attributes, isProAvailable } = fieldProps;
+	const { field, isProAvailable } = fieldProps;
 
 	//@ts-ignore
 	if ( !! field.isPro && ! isProAvailable ) {
@@ -53,13 +57,13 @@ export function isDisabled( fieldProps: FieldProps ): boolean {
 	}
 
 	//@ts-ignore
-	if ( typeof field.isDisabled === 'function' ) {
+	if ( typeof field.disabled === 'function' ) {
 		//@ts-ignore
-		return field.isDisabled( fieldProps );
+		return field.disabled( fieldProps );
 	}
 
 	//@ts-ignore
-	return !! field.isDisabled;
+	return !! field.disabled;
 }
 
 export function memoCallback(

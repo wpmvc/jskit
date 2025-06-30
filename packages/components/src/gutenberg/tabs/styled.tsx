@@ -1,7 +1,6 @@
 import { TabPanel } from '@wordpress/components';
 import styled from 'styled-components';
 
-// Styled component with TypeScript support
 export const StyledTabPanel = styled( TabPanel )< {
 	tabsLength: number;
 	selectedTabIndex: number;

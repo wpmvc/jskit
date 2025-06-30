@@ -1,20 +1,19 @@
 /**
  * External dependencies
  */
-import { Notice as WpNotice } from '@wordpress/components';
+import { Notice as NoticeComponent } from '@wpmvc/components';
 import { NoticeFieldProps } from './types';
 
 export default function Notice( { field }: NoticeFieldProps ): JSX.Element {
-	const { status, notice, isDismissible, onRemove, className } = field;
+	const { status, notice, isDismissible, onRemove } = field;
 
 	return (
-		<WpNotice
+		<NoticeComponent
 			status={ status }
 			isDismissible={ isDismissible }
 			onRemove={ onRemove }
-			className={ 'components-base-field ' + ( className ?? '' ) }
 		>
 			{ notice }
-		</WpNotice>
+		</NoticeComponent>
 	);
 }
