@@ -24,17 +24,19 @@ export function getValue(
 	return attributes[ attrKey ];
 }
 
-export function updateAttribute( value: any, fieldProps: FieldProps ): void {
+export function updateAttribute( value: any, fieldProps: FieldProps ) {
 	if ( isDisabled( fieldProps ) ) {
 		return;
 	}
 
 	const { attrKey, setAttributes, attributes, device, field } = fieldProps;
 
+	const updatedValues = isResponsive( fieldProps )
+		? { ...attributes[ attrKey ], [ device as string ]: value }
+		: value;
+
 	setAttributes( {
-		[ attrKey ]: isResponsive( fieldProps )
-			? { ...attributes[ attrKey ], [ device as string ]: value }
-			: value,
+		[ attrKey ]: updatedValues,
 	} );
 
 	//@ts-ignore
@@ -42,6 +44,8 @@ export function updateAttribute( value: any, fieldProps: FieldProps ): void {
 		//@ts-ignore
 		field.onChange( fieldProps );
 	}
+
+	return updatedValues;
 }
 
 export function isDisabled( fieldProps: FieldProps ): boolean {

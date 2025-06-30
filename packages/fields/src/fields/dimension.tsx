@@ -23,14 +23,33 @@ const StyledBoxField = styled( BoxControl )< {
 	` }
 `;
 
+/**
+ * Normalize values: append 'px' if value is a non-empty string without a unit
+ */
+function normalizedValue( value: any ) {
+	return Object.fromEntries(
+		Object.entries( value ).map( ( [ key, val ] ) => {
+			if (
+				typeof val === 'string' &&
+				val.trim() !== '' &&
+				! /[a-z%]+$/i.test( val )
+			) {
+				return [ key, `${ val }px` ];
+			}
+			return [ key, val ];
+		} )
+	);
+}
+
 export default function Dimension( props: CommonFieldProps ): JSX.Element {
-	const { field } = props;
 	return (
 		<StyledBoxField
 			//@ts-ignore
 			label={ <Label { ...props } /> }
 			values={ getValue( props, {} ) }
-			onChange={ ( value: any ) => updateAttribute( value, props ) }
+			onChange={ ( value: any ) => {
+				updateAttribute( normalizedValue( value ), props );
+			} }
 			$disabled={ isDisabled( props ) }
 		/>
 	);

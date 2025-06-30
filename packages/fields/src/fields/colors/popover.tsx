@@ -17,6 +17,7 @@ export default function Popover( {
 	attributes,
 	setAttributes,
 	elementColors,
+	preset,
 }: any ) {
 	const { colors } = element;
 
@@ -57,6 +58,7 @@ export default function Popover( {
 							onChange( tabs[ 0 ].name, value )
 						}
 						value={ elementColors?.[ tabs[ 0 ].name ] }
+						colors={ preset }
 					/>
 				) : (
 					<TabPanel
@@ -72,6 +74,7 @@ export default function Popover( {
 									onChange( tab.name, value )
 								}
 								value={ elementColors?.[ tab.name ] }
+								colors={ preset }
 							/>
 						) }
 					</TabPanel>

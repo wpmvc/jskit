@@ -13,7 +13,7 @@ import {
 /**
  * External dependencies
  */
-import { isEqual } from 'lodash';
+import { isEqual, isFunction } from 'lodash';
 
 /**
  * Internal dependencies
@@ -72,6 +72,10 @@ export default function Colors( {
 	}
 
 	const _dropdownProps = dropdownProps();
+
+	const colorPreset = isFunction( field.colors )
+		? field.colors( attributes )
+		: field.colors || [];
 
 	return (
 		<ToolsPanel
@@ -143,6 +147,7 @@ export default function Colors( {
 											attributes={ attributes }
 											setAttributes={ setAttributes }
 											elementColors={ elementColors }
+											preset={ colorPreset }
 										/>
 									);
 								} }

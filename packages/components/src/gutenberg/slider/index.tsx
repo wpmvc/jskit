@@ -11,6 +11,7 @@ import {
 	__experimentalUnitControl as UnitControl,
 	__experimentalParseQuantityAndUnitFromRawValue as parseQuantityAndUnitFromRawValue,
 	FlexBlock,
+	BaseControl,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { SliderProps } from './types';
@@ -127,12 +128,14 @@ export default function Slider( {
 	};
 
 	return (
-		<StyledSlider className={ className ?? 'block-editor-height-control' }>
+		<StyledSlider className={ className }>
+			<BaseControl.VisualLabel as="legend">
+				{ label }
+			</BaseControl.VisualLabel>
 			<Flex>
 				<FlexBlock>
-					<Spacer marginX={ 2 } marginBottom={ 0 }>
+					<Spacer marginX={ 2 } marginBottom={ 0 } marginLeft={ 0 }>
 						<RangeControl
-							label={ label }
 							value={ quantity }
 							min={ min ?? 0 }
 							max={ max ?? rangeSettings.max }
@@ -151,7 +154,7 @@ export default function Slider( {
 
 				{ /* Show unit switcher only if unit mode is enabled */ }
 				{ unit && (
-					<FlexItem style={ { maxWidth: 92 } }>
+					<FlexItem style={ { maxWidth: 88 } }>
 						<UnitControl
 							value={ value }
 							units={ units }

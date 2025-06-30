@@ -8,27 +8,28 @@ import {
 	__experimentalVStack as VStack,
 } from '@wordpress/components';
 
-export default function ColorField( { onChange, value }: any ) {
+export default function ColorField( { onChange, value, colors }: any ) {
 	const showTitle = false;
 	const label = 'Hello';
 	const isGradient = false;
+
 	return (
 		<BaseControl
 			__nextHasNoMarginBottom
-			className="block-editor-color-gradient-field"
+			className="block-editor-color-gradient-control"
 		>
-			<fieldset className="block-editor-color-gradient-field__fieldset">
+			<fieldset className="block-editor-color-gradient-control__fieldset">
 				<VStack spacing={ 1 }>
 					{ showTitle && (
 						<legend>
-							<div className="block-editor-color-gradient-field__color-indicator">
+							<div className="block-editor-color-gradient-control__color-indicator">
 								<BaseControl.VisualLabel>
 									{ label }
 								</BaseControl.VisualLabel>
 							</div>
 						</legend>
 					) }
-					<div className="block-editor-color-gradient-field__panel">
+					<div className="block-editor-color-gradient-control__panel">
 						{ isGradient ? (
 							<GradientPicker
 								onChange={ onChange }
@@ -51,6 +52,7 @@ export default function ColorField( { onChange, value }: any ) {
 								// 		: onColorChange
 								// }
 								// {...{ colors, disableCustomColors }}
+								colors={ colors }
 								clearable={ true }
 								enableAlpha={ true }
 								headingLevel={ 3 }
