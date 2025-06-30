@@ -1,6 +1,6 @@
 {
   "name": "@wpmvc/components",
-  "version": "0.0.1",
+  "version": "0.0.01",
   "description": "Reusable components package for WordPress MVC JSKit.",
   "author": "Md Al Amin",
   "license": "MIT",
