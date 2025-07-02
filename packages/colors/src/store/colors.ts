@@ -77,6 +77,11 @@ const colors = {
 		dark: '#f3f4f6',
 		muted: '#6b7280',
 	},
+	//Color
+	color: {
+		white: '#fff',
+		black: '#000',
+	},
 };
 
 export default colors;

@@ -1,16 +1,7 @@
 import colors from './colors';
 import { ColorPalette } from './types';
 
-const DEFAULT_STATE: ColorPalette = {
-	primary: colors.primary,
-	secondary: colors.secondary,
-	success: colors.success,
-	warning: colors.warning,
-	danger: colors.danger,
-	gray: colors.gray,
-	background: colors.background,
-	text: colors.text,
-};
+const DEFAULT_STATE: ColorPalette = colors;
 
 export default function getConfig() {
 	return {

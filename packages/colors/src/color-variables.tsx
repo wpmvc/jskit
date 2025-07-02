@@ -1,7 +1,7 @@
 import { useMemo } from '@wordpress/element';
 import { useColors } from './hooks';
-import { ColorPalette } from './store/types';
 import registerColorsStore from './store';
+import { ColorPalette } from './store/types';
 
 function generateCSSVariables(
 	colors: ColorPalette,

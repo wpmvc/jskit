@@ -1,8 +1,7 @@
-import { useState, useEffect } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { useEffect, useState } from '@wordpress/element';
 //@ts-ignore
 import { DataViews } from '@wordpress/dataviews/wp';
-import { map, has } from 'lodash';
+import { has, map } from 'lodash';
 import { Column, TableType } from './types';
 
 const defaultLayouts = {
