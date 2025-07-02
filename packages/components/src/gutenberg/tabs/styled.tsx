@@ -15,7 +15,7 @@ export const StyledTabPanel = styled( TabPanel )< {
 			content: '';
 			width: calc( 100% / ${ ( props ) => props.tabsLength } );
 			height: 2px;
-			background: #007cba;
+			background: var(--wp-admin-theme-color);
 			bottom: 0;
 			left: calc(
 				( 100% / ${ ( props ) => props.tabsLength } ) *
@@ -54,10 +54,10 @@ export const StyledTabPanel = styled( TabPanel )< {
 
 			&.is-active,
 			&:hover {
-				color: #0085ba;
+				color: var(--wp-admin-theme-color);
 
 				svg g path {
-					fill: #0085ba;
+					fill: var(--wp-admin-theme-color);
 				}
 			}
 
