@@ -2,25 +2,17 @@ export type RGBA =
 	| `rgba(${ number }, ${ number }, ${ number }, ${ number })`
 	| string;
 
-type Shade =
-	| '50'
-	| '100'
-	| '200'
-	| '300'
-	| '400'
-	| '500'
-	| '600'
-	| '700'
-	| '800'
-	| '900';
+export type Shade = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+
+type StandardShades = Record< Shade, RGBA >;
 
 export type ColorPalette = {
-	primary: Record< Shade, RGBA >;
-	secondary: Record< Shade, RGBA >;
-	success: Record< '100' | '200' | '500' | '700', RGBA >;
-	warning: Record< '100' | '200' | '500' | '700', RGBA >;
-	danger: Record< '100' | '200' | '500' | '700', RGBA >;
-	gray: Record< Shade, RGBA >;
+	primary: StandardShades;
+	secondary: StandardShades;
+	success: StandardShades;
+	warning: StandardShades;
+	danger: StandardShades;
+	gray: StandardShades;
 	background: {
 		light: RGBA;
 		dark: RGBA;
@@ -30,4 +22,8 @@ export type ColorPalette = {
 		dark: RGBA;
 		muted: RGBA;
 	};
+};
+
+export type ColorPaletteOverride = {
+	[ K in keyof ColorPalette ]?: string | Partial< Record< string, RGBA > >;
 };
