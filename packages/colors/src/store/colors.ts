@@ -35,6 +35,13 @@ const colors = {
 		700: '#15803d',
 	},
 
+	info: {
+		100: '#fce7f3',
+		200: '#fbcfe8',
+		500: '#ec4899',
+		700: '#be185d',
+	},
+
 	// Warning / Amber
 	warning: {
 		100: '#fef3c7',
@@ -44,7 +51,7 @@ const colors = {
 	},
 
 	// Error / Red
-	danger: {
+	error: {
 		100: '#fee2e2',
 		200: '#fecaca',
 		500: '#ef4444',
