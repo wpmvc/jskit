@@ -1,7 +1,8 @@
-import { useMemo } from '@wordpress/element';
+import { useEffect, useMemo } from '@wordpress/element';
 import { useColors } from './hooks';
 import registerColorsStore from './store';
-import { ColorPalette } from './store/types';
+import { ColorPalette, ColorPaletteOverride } from './store/types';
+import { dispatch } from '@wordpress/data';
 
 function generateCSSVariables(
 	colors: ColorPalette,
@@ -28,13 +29,27 @@ function generateCSSVariables(
 	return css;
 }
 
-export default function ColorVariables() {
+type ColorVariablesProps = {
+	colors?: ColorPaletteOverride;
+};
+
+export default function ColorVariables( { colors }: ColorVariablesProps ) {
 	registerColorsStore();
 
-	const colors = useColors();
+	const storeColors = useColors();
 
 	const css = useMemo( () => {
-		return generateCSSVariables( colors );
+		return generateCSSVariables( storeColors );
+	}, [ storeColors ] );
+
+	useEffect( () => {
+		if ( colors ) {
+			(
+				dispatch( 'wpmvc/colors' ) as {
+					setColors: ( colors: ColorPaletteOverride ) => void;
+				}
+			 ).setColors( colors );
+		}
 	}, [ colors ] );
 
 	const style = {
