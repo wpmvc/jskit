@@ -11,22 +11,22 @@
     "build": "vite build"
   },
   "files": [
-		"build",
-		"build-types"
-	],
-	"homepage": "https://github.com/wpmvc/jskit/tree/master/packages/data",
-	"repository": "git+https://github.com/wpmvc/jskit.git",
-	"bugs": {
-		"url": "https://github.com/wpmvc/jskit/issues"
-	},
+    "build",
+    "build-types"
+  ],
+  "homepage": "https://github.com/wpmvc/jskit/tree/master/packages/data",
+  "repository": "git+https://github.com/wpmvc/jskit.git",
+  "bugs": {
+    "url": "https://github.com/wpmvc/jskit/issues"
+  },
   "devDependencies": {
     "path": "^0.12.7",
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@wordpress/api-fetch": "^7.25.0",
-    "@wordpress/data": "^10.25.0",
-    "@wordpress/url": "^4.25.0",
+    "@wordpress/api-fetch": "^7.26.0",
+    "@wordpress/data": "^10.26.0",
+    "@wordpress/url": "^4.26.0",
     "immer": "^10.1.1"
   }
 }
