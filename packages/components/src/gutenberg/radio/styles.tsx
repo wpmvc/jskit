@@ -16,7 +16,7 @@ const StyleRadioField = styled( VStack )< {
 
 	.components-radio-control__option-wrapper {	
 		flex: 0 0 100%;
-		border: 1px solid #e3e3f1;
+		border: 1px solid var(--wpmvc-gray-600);
 		padding: 16px 16px;
 		border-radius: 4px;
 		box-sizing: border-box;

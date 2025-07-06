@@ -7,7 +7,8 @@ export const StyledTabPanel = styled( TabPanel )< {
 } >`
 	.components-tab-panel__tabs {
 		display: flex;
-		border-top: calc( 0.1em + 1px ) solid #f2f4f5;
+		border-top: calc( 0.1em + 1px ) solid
+			var( --wp-components-color-gray-100, #f2f4f5 );
 		position: relative;
 
 		&:after {
@@ -15,7 +16,7 @@ export const StyledTabPanel = styled( TabPanel )< {
 			content: '';
 			width: calc( 100% / ${ ( props ) => props.tabsLength } );
 			height: 2px;
-			background: var( --wp-admin-theme-color );
+			background: var( --wp-admin-theme-color, #007cba );
 			bottom: 0;
 			left: calc(
 				( 100% / ${ ( props ) => props.tabsLength } ) *
@@ -29,7 +30,8 @@ export const StyledTabPanel = styled( TabPanel )< {
 			flex: 1;
 			height: auto !important;
 			padding: 15px;
-			border-right: 1px solid #d6d9dd;
+			border-right: 1px solid
+				var( --wp-components-color-gray-100, #d6d9dd );
 
 			&:last-child {
 				border-right: none;
@@ -54,10 +56,10 @@ export const StyledTabPanel = styled( TabPanel )< {
 
 			&.is-active,
 			&:hover {
-				color: var( --wp-admin-theme-color );
+				color: var( --wp-admin-theme-color, #007cba );
 
 				svg g path {
-					fill: var( --wp-admin-theme-color );
+					fill: var( --wp-admin-theme-color, #007cba );
 				}
 			}
 

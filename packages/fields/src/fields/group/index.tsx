@@ -1,11 +1,11 @@
 /**
  * WordPress dependencies
  */
-import styled from 'styled-components';
-import { GroupFieldProps } from './types';
-import { PrivateFields } from '..';
 import { size } from 'lodash';
+import styled from 'styled-components';
+import { PrivateFields } from '..';
 import Label from '../../components/label';
+import { GroupFieldProps } from './types';
 
 const GroupFields = styled.div< {
 	$perRow?: number;
@@ -19,7 +19,7 @@ const GroupFields = styled.div< {
 
 	/* Box Model */
 	background: white;
-	border: 1px solid rgba( 0, 0, 0, 0.13 );
+	border: 1px solid var( --wpmvc-gray-200 );
 	border-radius: 4px;
 	padding: 24px;
 

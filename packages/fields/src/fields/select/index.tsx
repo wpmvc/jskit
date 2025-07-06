@@ -2,21 +2,20 @@
  * WordPress dependencies
  */
 import { useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
 
 /**
  * External dependencies
  */
-import Select, { components, MultiValue, SingleValue } from 'react-select';
 import { isFunction } from 'lodash';
+import Select, { components, MultiValue, SingleValue } from 'react-select';
 
 /**
  * Internal dependencies
  */
 import Label from '../../components/label';
 import { getValue, isDisabled, updateAttribute } from '../../utils';
-import { SelectFieldProps } from './types';
 import { Chevron, StyledHelpText, StyledLabel, Wrapper } from './styles';
+import { SelectFieldProps } from './types';
 
 const DropdownIndicator = ( menuIsOpen: boolean ) => ( props: any ) => (
 	<components.DropdownIndicator { ...props }>
@@ -98,23 +97,19 @@ export default function SelectComponent( props: SelectFieldProps ) {
 						ClearIndicator: () => null,
 						IndicatorSeparator: () => null,
 					} }
-					styles={ {
-						menuPortal: ( base ) => ( { ...base, zIndex: 9999 } ),
-						control: ( base, state ) => ( {
-							...base,
-							boxShadow: 'none',
-							borderColor: state.isFocused
-								? '#3858E9'
-								: '#dcdcde',
-							borderWidth: '1px',
-							borderStyle: 'solid',
-							backgroundColor: 'white',
-							transition: 'border-color 0.2s ease',
-							'&:hover': {
-								borderColor: '#3858E9',
-							},
-						} ),
-					} }
+					theme={ ( theme ) => ( {
+						...theme,
+						colors: {
+							...theme.colors,
+							primary: 'var(--wp-admin-theme-color)', // selected
+							primary75:
+								'color-mix(in srgb, var(--wp-admin-theme-color) 60%, transparent)', // selected + focus
+							primary50:
+								'color-mix(in srgb, var(--wp-admin-theme-color) 40%, transparent)', // hover/focus
+							primary25:
+								'color-mix(in srgb, var(--wp-admin-theme-color) 15%, transparent)', // lightest hover
+						},
+					} ) }
 				/>
 			</Wrapper>
 
