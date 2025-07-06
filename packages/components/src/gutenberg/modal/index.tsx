@@ -48,14 +48,12 @@ export default function Modal( {
 				isFullScreen={ isFullScreen }
 				$headerBorder={ borderHeaderFooter }
 			>
-				<ColorWrapper>
-					<ModalBody>{ children }</ModalBody>
-					{ footer && (
-						<ModalFooter $border={ borderHeaderFooter }>
-							{ footer }
-						</ModalFooter>
-					) }
-				</ColorWrapper>
+				<ModalBody>{ children }</ModalBody>
+				{ footer && (
+					<ModalFooter $border={ borderHeaderFooter }>
+						{ footer }
+					</ModalFooter>
+				) }
 			</StyledModal>
 		)
 	);

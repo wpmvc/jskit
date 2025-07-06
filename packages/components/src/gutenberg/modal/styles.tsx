@@ -1,4 +1,5 @@
 import { Modal } from '@wordpress/components';
+import { ColorWrapper } from '@wpmvc/colors';
 import styled from 'styled-components';
 
 export const StyledModal = styled( Modal )< {
@@ -27,12 +28,12 @@ export const StyledModal = styled( Modal )< {
 	}
 `;
 
-export const ModalBody = styled.div`
+export const ModalBody = styled( ColorWrapper )`
 	padding: 24px 32px;
-	overflow: scroll;
+	overflow-y: auto;
 `;
 
-export const ModalFooter = styled.div< {
+export const ModalFooter = styled( ColorWrapper )< {
 	$border?: boolean;
 } >`
 	padding: 14px 32px;
