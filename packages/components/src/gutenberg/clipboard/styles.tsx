@@ -1,4 +1,4 @@
-const ClipboardCopyWrapper = Styled.div`
+export const ClipboardCopyWrapper = Styled.div`
     position: relative;
     width: fit-content;
     min-width: 120px;
@@ -10,11 +10,11 @@ const ClipboardCopyWrapper = Styled.div`
     background-color: var(--wpmvc-gray-50);
 `;
 
-const ClipboardText = Styled.span< StyledClipboardTypes >`
+export const ClipboardText = Styled.span< StyledClipboardTypes >`
 
 `;
 
-const ActionIcon = Styled.span`
+export const ActionIcon = Styled.span`
     line-height: 0.8;
     min-height: 30px;
     display: flex;
@@ -28,5 +28,3 @@ const ActionIcon = Styled.span`
         height: 16px;
     }
 `;
-
-export { ActionIcon, ClipboardCopyWrapper, ClipboardText };
