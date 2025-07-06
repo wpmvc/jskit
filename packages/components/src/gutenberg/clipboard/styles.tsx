@@ -1,4 +1,6 @@
-export const ClipboardCopyWrapper = Styled.div`
+import styled from 'styled-components';
+
+export const ClipboardCopyWrapper = styled.div`
     position: relative;
     width: fit-content;
     min-width: 120px;
@@ -10,11 +12,11 @@ export const ClipboardCopyWrapper = Styled.div`
     background-color: var(--wpmvc-gray-50);
 `;
 
-export const ClipboardText = Styled.span< StyledClipboardTypes >`
+export const ClipboardText = styled.span< StyledClipboardTypes >`
 
 `;
 
-export const ActionIcon = Styled.span`
+export const ActionIcon = styled.span`
     line-height: 0.8;
     min-height: 30px;
     display: flex;
