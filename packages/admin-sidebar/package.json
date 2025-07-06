@@ -28,19 +28,19 @@
 		"type": "git",
 		"url": "git+https://github.com/wpmvc/jskit.git"
 	},
-  	"bugs": {
+	"bugs": {
 		"url": "https://github.com/wpmvc/jskit/issues"
 	},
 	"devDependencies": {
-		"@types/lodash": "^4.17.18",
+		"@types/lodash": "^4.17.20",
 		"@types/react": "^19.1.8",
 		"@types/react-dom": "^19.1.6",
 		"@types/react-router-dom": "^5.3.3",
 		"typescript": "^5.8.3"
 	},
 	"dependencies": {
-		"@wordpress/data": "^10.25.0",
-		"@wordpress/viewport": "^6.25.0",
-		"react-router-dom": "^7.6.2"
+		"@wordpress/data": "^10.26.0",
+		"@wordpress/viewport": "^6.26.0",
+		"react-router-dom": "^7.6.3"
 	}
 }

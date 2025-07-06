@@ -4,7 +4,7 @@ import { produce } from 'immer';
 import {
 	Actions,
 	ResetAction,
-	SetIndexQueryParamsAction,
+	SetQueryParamsAction,
 	SetItemAction,
 	SetItemsAction,
 	State,
@@ -16,7 +16,7 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 		path,
 		item: null,
 		items: [],
-		indexQueryParams: {
+		queryParams: {
 			search: '',
 			page: 1,
 			perPage: 10,
@@ -34,8 +34,8 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 		reset(): ResetAction {
 			return { type: 'RESET' };
 		},
-		setIndexQueryParams( params: any ): SetIndexQueryParamsAction {
-			return { type: 'SET_INDEX_QUERY_PARAMS', params };
+		setQueryParams( params: any ): SetQueryParamsAction {
+			return { type: 'SET_QUERY_PARAMS', params };
 		},
 	};
 
@@ -53,8 +53,8 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 						draft.items = [];
 						draft.item = null;
 						break;
-					case 'SET_INDEX_QUERY_PARAMS':
-						draft.indexQueryParams = action.params;
+					case 'SET_QUERY_PARAMS':
+						draft.queryParams = action.params;
 						break;
 				}
 			} );
@@ -110,7 +110,7 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 				return ( { dispatch }: { dispatch: typeof actions } ) => {
 					if ( params ) {
 						dispatch.reset();
-						dispatch.setIndexQueryParams( params );
+						dispatch.setQueryParams( params );
 					}
 
 					//@ts-ignore
@@ -121,8 +121,8 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 			},
 			resetQueryParamsAndRefresh: () => {
 				return ( { dispatch }: { dispatch: typeof actions } ) => {
-					dispatch.setIndexQueryParams(
-						DEFAULT_STATE.indexQueryParams
+					dispatch.setQueryParams(
+						DEFAULT_STATE.queryParams
 					);
 					//@ts-ignore
 					dispatch.invalidateResolution( 'get' );
@@ -137,8 +137,8 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 				return state.items;
 			},
 
-			getIndexQueryParams( state: State ) {
-				return state.indexQueryParams;
+			getQueryParams( state: State ) {
+				return state.queryParams;
 			},
 
 			getItem( state: State ) {
@@ -166,7 +166,7 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 					const data = await apiFetch( {
 						path: addQueryArgs(
 							path,
-							select.getIndexQueryParams()
+							select.getQueryParams()
 						),
 					} );
 

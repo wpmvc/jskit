@@ -32,9 +32,9 @@
     "url": "https://github.com/wpmvc/jskit/issues"
   },
   "dependencies": {
-    "@wordpress/element": "^6.9.0",
+    "@wordpress/element": "^6.26.0",
     "react": "^19.1.0",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "@types/react": "^19.1.8"

@@ -30,7 +30,6 @@ export function useCrudStore( { name }: StoreConfig ) {
 export function useCrudStoreData( {
 	name,
 	selector,
-	params,
 }: CrudSelectorConfig ) {
 	const { data, isResolved } = useSelect(
 		( select: any ) => {
@@ -51,8 +50,8 @@ export function useCrudStoreData( {
 export function useCrudQueryParams( { name }: { name: string } ) {
 	return useSelect(
 		( select: any ) => {
-			const { getIndexQueryParams } = select( name );
-			return getIndexQueryParams();
+			const { getQueryParams } = select( name );
+			return getQueryParams();
 		},
 		[ name ]
 	);

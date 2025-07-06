@@ -10,8 +10,6 @@ export default function registerCrudStore( storeConfig: StoreConfig ) {
 
 	const defaultConfig = getCrudConfig( storeConfig );
 
-	// console.log(defaultConfig);
-
 	const extendedConfig = produce( defaultConfig, ( config ) => {
 		//override store
 	} );
