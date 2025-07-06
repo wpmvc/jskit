@@ -27,10 +27,7 @@ export function useCrudStore( { name }: StoreConfig ) {
 	return { refresh, resetQueryParamsAndRefresh, store, update };
 }
 
-export function useCrudStoreData( {
-	name,
-	selector,
-}: CrudSelectorConfig ) {
+export function useCrudStoreData( { name, selector }: CrudSelectorConfig ) {
 	const { data, isResolved } = useSelect(
 		( select: any ) => {
 			const { hasFinishedResolution, get, show } = select( name );
