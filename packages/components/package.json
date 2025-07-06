@@ -1,6 +1,6 @@
 {
   "name": "@wpmvc/components",
-  "version": "0.0.2",
+  "version": "0.0.21",
   "description": "Reusable components package for WordPress MVC JSKit.",
   "author": "Md Al Amin",
   "license": "MIT",
@@ -39,7 +39,7 @@
     "@wordpress/element": "^6.26.0",
     "@wordpress/i18n": "^5.26.0",
     "@wordpress/icons": "^10.26.0",
-    "@wpmvc/colors": "^0.0.1",
+    "@wpmvc/colors": "^0.0.11",
     "clsx": "^2.1.1",
     "lodash": "^4.17.21",
     "styled-components": "^6.1.19"

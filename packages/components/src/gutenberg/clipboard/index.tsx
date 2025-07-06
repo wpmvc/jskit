@@ -9,7 +9,8 @@ import { check, copy } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
-import { ActionIcon, ClipboardCopyWrapper, ClipboardText } from './styles';
+import { ActionIcon, ClipboardCopyWrapper } from './styles';
+import { ClipboardProps } from './types';
 
 /**
  * A reusable clipboard copy component that displays a visual feedback when text is copied.
@@ -30,7 +31,7 @@ export default function Clipboard( {
 
 	return (
 		<ClipboardCopyWrapper className={ `${ className }` }>
-			<ClipboardText>{ text }</ClipboardText>
+			<span>{ text }</span>
 			<ActionIcon ref={ copyRef }>
 				{ isCopied ? <Icon icon={ check } /> : <Icon icon={ copy } /> }
 			</ActionIcon>

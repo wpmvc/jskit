@@ -24,7 +24,7 @@ export default function getConfig() {
 		secondary: generateColorVariations( colors.secondary ),
 		success: generateColorVariations( colors.success ),
 		warning: generateColorVariations( colors.warning ),
-		danger: generateColorVariations( colors.danger ),
+		error: generateColorVariations( colors.error ),
 		gray: generateColorVariations( colors.gray ),
 		background: colors.background,
 		text: colors.text,

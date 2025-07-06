@@ -11,7 +11,7 @@ export type ColorPalette = {
 	secondary: StandardShades;
 	success: StandardShades;
 	warning: StandardShades;
-	danger: StandardShades;
+	error: StandardShades;
 	gray: StandardShades;
 	background: {
 		light: RGBA;

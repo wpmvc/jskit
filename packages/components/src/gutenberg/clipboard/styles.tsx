@@ -12,8 +12,6 @@ export const ClipboardCopyWrapper = styled.div`
 	background-color: var( --wpmvc-gray-50 );
 `;
 
-export const ClipboardText = styled.span< StyledClipboardTypes >``;
-
 export const ActionIcon = styled.span`
 	line-height: 0.8;
 	min-height: 30px;

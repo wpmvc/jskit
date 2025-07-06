@@ -8,7 +8,7 @@ const colors = {
 	// Success / Green
 	success: '#22c55e',
 
-	info: '#ec4899',
+	info: '#17a2b8',
 
 	// Warning / Amber
 	warning: '#f59e0b',

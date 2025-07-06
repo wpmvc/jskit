@@ -1,6 +1,6 @@
 {
   "name": "@wpmvc/colors",
-  "version": "0.0.1",
+  "version": "0.0.11",
   "author": "Md Al Amin",
   "type": "module",
   "main": "build/colors.umd.js",
