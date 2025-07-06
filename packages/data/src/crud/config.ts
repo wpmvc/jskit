@@ -121,9 +121,7 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 			},
 			resetQueryParamsAndRefresh: () => {
 				return ( { dispatch }: { dispatch: typeof actions } ) => {
-					dispatch.setQueryParams(
-						DEFAULT_STATE.queryParams
-					);
+					dispatch.setQueryParams( DEFAULT_STATE.queryParams );
 					//@ts-ignore
 					dispatch.invalidateResolution( 'get' );
 					//@ts-ignore
@@ -164,10 +162,7 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 					select: any;
 				} ) => {
 					const data = await apiFetch( {
-						path: addQueryArgs(
-							path,
-							select.getQueryParams()
-						),
+						path: addQueryArgs( path, select.getQueryParams() ),
 					} );
 
 					dispatch.setItems( data );
