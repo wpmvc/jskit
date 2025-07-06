@@ -23,16 +23,17 @@ import { useState } from '@wordpress/element';
  */
 import { check, copy } from '@wordpress/icons';
 import { ActionIcon, ClipboardCopyWrapper, ClipboardText } from './styles';
-import { ClipboardTypes } from './types';
 
 export default function Clipboard( {
 	text,
 	className = '',
 	timeout = 2000,
-}: ClipboardTypes ) {
+    onCopied
+}: ClipboardProps ) {
 	const [ isCopied, setIsCopied ] = useState( false );
 	const copyRef = useCopyToClipboard( text, () => {
 		setIsCopied( true );
+        onCopied?.();
 		setTimeout( () => setIsCopied( false ), timeout );
 	} );
 
