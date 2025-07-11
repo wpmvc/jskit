@@ -17,13 +17,15 @@ export default function Switch( props: SwitchProps ) {
 
 		if ( ! thumb ) return;
 
-		// Clean previous render if any
+		// Defer unmount to avoid race condition warning
 		if ( rootRef.current ) {
-			rootRef.current.unmount();
+			const prevRoot = rootRef.current;
 			rootRef.current = null;
+			queueMicrotask( () => {
+				prevRoot.unmount();
+			} );
 		}
 
-		// If loading, render Spinner inside thumb
 		if ( isLoading ) {
 			const container = document.createElement( 'div' );
 			Object.assign( container.style, {
@@ -41,8 +43,9 @@ export default function Switch( props: SwitchProps ) {
 			} );
 
 			thumb.appendChild( container );
-			rootRef.current = createRoot( container );
-			rootRef.current.render( <Spinner /> );
+			const newRoot = createRoot( container );
+			newRoot.render( <Spinner /> );
+			rootRef.current = newRoot;
 		}
 	}, [ isLoading ] );
 
