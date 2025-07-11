@@ -7,6 +7,7 @@ import {
 	SetQueryParamsAction,
 	SetItemAction,
 	SetItemsAction,
+	UpdateItemAction,
 	State,
 } from './types';
 import { StoreConfig } from '../types';
@@ -30,6 +31,9 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 		},
 		setItems( items: any ): SetItemsAction {
 			return { type: 'SET_ITEMS', items };
+		},
+		updateItem( id: string, item: any ): UpdateItemAction {
+			return { type: 'UPDATE_ITEM', id, item };
 		},
 		reset(): ResetAction {
 			return { type: 'RESET' };
@@ -55,6 +59,20 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 						break;
 					case 'SET_QUERY_PARAMS':
 						draft.queryParams = action.params;
+						break;
+					case 'UPDATE_ITEM':
+						//@ts-ignore
+						draft.items.items = draft.items.items.map(
+							( item: any ) => {
+								if ( item.id === action.id ) {
+									return {
+										...item,
+										...action.item,
+									};
+								}
+								return item;
+							}
+						);
 						break;
 				}
 			} );

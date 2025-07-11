@@ -11,8 +11,10 @@ export type SetQueryParamsAction = {
 	type: 'SET_QUERY_PARAMS';
 	params: boolean;
 };
+export type UpdateItemAction = { type: 'UPDATE_ITEM'; id: string; item: any };
 export type Actions =
 	| SetItemAction
 	| SetItemsAction
 	| ResetAction
-	| SetQueryParamsAction;
+	| SetQueryParamsAction
+	| UpdateItemAction;

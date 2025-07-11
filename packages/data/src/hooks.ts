@@ -22,9 +22,9 @@ export function useValuesStoreData( { name }: StoreConfig ) {
 }
 
 export function useCrudStore( { name }: StoreConfig ) {
-	const { refresh, resetQueryParamsAndRefresh, store, update } =
+	const { refresh, resetQueryParamsAndRefresh, store, update, updateItem } =
 		useDispatch( name );
-	return { refresh, resetQueryParamsAndRefresh, store, update };
+	return { refresh, resetQueryParamsAndRefresh, store, update, updateItem };
 }
 
 export function useCrudStoreData( { name, selector }: CrudSelectorConfig ) {
