@@ -19,6 +19,7 @@ import {
 	ToggleGroupFieldType,
 } from '../fields/toggle-group/types';
 import { TextFieldProps, TextFieldType } from '../fields/text/types';
+import { ImageChoiceProps, ImageChoiceType } from '../fields/image-choice/types';
 
 // Field types
 export type FieldType =
@@ -39,6 +40,7 @@ export type FieldType =
 	| 'text'
 	| 'toggleGroup'
 	| 'repeater'
+	| 'imageChoice'
 	| 'row';
 
 export type Option = { label: string; value: string; description?: string };
@@ -85,6 +87,7 @@ export type Field =
 	| TabsFieldType
 	| TextFieldType
 	| ToggleGroupFieldType
+	| ImageChoiceType
 	| OtherFieldType;
 
 // Record of field config
@@ -131,4 +134,5 @@ export type FieldProps =
 	| TabsFieldProps
 	| TextFieldProps
 	| ToggleGroupFieldProps
+	| ImageChoiceProps
 	| CommonFieldProps;

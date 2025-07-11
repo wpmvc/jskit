@@ -12,15 +12,15 @@ import { size } from 'lodash';
  * Internal dependencies
  */
 import {
-    ChoiceAction,
-    ContentContainer,
-    ImageChoiceBox,
-    ImageChoiceItem,
-    ImageChoiceWrapper,
-    ImageContainer,
-    StyledChoice,
+	ChoiceAction,
+	ContentContainer,
+	ImageChoiceBox,
+	ImageChoiceItem,
+	ImageChoiceWrapper,
+	ImageContainer,
+	StyledChoice,
 } from './styles';
-import type { ImageChoiceProps } from './types';
+import { ImageChoiceProps } from './types';
 
 function generateOptionId( imageChoiceId: string, index: number ) {
 	return `${ imageChoiceId }-${ index }-image-choice`;
@@ -34,8 +34,7 @@ export default function ImageChoice( {
 	className,
 	perRow,
 }: ImageChoiceProps ) {
-
-    const id = useInstanceId( ImageChoice, 'wpmvc-image-choice' );
+	const id = useInstanceId( ImageChoice, 'wpmvc-image-choice' );
 
 	return (
 		<div
@@ -60,7 +59,7 @@ export default function ImageChoice( {
 							>
 								<StyledChoice
 									type="radio"
-									id={ generateOptionId(id, index) }
+									id={ generateOptionId( id, index ) }
 									name={ id }
 									value={ option.value }
 									checked={ option.value === value }

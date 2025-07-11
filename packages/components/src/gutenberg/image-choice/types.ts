@@ -9,7 +9,7 @@ type Pro = {
 	url: string;
 };
 
-type Option = {
+export type Option = {
 	label: string;
 	value: string;
 	demo?: Demo;
@@ -20,8 +20,8 @@ type Option = {
 export type ImageChoiceProps = {
 	label: string;
 	value: any;
-	onChange: ()=>void;
+	onChange: ( value: string ) => void;
 	className?: string;
-	options: Array< Option > | (() => Array<Option>);
+	options: Array< Option >;
 	perRow?: number;
 };

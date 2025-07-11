@@ -32,6 +32,7 @@ import styled, { CSSProperties } from 'styled-components';
 import Group from './group';
 import Row from './row';
 import clsx from 'clsx';
+import ImageChoice from './image-choice';
 
 /**
  * Mapping of field types to their respective components
@@ -59,6 +60,7 @@ const defaultComponents: {
 	toggleGroup: ToggleGroup,
 	repeater: Repeater,
 	row: Row,
+	imageChoice: ImageChoice,
 };
 
 const StyledFields = styled.div`
