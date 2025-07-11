@@ -6,4 +6,5 @@ export type SwitchProps = {
 	disabled?: boolean;
 	className?: string;
 	required?: boolean;
+	isLoading?: boolean;
 };
