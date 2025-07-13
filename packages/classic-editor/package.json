@@ -1,6 +1,6 @@
 {
   "name": "@wpmvc/classic-editor",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A React component for integrating WordPress' classic editor using wp.editor API",
   "author": "Md Al Amin",
   "license": "MIT",
@@ -32,6 +32,7 @@
     "url": "https://github.com/wpmvc/jskit/issues"
   },
   "dependencies": {
+    "@wordpress/compose": "^7.26.0",
     "@wordpress/element": "^6.26.0",
     "react": "^19.1.0",
     "styled-components": "^6.1.19"
