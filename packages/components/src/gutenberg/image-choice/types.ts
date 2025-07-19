@@ -19,9 +19,9 @@ export type Option = {
 
 export type ImageChoiceProps = {
 	label: string;
-	value: any;
+	value: string;
 	onChange: ( value: string ) => void;
 	className?: string;
-	options: Array< Option >;
+	options: Option[];
 	perRow?: number;
 };

@@ -19,7 +19,10 @@ import {
 	ToggleGroupFieldType,
 } from '../fields/toggle-group/types';
 import { TextFieldProps, TextFieldType } from '../fields/text/types';
-import { ImageChoiceProps, ImageChoiceType } from '../fields/image-choice/types';
+import {
+	ImageChoiceProps,
+	ImageChoiceType,
+} from '../fields/image-choice/types';
 
 // Field types
 export type FieldType =
