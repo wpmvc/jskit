@@ -64,7 +64,7 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 						//@ts-ignore
 						draft.items.items = draft.items.items.map(
 							( item: any ) => {
-								if ( item.id === action.id ) {
+								if ( item?.id ?? item?.ID === action.id ) {
 									return {
 										...item,
 										...action.item,
