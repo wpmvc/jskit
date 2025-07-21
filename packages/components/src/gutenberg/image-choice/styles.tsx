@@ -70,7 +70,7 @@ export const ImageContainer = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-	padding: 8px;
+	padding: 12px 10px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -86,4 +86,33 @@ export const DemoLink = styled.a`
 	&:hover {
 		text-decoration: underline;
 	}
+`;
+
+export const BadgeGroup = styled.div`
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	display: flex;
+	flex-direction: row; /* row instead of column */
+	gap: 6px;
+`;
+
+export const ProBadge = styled.div`
+	background-color: var( --wpmvc-primary-500 );
+	color: white;
+	font-size: 11px;
+	font-weight: 600;
+	padding: 4px 10px;
+	border-radius: 8px;
+	text-transform: uppercase;
+`;
+
+export const SoonBadge = styled.div`
+	background-color: #4b4b4b;
+	color: white;
+	font-size: 11px;
+	font-weight: 600;
+	padding: 4px 10px;
+	border-radius: 8px;
+	text-transform: uppercase;
 `;

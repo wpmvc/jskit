@@ -2,17 +2,21 @@
  * WordPress dependencies
  */
 import { useInstanceId } from '@wordpress/compose';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
 import {
+	BadgeGroup,
 	ContentContainer,
 	DemoLink,
 	ImageChoiceBox,
 	ImageChoiceItem,
 	ImageChoiceWrapper,
 	ImageContainer,
+	ProBadge,
+	SoonBadge,
 	StyledChoice,
 } from './styles';
 import { ImageChoiceProps } from './types';
@@ -54,15 +58,35 @@ export default function ImageChoice( {
 									$checked={ isChecked }
 								>
 									<ImageContainer>
-										<StyledChoice
-											id={ inputId }
-											name={ id }
-											value={ option.value }
-											checked={ isChecked }
-											onChange={ () =>
-												onChange( option.value )
-											}
-										/>
+										{ ! option.isPro &&
+											! option.isComingSoon && (
+												<StyledChoice
+													id={ inputId }
+													name={ id }
+													value={ option.value }
+													checked={ isChecked }
+													onChange={ () =>
+														onChange( option.value )
+													}
+												/>
+											) }
+
+										{ ( option.isPro ||
+											option.isComingSoon ) && (
+											<BadgeGroup>
+												{ option.isPro && (
+													<ProBadge>
+														{ __( 'PRO' ) }
+													</ProBadge>
+												) }
+												{ option.isComingSoon && (
+													<SoonBadge>
+														{ __( 'Coming Soon' ) }
+													</SoonBadge>
+												) }
+											</BadgeGroup>
+										) }
+
 										<img
 											src={ option.image }
 											alt={ option.label }

@@ -3,17 +3,12 @@ type Demo = {
 	url: string;
 };
 
-type Pro = {
-	status: boolean;
-	label: string;
-	url: string;
-};
-
 export type Option = {
 	label: string;
 	value: string;
 	demo?: Demo;
-	pro?: Pro;
+	isPro?: boolean;
+	isComingSoon?: boolean;
 	image: string;
 };
 
