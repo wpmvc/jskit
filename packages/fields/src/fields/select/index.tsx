@@ -52,8 +52,10 @@ export default function SelectComponent( props: SelectFieldProps ) {
 				.map( ( val: any ) =>
 					normalizedOptions.find( ( opt ) => opt.value === val )
 				)
-				.filter( Boolean )
-		: normalizedOptions.find( ( opt ) => opt.value === rawValue );
+				.filter( Boolean ) ||
+		  // Ensure empty array if nothing selected
+		  []
+		: normalizedOptions.find( ( opt ) => opt.value === rawValue ) ?? null;
 
 	const handleChange = (
 		newValue:

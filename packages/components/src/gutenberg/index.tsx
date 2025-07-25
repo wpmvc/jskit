@@ -1,6 +1,7 @@
 export { default as Button } from './button';
 export { default as Checkbox } from './checkbox';
 export { default as Clipboard } from './clipboard';
+export { default as ImageChoice } from './image-choice';
 export { default as Modal } from './modal';
 export { default as Notice } from './notice';
 export { default as Number } from './number';
