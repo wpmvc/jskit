@@ -1,4 +1,4 @@
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useMemo, useState } from '@wordpress/element';
 //@ts-ignore
 import { DataViews } from '@wordpress/dataviews/wp';
 import { has, map } from 'lodash';
@@ -27,29 +27,32 @@ const Table = ( {
 	layout,
 	layouts,
 }: TableType ) => {
-	let defaultView = {
-		search: '',
-		page: 1,
-		perPage: 10,
-		layout: layout ?? defaultLayouts.table.layout,
-		fields: map( fields, 'id' ).filter(value => {
-			return value !== titleField && value !== mediaField;
-		}),
-		sort: {},
-		type: layoutType ?? 'table',
-	};
+	const defaultFieldIds = useMemo(
+		() =>
+			map( fields, 'id' ).filter(
+				( id ) => id !== titleField && id !== mediaField
+			),
+		[ fields, titleField, mediaField ]
+	);
 
-	if ( titleField ) {
-		//@ts-ignore
-		defaultView.titleField = titleField;
-	}
+	const initialView = useMemo( () => {
+		const baseView: any = {
+			search: '',
+			page: 1,
+			perPage: 10,
+			layout: layout ?? defaultLayouts.table.layout,
+			fields: defaultFieldIds,
+			sort: {},
+			type: layoutType,
+		};
 
-	if ( mediaField ) {
-		//@ts-ignore
-		defaultView.mediaField = mediaField;
-	}
+		if ( titleField ) baseView.titleField = titleField;
+		if ( mediaField ) baseView.mediaField = mediaField;
 
-	const [ view, setView ] = useState( defaultView );
+		return baseView;
+	}, [ layout, layoutType, defaultFieldIds, titleField, mediaField ] );
+
+	const [ view, setView ] = useState( initialView );
 
 	const [ processedFields, setProcessedFields ] = useState< Array< Column > >(
 		[]
@@ -66,7 +69,7 @@ const Table = ( {
 	}, [ fields ] );
 
 	useEffect( () => {
-		setView( ( prev ) => ( {
+		setView( ( prev: any ) => ( {
 			...prev,
 			...queryParams,
 		} ) );
