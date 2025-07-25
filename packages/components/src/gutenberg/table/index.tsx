@@ -21,16 +21,35 @@ const Table = ( {
 	refresh,
 	actions,
 	queryParams,
+	titleField,
+	mediaField,
+	layoutType,
+	layout,
+	layouts,
 }: TableType ) => {
-	const [ view, setView ] = useState( {
+	let defaultView = {
 		search: '',
 		page: 1,
 		perPage: 10,
-		layout: defaultLayouts.table.layout,
-		fields: map( fields, 'id' ),
+		layout: layout ?? defaultLayouts.table.layout,
+		fields: map( fields, 'id' ).filter(value => {
+			return value !== titleField && value !== mediaField;
+		}),
 		sort: {},
-		type: 'table',
-	} );
+		type: layoutType ?? 'table',
+	};
+
+	if ( titleField ) {
+		//@ts-ignore
+		defaultView.titleField = titleField;
+	}
+
+	if ( mediaField ) {
+		//@ts-ignore
+		defaultView.mediaField = mediaField;
+	}
+
+	const [ view, setView ] = useState( defaultView );
 
 	const [ processedFields, setProcessedFields ] = useState< Array< Column > >(
 		[]
@@ -75,7 +94,7 @@ const Table = ( {
 			fields={ processedFields }
 			view={ view }
 			onChangeView={ handleChangeView }
-			defaultLayouts={ defaultLayouts }
+			defaultLayouts={ layouts ?? defaultLayouts }
 			actions={ actions }
 			paginationInfo={ {
 				totalItems: total,

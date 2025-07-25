@@ -2,6 +2,14 @@ import type { Field as FieldType } from '@wordpress/dataviews';
 import { __ } from '@wordpress/i18n';
 
 export type Column = Omit< FieldType< any >, 'enableGlobalSearch' | 'sort' >;
+
+type Layout = {
+	styles: object;
+	primaryField: string;
+	showMedia?: boolean;
+	mediaField?: string;
+};
+
 export type TableType = {
 	items: object;
 	total: number;
@@ -14,5 +22,17 @@ export type TableType = {
 		page: number;
 		perPage: number;
 		sort: object;
+	};
+	titleField?: string;
+	mediaField?: string;
+	layoutType?: string;
+	layout?: Layout;
+	layouts?: {
+		table?: {
+			layout: Layout;
+		};
+		grid?: {
+			layout: Layout;
+		};
 	};
 };
