@@ -85,7 +85,7 @@ const Table = ( {
 	}, [ view.search, view.page, view.perPage, view.sort ] );
 
 	const handleChangeView = ( newView: any ) => {
-		setView( ( prev ) => ( {
+		setView( ( prev: any ) => ( {
 			...prev,
 			...newView,
 		} ) );
