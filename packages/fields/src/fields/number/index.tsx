@@ -27,29 +27,8 @@ export default function Number( props: NumberFieldProps ): JSX.Element {
 		}
 	};
 
-	const getMinValue = () => {
-		if ( isFunction( field?.min ) ) {
-			try {
-				return field.min( attributes );
-			} catch ( error ) {
-				console.warn( 'Error evaluating min function:', error );
-				return undefined;
-			}
-		}
-		return field?.min;
-	};
-
-	const getMaxValue = () => {
-		if ( isFunction( field?.max ) ) {
-			try {
-				return field.max( attributes );
-			} catch ( error ) {
-				console.warn( 'Error evaluating max function:', error );
-				return undefined;
-			}
-		}
-		return field?.max;
-	};
+	const min = isFunction( field?.min ) ? field.min( attributes ) : field?.min;
+	const max = isFunction( field?.max ) ? field.max( attributes ) : field?.max;
 
 	return (
 		<NumberComponent
@@ -61,8 +40,8 @@ export default function Number( props: NumberFieldProps ): JSX.Element {
 			value={ getValue( props ) }
 			onChange={ handleChange }
 			disabled={ isDisabled( props ) }
-			min={ getMinValue() }
-			max={ getMaxValue() }
+			min={ min }
+			max={ max }
 			required={ field?.required }
 			labelPosition={ field?.labelPosition }
 		/>
