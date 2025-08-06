@@ -9,9 +9,10 @@ import { Number as NumberComponent } from '@wpmvc/components';
 import Label from '../../components/label';
 import { getValue, isDisabled, updateAttribute } from '../../utils';
 import { NumberFieldProps } from './types';
+import { isFunction } from 'lodash';
 
 export default function Number( props: NumberFieldProps ): JSX.Element {
-	const { field } = props;
+	const { field, attributes } = props;
 
 	const handleChange = ( value: any ) => {
 		if ( field.precision ) {
@@ -26,6 +27,9 @@ export default function Number( props: NumberFieldProps ): JSX.Element {
 		}
 	};
 
+	const min = isFunction( field?.min ) ? field.min( attributes ) : field?.min;
+	const max = isFunction( field?.max ) ? field.max( attributes ) : field?.max;
+
 	return (
 		<NumberComponent
 			//@ts-ignore
@@ -36,8 +40,8 @@ export default function Number( props: NumberFieldProps ): JSX.Element {
 			value={ getValue( props ) }
 			onChange={ handleChange }
 			disabled={ isDisabled( props ) }
-			min={ field?.min }
-			max={ field?.max }
+			min={ min }
+			max={ max }
 			required={ field?.required }
 			labelPosition={ field?.labelPosition }
 		/>
