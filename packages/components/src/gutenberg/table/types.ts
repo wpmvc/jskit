@@ -3,7 +3,7 @@ import { __ } from '@wordpress/i18n';
 
 export type Column = Omit< FieldType< any >, 'enableGlobalSearch' | 'sort' >;
 
-type Layout = {
+export type Layout = {
 	styles: object;
 	primaryField: string;
 	showMedia?: boolean;

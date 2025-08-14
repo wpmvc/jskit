@@ -27,6 +27,10 @@ const Table = ( {
 	layout,
 	layouts,
 }: TableType ) => {
+	if ( ! layoutType ) {
+		layoutType = 'table';
+	}
+
 	const defaultFieldIds = useMemo(
 		() =>
 			map( fields, 'id' ).filter(
