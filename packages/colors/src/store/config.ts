@@ -3,6 +3,7 @@ import { ColorPalette, ColorPaletteOverride } from './types';
 
 function generateColorVariations( baseColor: string ) {
 	const steps = {
+		25: `color-mix(in srgb, ${ baseColor } 5%, white)`,
 		50: `color-mix(in srgb, ${ baseColor } 10%, white)`,
 		100: `color-mix(in srgb, ${ baseColor } 20%, white)`,
 		200: `color-mix(in srgb, ${ baseColor } 30%, white)`,
