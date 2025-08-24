@@ -81,7 +81,7 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 		actions: {
 			...actions,
 
-			store( payload: any ) {
+			create( payload: any ) {
 				return async ( { dispatch }: { dispatch: typeof actions } ) => {
 					const response = await apiFetch( {
 						path,
@@ -120,6 +120,8 @@ export default function getCrudConfig( { path }: StoreConfig ) {
 
 					//@ts-ignore
 					dispatch.invalidateResolution( 'get' );
+					//@ts-ignore
+					dispatch.invalidateResolution( 'show' );
 					return response;
 				};
 			},

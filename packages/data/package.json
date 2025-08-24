@@ -1,6 +1,6 @@
 {
   "name": "@wpmvc/data",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "author": "Md Al Amin",
   "type": "module",
   "main": "build/data.umd.js",
@@ -27,6 +27,7 @@
     "@wordpress/api-fetch": "^7.26.0",
     "@wordpress/data": "^10.26.0",
     "@wordpress/url": "^4.26.0",
-    "immer": "^10.1.1"
+    "immer": "^10.1.1",
+    "vite": "^7.1.3"
   }
 }
