@@ -37,24 +37,27 @@
     "@dnd-kit/modifiers": "^9.0.0",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
-    "@wordpress/block-editor": "^15.0.0",
-    "@wordpress/components": "^30.0.0",
-    "@wordpress/compose": "^7.27.0",
-    "@wordpress/element": "^6.27.0",
-    "@wordpress/i18n": "^6.0.0",
-    "@wordpress/icons": "^10.27.0",
-    "@wpmvc/components": "^0.0.22",
+    "@vitejs/plugin-react": "^5.0.2",
+    "@wordpress/block-editor": "^15.2.0",
+    "@wordpress/components": "^30.2.0",
+    "@wordpress/compose": "^7.29.0",
+    "@wordpress/element": "^6.29.0",
+    "@wordpress/i18n": "^6.2.0",
+    "@wordpress/icons": "^10.29.0",
+    "@wpmvc/components": "^0.0.23",
     "clsx": "^2.1.1",
     "lodash": "^4.17.21",
     "react-select": "^5.10.2",
-    "styled-components": "^6.1.19"
+    "styled-components": "^6.1.19",
+    "vite": "^7.1.4",
+    "vite-plugin-dts": "^4.5.4"
   },
   "devDependencies": {
     "@types/lodash": "^4.17.20",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
-    "@wordpress/scripts": "^30.20.0",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "@wordpress/scripts": "^30.22.0",
     "path": "^0.12.7",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.2"
   }
 }
