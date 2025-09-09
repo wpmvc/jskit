@@ -12,12 +12,17 @@ export type Item = {
 	[ key: string ]: any;
 };
 
+export type Index = {
+	index: number;
+};
+
 export type RepeaterFieldType = BaseField & {
 	type: 'repeater';
 	fixed?: boolean;
 	allowDuplication?: boolean;
 	hideLabel?: boolean;
 	showFieldInHeader?: boolean;
+	showHeader?: boolean;
 	labelField?: string;
 	addButtonText?: boolean;
 	preventEmpty?: boolean; // default: true
@@ -39,4 +44,10 @@ export type SortableItemProps = {
 	onToggleCollapse: ( id: number ) => void;
 	repeaterProps: RepeaterFieldProps;
 	isDisabledRemove: boolean;
+};
+
+export type ActionsProps = {
+	onDuplicate: ( id: number ) => void;
+	onRemove: ( id: number ) => void;
+	item: Item;
 };

@@ -1,48 +1,50 @@
 /**
  * WordPress dependencies
  */
-import { useCallback, useEffect, useRef, useState } from '@wordpress/element';
 import { Button } from '@wordpress/components';
+import { useCallback, useEffect, useRef, useState } from '@wordpress/element';
 
 /**
  * External dependencies
  */
 import {
 	DndContext,
+	DragEndEvent,
+	KeyboardSensor,
+	PointerSensor,
 	closestCenter,
 	useSensor,
 	useSensors,
-	PointerSensor,
-	KeyboardSensor,
-	DragEndEvent,
 } from '@dnd-kit/core';
 import {
-	SortableContext,
-	verticalListSortingStrategy,
-	arrayMove,
-} from '@dnd-kit/sortable';
-import {
+	restrictToFirstScrollableAncestor,
 	restrictToVerticalAxis,
 	restrictToWindowEdges,
-	restrictToFirstScrollableAncestor,
 } from '@dnd-kit/modifiers';
+import {
+	SortableContext,
+	arrayMove,
+	verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
 
 /**
  * Internal dependencies
  */
+import clsx from 'clsx';
 import Label from '../../components/label';
 import SortableItem from './sortable-item';
-import { getMaxId } from './utils';
-import { Item, RepeaterFieldProps } from './types';
 import {
 	ButtonContainer,
 	Container,
 	ItemList,
 	Label as StyledLabel,
 } from './styles';
+import { Index, Item, RepeaterFieldProps } from './types';
+import { getMaxId } from './utils';
 
 export default function Repeater( props: RepeaterFieldProps ) {
 	const { field, attributes, attrKey, setAttributes } = props;
+	
 	const attribute = attributes[ attrKey ] ?? [];
 	const itemListRef = useRef< HTMLDivElement >( null ); // Ref for the scrollable list
 	const [ newItemAdded, setNewItemAdded ] = useState( false );
@@ -141,7 +143,12 @@ export default function Repeater( props: RepeaterFieldProps ) {
 				{ /* @ts-ignore */ }
 				<Label { ...props } />
 			</StyledLabel>
-			<Container className="repeater-container">
+			<Container
+				className={ clsx(
+					'repeater-container',
+					{'repeater-container-header-active':field.showHeader}
+				) }
+			>
 				<DndContext
 					sensors={ sensors }
 					collisionDetection={ closestCenter }
@@ -160,7 +167,20 @@ export default function Repeater( props: RepeaterFieldProps ) {
 							className="repeater-item-list"
 							ref={ itemListRef }
 						>
-							{ attribute.map( ( item: Item ) => (
+							{ attribute.map( ( item: Item, index: Index ) => (
+								<>
+								{
+									(field.showHeader && Number(index) === 0) &&
+									<div className="repeater-item-list__top">
+										{/* <span className="repeater-item-list__top-title">Title</span> */}
+										{
+											Object.keys(field.quickFields).map((key) => (
+												<span className="repeater-item-list__top-field-title" key={key}>{field?.quickFields[key]?.label}</span>
+											))
+										}
+										<span className="repeater-item-list__top-action">Settings</span>
+									</div>
+								}
 								<SortableItem
 									key={ item.id }
 									item={ item }
@@ -170,6 +190,7 @@ export default function Repeater( props: RepeaterFieldProps ) {
 									onToggleCollapse={ toggleCollapse }
 									isDisabledRemove={ isDisabledRemove }
 								/>
+								</>
 							) ) }
 						</ItemList>
 					</SortableContext>

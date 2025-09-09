@@ -1,24 +1,22 @@
 /**
  * WordPress dependencies
  */
-import { memo } from '@wordpress/element';
-import { Icon, copy, trash } from '@wordpress/icons';
 import { Tooltip } from '@wordpress/components';
+import { memo } from '@wordpress/element';
+import { Icon, copy, dragHandle, trash } from '@wordpress/icons';
 
 /**
  * External dependencies
  */
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { findIndex, isEmpty } from 'lodash';
 import clsx from 'clsx';
+import { findIndex } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import { PrivateFields } from '..';
-import { SortableItemProps } from './types';
-import { splitFields } from './utils';
 import {
 	Action,
 	ItemContainer,
@@ -27,6 +25,7 @@ import {
 	ItemHeaderContent,
 	SortButton,
 } from './styles';
+import { ActionsProps, SortableItemProps } from './types';
 
 const SortableItem = ( {
 	item,
@@ -48,6 +47,21 @@ const SortableItem = ( {
 	const { attrKey, attributes, field, setAttributes } = repeaterProps;
 	const attribute = attributes[ attrKey ];
 	const itemIndex = findIndex( attribute, { id: item.id } );
+	let quickFields = field?.quickFields;
+	if ( field?.showHeader && quickFields && ! Array.isArray( quickFields ) ) {
+		quickFields = Object.fromEntries(
+			Object.entries( quickFields as Record< string, any > ).map(
+				( [ key, config ] ) => {
+					const { label: _omitLabel, ...restConfig } = config || {};
+					return [ key, restConfig ];
+				}
+			)
+		) as typeof quickFields;
+	}
+
+	const ActionsComponent = ( field?.actions as unknown ) as
+		| React.ComponentType< ActionsProps >
+		| undefined;
 
 	const updateAttributes = ( newAttributes: any ) => {
 		const updatedValues = [ ...attribute ];
@@ -66,11 +80,6 @@ const SortableItem = ( {
 		}
 	};
 
-	const { headerFields, bodyFields } = splitFields(
-		field.fields as Record< string, any >,
-		field?.showFieldInHeader
-	);
-
 	return (
 		<ItemContainer
 			ref={ setNodeRef }
@@ -81,6 +90,8 @@ const SortableItem = ( {
 			$dragging={ isDragging ? 1 : 0 }
 			className={ clsx( 'repeater-item', {
 				'repeater-item--compact': field?.showFieldInHeader,
+				'repeater-item--quickview': field?.quickFields,
+				'repeater-item--dragging': isDragging,
 			} ) }
 		>
 			<ItemHeader
@@ -93,34 +104,40 @@ const SortableItem = ( {
 				} ) }
 			>
 				<ItemHeaderContent className="repeater-header-content">
-					<SortButton
-						{ ...listeners }
-						{ ...dragAttributes }
-						className="repeater-sort-button"
-					>
-						<span className="dashicons dashicons-move"></span>
-					</SortButton>
-					<span className="repeater-item-label">
-						{ ! field?.hideLabel &&
-							( item[ field?.labelField ?? 'defaultField' ] ??
-								`Item #${ item.id }` ) }
-						{ field?.showFieldInHeader && (
+					
+					
+					<div className="repeater-header-content__inner">
+						<span className="repeater-item-label">
+							<SortButton
+								{ ...listeners }
+								{ ...dragAttributes }
+								className="repeater-sort-button"
+							>
+								<Icon icon={ dragHandle } />
+							</SortButton>
+							{ ! field?.hideLabel &&
+								( <span> {item[ field?.labelField ?? 'defaultField' ] ??
+									`Item #${ item.id }`} </span>) }
+						</span>
+					
+						{ quickFields && (
 							<PrivateFields
 								{ ...repeaterProps }
 								attributes={ attribute[ itemIndex ] }
 								setAttributes={ updateAttributes }
-								fields={ headerFields }
+								fields={ quickFields }
 							/>
 						) }
-					</span>
+						{ ActionsComponent && (
+							<ItemHeaderActions className="header-actions">
+								<Action className="edit">
+									<ActionsComponent onDuplicate={ onDuplicate } onRemove={ onRemove } item={ item } />
+								</Action>
+							</ItemHeaderActions>
+						) }
+					</div>
 				</ItemHeaderContent>
-				{ field?.actions && (
-					<ItemHeaderActions className="header-actions">
-						<Action className="edit">
-							<field.actions />
-						</Action>
-					</ItemHeaderActions>
-				) }
+				
 				{ ! field?.fixed && ! field?.actions && (
 					<ItemHeaderActions className="header-actions">
 						{ ( undefined === field?.allowDuplication ||
@@ -169,7 +186,7 @@ const SortableItem = ( {
 					</ItemHeaderActions>
 				) }
 			</ItemHeader>
-			{ ! isEmpty( bodyFields ) && ! item.collapsed && (
+			{ ! item.collapsed && (
 				<div
 					style={ {
 						padding: 10,
@@ -181,7 +198,7 @@ const SortableItem = ( {
 						{ ...repeaterProps }
 						attributes={ attribute[ itemIndex ] }
 						setAttributes={ updateAttributes }
-						fields={ bodyFields }
+						fields={ field?.fields }
 					/>
 				</div>
 			) }
