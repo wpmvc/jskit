@@ -12,21 +12,3 @@ export function getMaxId( attribute: Item[] ) {
 		0
 	);
 }
-
-/**
- * Splits fields into header and body fields
- */
-export function splitFields(
-	fields: Record< string, any >,
-	showFieldInHeader?: boolean
-) {
-	const [ firstKey, ...restKeys ] = Object.keys( fields );
-	return showFieldInHeader
-		? {
-				headerFields: { [ firstKey ]: fields[ firstKey ] },
-				bodyFields: Object.fromEntries(
-					Object.entries( fields ).slice( 1 )
-				),
-		  }
-		: { headerFields: {}, bodyFields: fields };
-}
