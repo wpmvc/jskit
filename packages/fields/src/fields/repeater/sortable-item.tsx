@@ -89,8 +89,7 @@ const SortableItem = ( {
 			} }
 			$dragging={ isDragging ? 1 : 0 }
 			className={ clsx( 'repeater-item', {
-				'repeater-item--compact': field?.showFieldInHeader,
-				'repeater-item--quickview': field?.quickFields,
+				'repeater-item--compact': field?.quickFields,
 				'repeater-item--dragging': isDragging,
 			} ) }
 		>
@@ -101,11 +100,10 @@ const SortableItem = ( {
 					'repeater-header--has-clone':
 						field?.allowDuplication === undefined ||
 						field?.allowDuplication,
+					'repeater-top-header-active': field?.showHeader
 				} ) }
 			>
 				<ItemHeaderContent className="repeater-header-content">
-					
-					
 					<div className="repeater-header-content__inner">
 						<span className="repeater-item-label">
 							<SortButton
@@ -135,58 +133,58 @@ const SortableItem = ( {
 								</Action>
 							</ItemHeaderActions>
 						) }
+						{ ! field?.fixed && ! field?.actions && (
+							<ItemHeaderActions className="header-actions">
+								{ ( undefined === field?.allowDuplication ||
+									field.allowDuplication ) && (
+									<Tooltip
+										text={
+											field?.showActionTooltip
+												? 'Duplicate Item'
+												: ''
+										}
+										delay={ 0 }
+									>
+										<Action
+											onClick={ ( event ) => {
+												event.stopPropagation();
+												onDuplicate( item.id );
+											} }
+											className="copy"
+										>
+											<Icon icon={ copy } />
+										</Action>
+									</Tooltip>
+								) }
+								<Tooltip
+									text={
+										field?.showActionTooltip && ! isDisabledRemove
+											? 'Delete Item'
+											: ''
+									}
+									delay={ 0 }
+									placement="bottom-end"
+									className="tooltip-bottom-end"
+								>
+									<Action
+										onClick={ ( event ) => {
+											event.stopPropagation();
+											onRemove( item.id );
+										} }
+										className={ clsx( 'remove', {
+											disabled: isDisabledRemove,
+										} ) }
+									>
+										<Icon icon={ trash } />
+									</Action>
+								</Tooltip>
+							</ItemHeaderActions>
+						) }
 					</div>
 				</ItemHeaderContent>
 				
-				{ ! field?.fixed && ! field?.actions && (
-					<ItemHeaderActions className="header-actions">
-						{ ( undefined === field?.allowDuplication ||
-							field.allowDuplication ) && (
-							<Tooltip
-								text={
-									field?.showActionTooltip
-										? 'Duplicate Item'
-										: ''
-								}
-								delay={ 0 }
-							>
-								<Action
-									onClick={ ( event ) => {
-										event.stopPropagation();
-										onDuplicate( item.id );
-									} }
-									className="copy"
-								>
-									<Icon icon={ copy } />
-								</Action>
-							</Tooltip>
-						) }
-						<Tooltip
-							text={
-								field?.showActionTooltip && ! isDisabledRemove
-									? 'Delete Item'
-									: ''
-							}
-							delay={ 0 }
-							placement="bottom-end"
-							className="tooltip-bottom-end"
-						>
-							<Action
-								onClick={ ( event ) => {
-									event.stopPropagation();
-									onRemove( item.id );
-								} }
-								className={ clsx( 'remove', {
-									disabled: isDisabledRemove,
-								} ) }
-							>
-								<Icon icon={ trash } />
-							</Action>
-						</Tooltip>
-					</ItemHeaderActions>
-				) }
 			</ItemHeader>
-			{ ! item.collapsed && (
+			{ ( field.fields && ! item.collapsed ) && (
 				<div
 					style={ {
 						padding: 10,
