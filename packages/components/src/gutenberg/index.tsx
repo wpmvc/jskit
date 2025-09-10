@@ -1,3 +1,4 @@
+export { default as Badge } from './badge';
 export { default as Button } from './button';
 export { default as Checkbox } from './checkbox';
 export { default as Clipboard } from './clipboard';
@@ -12,3 +13,4 @@ export { default as Table } from './table';
 export { default as Tabs } from './tabs';
 export { default as Text } from './text';
 export { default as ToggleGroup } from './toggle-group';
+
