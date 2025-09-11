@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { Button } from '@wordpress/components';
-import { useCallback, useEffect, useRef, useState } from '@wordpress/element';
+import { Fragment, useCallback, useEffect, useRef, useState } from '@wordpress/element';
 
 /**
  * External dependencies
@@ -10,6 +10,8 @@ import { useCallback, useEffect, useRef, useState } from '@wordpress/element';
 import {
 	DndContext,
 	DragEndEvent,
+	DragOverlay,
+	DragStartEvent,
 	KeyboardSensor,
 	PointerSensor,
 	closestCenter,
@@ -32,12 +34,15 @@ import {
  */
 import clsx from 'clsx';
 import Label from '../../components/label';
+import { RepeaterItemHeader, useQuickFields } from './shared';
 import SortableItem from './sortable-item';
 import {
 	ButtonContainer,
 	Container,
+	ItemContainer,
+	ItemHeader,
 	ItemList,
-	Label as StyledLabel,
+	Label as StyledLabel
 } from './styles';
 import { Index, Item, RepeaterFieldProps } from './types';
 import { getMaxId } from './utils';
@@ -48,10 +53,41 @@ export default function Repeater( props: RepeaterFieldProps ) {
 	const attribute = attributes[ attrKey ] ?? [];
 	const itemListRef = useRef< HTMLDivElement >( null ); // Ref for the scrollable list
 	const [ newItemAdded, setNewItemAdded ] = useState( false );
+	const [ activeId, setActiveId ] = useState< number | null >( null );
+	const [ overlayWidth, setOverlayWidth ] = useState< number | null >( null );
+	const noop = useCallback( () => {}, [] );
+	const getLabel = useCallback(
+		( it: Item ) =>
+			field?.hideLabel
+				? null
+				: ( it[ field?.labelField ?? 'defaultField' ] ?? `Item #${ it.id }` ),
+		[ field ]
+	);
+
+	const quickFields = useQuickFields( field );
+
+	const ActionsComponent = ( field?.actions as unknown ) as
+		| React.ComponentType<any>
+		| undefined;
 
 	const sensors = useSensors(
 		useSensor( PointerSensor ),
 		useSensor( KeyboardSensor )
+	);
+
+	const handleDragStart = useCallback(
+		( event: DragStartEvent ) => {
+			const { active } = event;
+			setActiveId( ( active.id as number ) ?? null );
+			// Measure the active item's width to mirror in overlay
+			const el = document.querySelector(
+				`.repeater-item[data-id="${ String( active.id ) }"]`
+			) as HTMLElement | null;
+			if ( el ) {
+				setOverlayWidth( el.getBoundingClientRect().width );
+			}
+		},
+		[]
 	);
 
 	const handleDragEnd = useCallback(
@@ -66,9 +102,39 @@ export default function Repeater( props: RepeaterFieldProps ) {
 			);
 			const newAttributes = arrayMove( attribute, oldIndex, newIndex );
 			setAttributes( { [ attrKey ]: newAttributes } );
+			setActiveId( null );
+			setOverlayWidth( null );
 		},
 		[ attribute, setAttributes, attrKey ]
 	);
+	const handleDragCancel = useCallback( () => { setActiveId( null ); setOverlayWidth( null ); }, [] );
+
+	const renderOverlay = useCallback( () => {
+		if ( activeId === null ) return null;
+		const activeItem = attribute.find( ( it: Item ) => it.id === activeId );
+		if ( ! activeItem ) return null;
+		return (
+			<ItemContainer $dragging={ 1 } className={ clsx( 'repeater-item repeater-item--overlay', { 'repeater-item--compact': !!quickFields } ) } style={ overlayWidth ? { width: overlayWidth } : undefined }>
+				<ItemHeader
+					$fixed={ field?.fixed ? field.fixed.toString() : 'false' }
+					className={ clsx( 'repeater-header', {
+						'repeater-header--has-clone': field?.allowDuplication === undefined || field?.allowDuplication,
+						'repeater-top-header-active': field?.showHeader,
+					} ) }
+				>
+					<RepeaterItemHeader
+						item={ activeItem }
+						field={ field }
+						repeaterProps={ props }
+						quickFields={ quickFields }
+						setAttributes={ noop }
+						actionsComponent={ ActionsComponent }
+						isOverlay={ true }
+					/>
+				</ItemHeader>
+			</ItemContainer>
+		);
+	}, [ activeId, attribute, quickFields, overlayWidth, field, noop, props ] );
 
 	useEffect( () => {
 		if ( newItemAdded && itemListRef.current ) {
@@ -152,7 +218,9 @@ export default function Repeater( props: RepeaterFieldProps ) {
 				<DndContext
 					sensors={ sensors }
 					collisionDetection={ closestCenter }
+					onDragStart={ handleDragStart }
 					onDragEnd={ handleDragEnd }
+					onDragCancel={ handleDragCancel }
 					modifiers={ [
 						restrictToVerticalAxis,
 						restrictToWindowEdges,
@@ -168,21 +236,19 @@ export default function Repeater( props: RepeaterFieldProps ) {
 							ref={ itemListRef }
 						>
 							{ attribute.map( ( item: Item, index: Index ) => (
-								<>
+								<Fragment key={ item.id }>
 								{
-									(field.showHeader && Number(index) === 0) &&
+									(field.showHeader && Number(index) === 0 && quickFields) &&
 									<div className="repeater-item-list__top">
-										{/* <span className="repeater-item-list__top-title">Title</span> */}
 										{
-											Object.keys(field.quickFields).map((key) => (
-												<span className="repeater-item-list__top-field-title" key={key}>{field?.quickFields[key]?.label}</span>
+											Object.keys(quickFields as Record<string, any>).map((key) => (
+												<span className="repeater-item-list__top-field-title" key={key}>{(quickFields as any)[key]?.label}</span>
 											))
 										}
 										<span className="repeater-item-list__top-action">Settings</span>
 									</div>
 								}
 								<SortableItem
-									key={ item.id }
 									item={ item }
 									repeaterProps={ props }
 									onRemove={ removeItem }
@@ -190,9 +256,10 @@ export default function Repeater( props: RepeaterFieldProps ) {
 									onToggleCollapse={ toggleCollapse }
 									isDisabledRemove={ isDisabledRemove }
 								/>
-								</>
+								</Fragment>
 							) ) }
 						</ItemList>
+						<DragOverlay dropAnimation={ null }>{ renderOverlay() }</DragOverlay>
 					</SortableContext>
 				</DndContext>
 				{ ! field?.fixed && (

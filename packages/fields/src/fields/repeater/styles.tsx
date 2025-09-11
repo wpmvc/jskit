@@ -62,8 +62,11 @@ export const ItemContainer = styled.div< { $dragging: number } >`
 			padding-bottom: 0;
 		}
 	}
-	&.repeater-item--dragging{
+	&.repeater-item--overlay{
 		background-color: #F1F1F1;
+	}
+	&.repeater-item--dragging{
+		opacity: .4;
 	}
 	.repeater-item{
 		&:not(:last-child){
@@ -73,10 +76,11 @@ export const ItemContainer = styled.div< { $dragging: number } >`
 `;
 
 export const ItemHeader = styled.div< { $fixed: string } >`
+	position: relative;
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	z-index: ${ ( props ) =>
+	cursor: ${ ( props ) =>
 		'true' === props.$fixed ? 'inherit' : 'pointer' };
 	&.repeater-header--has-clone {
 		.repeater-item-label {
