@@ -1,38 +1,11 @@
-import { useMemo } from '@wordpress/element';
+
+import { Tooltip } from '@wordpress/components';
 import { Icon, copy, dragHandle, trash } from '@wordpress/icons';
 import clsx from 'clsx';
 import { PrivateFields } from '..';
 import { Action, ItemHeaderActions, ItemHeaderContent, SortButton } from './styles';
-import { ActionsProps, Item, RepeaterFieldProps, RepeaterFieldType } from './types';
-
-export function getItemLabel( field: RepeaterFieldType, item: Item ): string | null {
-	if ( field?.hideLabel ) return null;
-	const key = field?.labelField ?? 'defaultField';
-	return ( item[ key ] ?? `Item #${ item.id }` ) as string;
-}
-
-export function useQuickFields( field?: RepeaterFieldType & { quickFields?: any; showHeader?: boolean } ) {
-	return useMemo( () => {
-		const quickFields = ( field as any )?.quickFields as any;
-		// Do not strip label; return as-is for header rendering consistency
-		return quickFields;
-	}, [ field ] );
-}
-
-export type RepeaterItemHeaderProps = {
-	item: Item;
-	field: RepeaterFieldType;
-	repeaterProps: RepeaterFieldProps;
-	quickFields?: any;
-	setAttributes: ( attrs: any ) => void;
-	actionsComponent?: React.ComponentType< ActionsProps >;
-	onDuplicate?: ( id: number ) => void;
-	onRemove?: ( id: number ) => void;
-	isDisabledRemove?: boolean;
-	isOverlay?: boolean;
-	dragAttributes?: any;
-	dragListeners?: any;
-};
+import { RepeaterItemHeaderProps } from './types';
+import { getItemLabel } from './utils';
 
 export function RepeaterItemHeader( props: RepeaterItemHeaderProps ) {
 	const {
@@ -89,16 +62,29 @@ export function RepeaterItemHeader( props: RepeaterItemHeaderProps ) {
 
 				{ ! field?.fixed && ! ActionsComponent && (
 					<ItemHeaderActions className="header-actions">
-						<Action
-							onClick={ ( event: any ) => {
-								event.stopPropagation();
-								if ( ! isOverlay ) onDuplicate?.( item.id );
-							} }
-							className="copy"
+						{ ( undefined === field?.allowDuplication ||
+							field.allowDuplication ) && (
+								<Action
+									onClick={ ( event: any ) => {
+										event.stopPropagation();
+										if ( ! isOverlay ) onDuplicate?.( item.id );
+									} }
+									className="copy"
+								>
+									<Icon icon={ copy } />
+								</Action>
+							)}
+						<Tooltip
+							text={
+								field?.showActionTooltip && ! isDisabledRemove
+									? 'Delete Item'
+									: ''
+							}
+							delay={ 0 }
+							placement="bottom-end"
+							className="tooltip-bottom-end"
 						>
-							<Icon icon={ copy } />
-						</Action>
-						<Action
+							<Action
 							onClick={ ( event: any ) => {
 								event.stopPropagation();
 								if ( ! isOverlay && ! isDisabledRemove ) onRemove?.( item.id );
@@ -107,6 +93,8 @@ export function RepeaterItemHeader( props: RepeaterItemHeaderProps ) {
 						>
 							<Icon icon={ trash } />
 						</Action>
+						</Tooltip>
+						
 					</ItemHeaderActions>
 				) }
 			</div>

@@ -51,3 +51,18 @@ export type ActionsProps = {
 	onRemove: ( id: number ) => void;
 	item: Item;
 };
+
+export type RepeaterItemHeaderProps = {
+	item: Item;
+	field: RepeaterFieldType;
+	repeaterProps: RepeaterFieldProps;
+	quickFields?: any;
+	setAttributes: ( attrs: any ) => void;
+	actionsComponent?: React.ComponentType< ActionsProps >;
+	onDuplicate?: ( id: number ) => void;
+	onRemove?: ( id: number ) => void;
+	isDisabledRemove?: boolean;
+	isOverlay?: boolean;
+	dragAttributes?: any;
+	dragListeners?: any;
+};

@@ -165,6 +165,7 @@ export const ButtonBase = styled.div`
 export const SortButton = styled( ButtonBase )`
 	cursor: grab;
 	flex: none;
+	padding: 0 6px;
 `;
 
 export const Action = styled( ButtonBase )`

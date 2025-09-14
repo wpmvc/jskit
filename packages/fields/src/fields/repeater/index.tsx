@@ -32,9 +32,11 @@ import {
 /**
  * Internal dependencies
  */
+import { __ } from '@wordpress/i18n';
 import clsx from 'clsx';
 import Label from '../../components/label';
-import { RepeaterItemHeader, useQuickFields } from './shared';
+import { useQuickFields } from './hooks';
+import { RepeaterItemHeader } from './RepeaterItemHeader';
 import SortableItem from './sortable-item';
 import {
 	ButtonContainer,
@@ -238,14 +240,14 @@ export default function Repeater( props: RepeaterFieldProps ) {
 							{ attribute.map( ( item: Item, index: Index ) => (
 								<Fragment key={ item.id }>
 								{
-									(field.showHeader && Number(index) === 0 && quickFields) &&
+									(field.showHeader && Number(index) === 0 && field?.quickFields) &&
 									<div className="repeater-item-list__top">
 										{
-											Object.keys(quickFields as Record<string, any>).map((key) => (
-												<span className="repeater-item-list__top-field-title" key={key}>{(quickFields as any)[key]?.label}</span>
+											Object.keys(field?.quickFields as Record<string, any>).map((key) => (
+												<span className="repeater-item-list__top-field-title" key={key}>{(field?.quickFields as any)[key]?.label}</span>
 											))
 										}
-										<span className="repeater-item-list__top-action">Settings</span>
+										<span className="repeater-item-list__top-action">{__('Settings', 'fields')}</span>
 									</div>
 								}
 								<SortableItem

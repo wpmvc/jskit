@@ -15,7 +15,8 @@ import { findIndex } from 'lodash';
  * Internal dependencies
  */
 import { PrivateFields } from '..';
-import { RepeaterItemHeader, useQuickFields } from './shared';
+import { useQuickFields } from './hooks';
+import { RepeaterItemHeader } from './RepeaterItemHeader';
 import { ItemContainer, ItemHeader } from './styles';
 import { ActionsProps, SortableItemProps } from './types';
 
