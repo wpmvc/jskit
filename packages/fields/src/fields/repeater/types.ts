@@ -21,7 +21,6 @@ export type RepeaterFieldType = BaseField & {
 	fixed?: boolean;
 	allowDuplication?: boolean;
 	hideLabel?: boolean;
-	showFieldInHeader?: boolean;
 	showHeader?: boolean;
 	labelField?: string;
 	addButtonText?: boolean;
