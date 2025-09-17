@@ -2,8 +2,8 @@ import { useDispatch, useSelect } from '@wordpress/data';
 import { CrudSelectorConfig, StoreConfig } from './types';
 
 export function useValuesStore( { name }: StoreConfig ) {
-	const { remove, refresh, save } = useDispatch( name );
-	return { remove, refresh, save };
+	const { set, remove, refresh, save } = useDispatch( name );
+	return { set, remove, refresh, save };
 }
 
 export function useValuesStoreData( { name }: StoreConfig ) {
