@@ -1,38 +1,39 @@
 /**
  * WordPress dependencies
  */
-import { Fragment, ComponentType } from '@wordpress/element';
+import { ComponentType, Fragment } from '@wordpress/element';
 
 /**
  * External dependencies
  */
 import { has } from 'lodash';
-import { FieldProps, Field, FieldRootProps } from '../types/field';
+import { Field, FieldProps, FieldRootProps } from '../types/field';
 
 /**
  * Internal dependencies
  */
-import Checkbox from './checkbox';
+import clsx from 'clsx';
+import styled, { CSSProperties } from 'styled-components';
 import Border from './border';
+import Checkbox from './checkbox';
+import PickColor from './color-picker';
+import Colors from './colors';
 import Dimension from './dimension';
+import Group from './group';
+import ImageChoice from './image-choice';
+import Label from './label';
+import Notice from './notice';
 import Number from './number';
 import Panel from './panel';
-import PickColor from './color-picker';
 import Radio from './radio';
+import Repeater from './repeater';
+import Row from './row';
 import Select from './select';
 import Slider from './slider';
 import Switch from './switch';
-import Text from './text';
-import Colors from './colors';
-import ToggleGroup from './toggle-group';
-import Repeater from './repeater';
-import Notice from './notice';
 import Tabs from './tabs';
-import styled, { CSSProperties } from 'styled-components';
-import Group from './group';
-import Row from './row';
-import clsx from 'clsx';
-import ImageChoice from './image-choice';
+import Text from './text';
+import ToggleGroup from './toggle-group';
 
 /**
  * Mapping of field types to their respective components
@@ -61,6 +62,7 @@ const defaultComponents: {
 	repeater: Repeater,
 	row: Row,
 	imageChoice: ImageChoice,
+	label: Label,
 };
 
 const StyledFields = styled.div`

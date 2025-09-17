@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { Item } from './types';
+import { Item, RepeaterFieldType } from './types';
 
 /**
  * Gets the maximum ID from an array of items
@@ -13,20 +13,8 @@ export function getMaxId( attribute: Item[] ) {
 	);
 }
 
-/**
- * Splits fields into header and body fields
- */
-export function splitFields(
-	fields: Record< string, any >,
-	showFieldInHeader?: boolean
-) {
-	const [ firstKey, ...restKeys ] = Object.keys( fields );
-	return showFieldInHeader
-		? {
-				headerFields: { [ firstKey ]: fields[ firstKey ] },
-				bodyFields: Object.fromEntries(
-					Object.entries( fields ).slice( 1 )
-				),
-		  }
-		: { headerFields: {}, bodyFields: fields };
+export function getItemLabel( field: RepeaterFieldType, item: Item ): string | null {
+	if ( field?.hideLabel ) return null;
+	const key = field?.labelField ?? 'defaultField';
+	return ( item[ key ] ?? `Item #${ item.id }` ) as string;
 }

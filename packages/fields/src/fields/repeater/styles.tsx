@@ -3,14 +3,38 @@ import styled from 'styled-components';
 export const Container = styled.div`
 	width: 100%;
 	max-width: 100%;
+	&.repeater-container-header-active{
+		.repeater-item-list{
+			gap: 0px;
+			max-height: 100%;
+		}
+		.repeater-item{
+			border: 0px;
+			&:not(:last-child){
+				border-bottom: 1px solid #F0F0F0;
+			}
+		}
+	}
 `;
 
 export const ItemList = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 6px;
-	overflow: auto;
 	max-height: 300px;
+	.repeater-item-list__top{
+		display: flex;
+    	gap: 15px;
+		background-color: #F9FAFB;
+		.repeater-item-list__top-title,
+		.repeater-item-list__top-field-title{
+			flex: 1;
+			padding: 10px;
+		}
+		.repeater-item-list__top-action{
+			padding: 10px;
+		}
+	}
 `;
 
 export const ItemContainer = styled.div< { $dragging: number } >`
@@ -21,26 +45,72 @@ export const ItemContainer = styled.div< { $dragging: number } >`
 	border: 1px solid #e0e0e0;
 	z-index: ${ ( props ) => ( props.$dragging ? 999 : 1 ) };
 	transition: all 0.2s ease;
+	&.repeater-item--compact {
+		.repeater-item-label{
+			position: absolute;
+			left: 0;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		.repeater-header-content__inner{
+			.repeater-item-label + div{
+				position: relative;
+				left: 30px;
+			}
+		}
+		.wpmvc-field:not( .panel-field ){
+			padding-bottom: 0;
+		}
+	}
+	&.repeater-item--overlay{
+		background-color: #F1F1F1;
+	}
+	&.repeater-item--dragging{
+		opacity: .4;
+	}
+	.repeater-item{
+		&:not(:last-child){
+			margin-bottom: 8px;
+		}
+	}
 `;
 
 export const ItemHeader = styled.div< { $fixed: string } >`
+	position: relative;
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	z-index: ${ ( props ) =>
+	cursor: ${ ( props ) =>
 		'true' === props.$fixed ? 'inherit' : 'pointer' };
 	&.repeater-header--has-clone {
 		.repeater-item-label {
 			width: 102px;
 		}
 	}
+	&.repeater-top-header-active{
+		.repeater-header-content__inner{
+			.wpmvc-field{
+				flex: 1
+			}
+		}
+	}
 `;
 
 export const ItemHeaderContent = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 8px;
 	flex: 1;
+	.repeater-header-content__inner{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		box-sizing: border-box;
+		width: 100%;
+		gap: 15px;
+		.repeater-item-label {
+			display: flex;
+			align-items: center;
+			// flex: none;
+		}
+	}
 	.repeater-item-label {
 		font-weight: 500;
 		color: #1e1e1e;
@@ -95,6 +165,7 @@ export const ButtonBase = styled.div`
 export const SortButton = styled( ButtonBase )`
 	cursor: grab;
 	flex: none;
+	padding: 0 6px;
 `;
 
 export const Action = styled( ButtonBase )`

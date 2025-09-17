@@ -30,6 +30,7 @@ export const StyledModal = styled( Modal )< {
 
 export const ModalBody = styled( ColorWrapper )`
 	padding: 24px 32px;
+	height: 100%;
 	overflow-y: auto;
 `;
 

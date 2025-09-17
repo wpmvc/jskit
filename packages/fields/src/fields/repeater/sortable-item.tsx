@@ -2,31 +2,23 @@
  * WordPress dependencies
  */
 import { memo } from '@wordpress/element';
-import { Icon, copy, trash } from '@wordpress/icons';
-import { Tooltip } from '@wordpress/components';
 
 /**
  * External dependencies
  */
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { findIndex, isEmpty } from 'lodash';
 import clsx from 'clsx';
+import { findIndex } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import { PrivateFields } from '..';
-import { SortableItemProps } from './types';
-import { splitFields } from './utils';
-import {
-	Action,
-	ItemContainer,
-	ItemHeader,
-	ItemHeaderActions,
-	ItemHeaderContent,
-	SortButton,
-} from './styles';
+import { useQuickFields } from './hooks';
+import { RepeaterItemHeader } from './RepeaterItemHeader';
+import { ItemContainer, ItemHeader } from './styles';
+import { ActionsProps, SortableItemProps } from './types';
 
 const SortableItem = ( {
 	item,
@@ -48,6 +40,11 @@ const SortableItem = ( {
 	const { attrKey, attributes, field, setAttributes } = repeaterProps;
 	const attribute = attributes[ attrKey ];
 	const itemIndex = findIndex( attribute, { id: item.id } );
+	const quickFields = useQuickFields( field );
+
+	const ActionsComponent = ( field?.actions as unknown ) as
+		| React.ComponentType< ActionsProps >
+		| undefined;
 
 	const updateAttributes = ( newAttributes: any ) => {
 		const updatedValues = [ ...attribute ];
@@ -66,22 +63,20 @@ const SortableItem = ( {
 		}
 	};
 
-	const { headerFields, bodyFields } = splitFields(
-		field.fields as Record< string, any >,
-		field?.showFieldInHeader
-	);
-
 	return (
 		<ItemContainer
 			ref={ setNodeRef }
 			style={ {
 				transform: CSS.Transform.toString( transform ),
 				transition,
+				// opacity: isDragging ? 0 : undefined,
 			} }
 			$dragging={ isDragging ? 1 : 0 }
 			className={ clsx( 'repeater-item', {
-				'repeater-item--compact': field?.showFieldInHeader,
+				'repeater-item--compact': field?.quickFields,
+				'repeater-item--dragging': isDragging,
 			} ) }
+			data-id={ item.id }
 		>
 			<ItemHeader
 				$fixed={ field?.fixed ? field.fixed.toString() : 'false' }
@@ -90,86 +85,25 @@ const SortableItem = ( {
 					'repeater-header--has-clone':
 						field?.allowDuplication === undefined ||
 						field?.allowDuplication,
+					'repeater-top-header-active': field?.showHeader
 				} ) }
 			>
-				<ItemHeaderContent className="repeater-header-content">
-					<SortButton
-						{ ...listeners }
-						{ ...dragAttributes }
-						className="repeater-sort-button"
-					>
-						<span className="dashicons dashicons-move"></span>
-					</SortButton>
-					<span className="repeater-item-label">
-						{ ! field?.hideLabel &&
-							( item[ field?.labelField ?? 'defaultField' ] ??
-								`Item #${ item.id }` ) }
-						{ field?.showFieldInHeader && (
-							<PrivateFields
-								{ ...repeaterProps }
-								attributes={ attribute[ itemIndex ] }
-								setAttributes={ updateAttributes }
-								fields={ headerFields }
-							/>
-						) }
-					</span>
-				</ItemHeaderContent>
-				{ field?.actions && (
-					<ItemHeaderActions className="header-actions">
-						<Action className="edit">
-							<field.actions />
-						</Action>
-					</ItemHeaderActions>
-				) }
-				{ ! field?.fixed && ! field?.actions && (
-					<ItemHeaderActions className="header-actions">
-						{ ( undefined === field?.allowDuplication ||
-							field.allowDuplication ) && (
-							<Tooltip
-								text={
-									field?.showActionTooltip
-										? 'Duplicate Item'
-										: ''
-								}
-								delay={ 0 }
-							>
-								<Action
-									onClick={ ( event ) => {
-										event.stopPropagation();
-										onDuplicate( item.id );
-									} }
-									className="copy"
-								>
-									<Icon icon={ copy } />
-								</Action>
-							</Tooltip>
-						) }
-						<Tooltip
-							text={
-								field?.showActionTooltip && ! isDisabledRemove
-									? 'Delete Item'
-									: ''
-							}
-							delay={ 0 }
-							placement="bottom-end"
-							className="tooltip-bottom-end"
-						>
-							<Action
-								onClick={ ( event ) => {
-									event.stopPropagation();
-									onRemove( item.id );
-								} }
-								className={ clsx( 'remove', {
-									disabled: isDisabledRemove,
-								} ) }
-							>
-								<Icon icon={ trash } />
-							</Action>
-						</Tooltip>
-					</ItemHeaderActions>
-				) }
+				<RepeaterItemHeader
+					item={ attribute[ itemIndex ] }
+					field={ field }
+					repeaterProps={ repeaterProps }
+					quickFields={ quickFields }
+					setAttributes={ updateAttributes }
+					actionsComponent={ ActionsComponent }
+					onDuplicate={ onDuplicate }
+					onRemove={ onRemove }
+					isDisabledRemove={ isDisabledRemove }
+					dragListeners={ listeners }
+					dragAttributes={ dragAttributes }
+				/>
+				
 			</ItemHeader>
-			{ ! isEmpty( bodyFields ) && ! item.collapsed && (
+			{ ( field.fields && ! item.collapsed ) && (
 				<div
 					style={ {
 						padding: 10,
@@ -181,7 +115,7 @@ const SortableItem = ( {
 						{ ...repeaterProps }
 						attributes={ attribute[ itemIndex ] }
 						setAttributes={ updateAttributes }
-						fields={ bodyFields }
+						fields={ field?.fields }
 					/>
 				</div>
 			) }

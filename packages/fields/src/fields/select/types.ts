@@ -5,6 +5,7 @@ export type SelectFieldType = BaseField & {
 	type: 'select';
 	options: Options;
 	isMulti?: boolean;
+	menuPosition?: 'fixed' | 'absolute';
 };
 
 // Typed props for each specific field

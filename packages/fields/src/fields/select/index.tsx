@@ -92,12 +92,20 @@ export default function SelectComponent( props: SelectFieldProps ) {
 					isDisabled={ isDisabled( props ) }
 					isMulti={ isMulti }
 					menuIsOpen={ menuIsOpen || undefined }
+					menuPosition={ field?.menuPosition }
+					menuPortalTarget={ field?.menuPosition === 'fixed' ? document.body : undefined }
 					onMenuOpen={ () => setMenuIsOpen( true ) }
 					onMenuClose={ () => setMenuIsOpen( false ) }
 					components={ {
 						DropdownIndicator: DropdownIndicator( menuIsOpen ),
 						ClearIndicator: () => null,
 						IndicatorSeparator: () => null,
+					} }
+					styles={ {
+						menuPortal: ( base ) => ( {
+							...base,
+							zIndex: 100000,
+						} ),
 					} }
 					theme={ ( theme ) => ( {
 						...theme,
