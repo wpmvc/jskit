@@ -207,10 +207,14 @@ export default function Repeater( props: RepeaterFieldProps ) {
 
 	return (
 		<div className={ `components-base-field wpmvc-repeater-wrapper` }>
-			<StyledLabel className="repeater-label">
-				{ /* @ts-ignore */ }
-				<Label { ...props } />
-			</StyledLabel>
+			{
+				props?.field?.label && 
+				<StyledLabel className="repeater-label">
+					{ /* @ts-ignore */ }
+					<Label { ...props } />
+				</StyledLabel>
+			}
+			
 			<Container
 				className={ clsx(
 					'repeater-container',

@@ -1,7 +1,7 @@
 import apiFetch from '@wordpress/api-fetch';
 import { produce } from 'immer';
-import { Actions, RemoveAction, SetAction, StoreState } from './types';
 import { StoreConfig } from '../types';
+import { Actions, RemoveAction, SetAction, StoreState } from './types';
 
 export default function getValuesConfig( { path }: StoreConfig ) {
 	const INITIAL_STATE: StoreState = {
@@ -30,6 +30,14 @@ export default function getValuesConfig( { path }: StoreConfig ) {
 			return produce( state, ( draft: any ) => {
 				switch ( action.type ) {
 					case 'SET':
+						// console.log( JSON.parse(JSON.stringify(draft.values)), action.values, state);
+						// draft.values = {
+						// 	...state.values,
+
+						// }
+						// draft.values = {
+						// 	...action.values,
+						// }
 						Object.assign( draft.values, action.values );
 						break;
 

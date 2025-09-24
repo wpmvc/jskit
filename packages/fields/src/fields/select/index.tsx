@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { useState } from '@wordpress/element';
+import { useMemo, useState } from '@wordpress/element';
 
 /**
  * External dependencies
@@ -16,6 +16,7 @@ import Label from '../../components/label';
 import { getValue, isDisabled, updateAttribute } from '../../utils';
 import { Chevron, StyledHelpText, StyledLabel, Wrapper } from './styles';
 import { SelectFieldProps } from './types';
+import { useApiOptions } from './useApiOptions';
 
 const DropdownIndicator = ( menuIsOpen: boolean ) => ( props: any ) => (
 	<components.DropdownIndicator { ...props }>
@@ -37,14 +38,17 @@ const DropdownIndicator = ( menuIsOpen: boolean ) => ( props: any ) => (
 );
 
 export default function SelectComponent( props: SelectFieldProps ) {
-	const { field, attributes } = props;
-	const { options, description, label } = field || {};
-	const [ menuIsOpen, setMenuIsOpen ] = useState( false );
-
-	const isMulti = Boolean( field?.isMulti );
-	const normalizedOptions = isFunction( options )
-		? options( attributes )
-		: options || [];
+    const { field, attributes } = props;
+    const { options, description, label, styles } = field || {};
+    const [ menuIsOpen, setMenuIsOpen ] = useState( false );
+    const { options: fetchedOptions, isLoading } = useApiOptions( {
+        optionsApi: field?.optionsApi
+    } );
+    const isMulti = Boolean( field?.isMulti );
+    const normalizedOptions = useMemo( () => {
+        if ( fetchedOptions ) return fetchedOptions;
+        return isFunction( options ) ? options( attributes ) : options || [];
+    }, [ fetchedOptions, options ] );
 
 	const rawValue = getValue( props );
 	const value = isMulti
@@ -55,7 +59,7 @@ export default function SelectComponent( props: SelectFieldProps ) {
 				.filter( Boolean ) ||
 		  // Ensure empty array if nothing selected
 		  []
-		: normalizedOptions.find( ( opt ) => opt.value === rawValue ) ?? null;
+		: normalizedOptions.find( ( opt ) => opt.value.toString() === rawValue ) ?? null;
 
 	const handleChange = (
 		newValue:
@@ -75,7 +79,7 @@ export default function SelectComponent( props: SelectFieldProps ) {
 		}
 	};
 
-	return (
+    return (
 		<div className="components-base-control">
 			<Wrapper className="components-base-field">
 				{ label && (
@@ -89,8 +93,11 @@ export default function SelectComponent( props: SelectFieldProps ) {
 					options={ normalizedOptions }
 					value={ value }
 					onChange={ handleChange }
+					className={field?.className}
+					classNamePrefix={field?.classNamePrefix}
 					isDisabled={ isDisabled( props ) }
 					isMulti={ isMulti }
+                    isLoading={ isLoading }
 					menuIsOpen={ menuIsOpen || undefined }
 					menuPosition={ field?.menuPosition }
 					menuPortalTarget={ field?.menuPosition === 'fixed' ? document.body : undefined }
@@ -106,6 +113,12 @@ export default function SelectComponent( props: SelectFieldProps ) {
 							...base,
 							zIndex: 100000,
 						} ),
+						control: (baseStyles, state) =>{
+							return {
+								...baseStyles,
+								...styles?.control,
+							}
+					},
 					} }
 					theme={ ( theme ) => ( {
 						...theme,
@@ -123,7 +136,7 @@ export default function SelectComponent( props: SelectFieldProps ) {
 				/>
 			</Wrapper>
 
-			{ description && (
+            { description && (
 				<StyledHelpText className="components-base-control__help">
 					{ description }
 				</StyledHelpText>

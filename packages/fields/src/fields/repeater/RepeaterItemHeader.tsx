@@ -17,6 +17,7 @@ export function RepeaterItemHeader( props: RepeaterItemHeaderProps ) {
 		actionsComponent: ActionsComponent,
 		onDuplicate,
 		onRemove,
+		onToggleCollapse,
 		isDisabledRemove,
 		isOverlay,
 		dragAttributes,
@@ -54,6 +55,7 @@ export function RepeaterItemHeader( props: RepeaterItemHeaderProps ) {
 							<ActionsComponent
 								onDuplicate={ isOverlay ? () => {} : ( id: number ) => onDuplicate?.( id ) }
 								onRemove={ isOverlay ? () => {} : ( id: number ) => onRemove?.( id ) }
+								onToggleCollapse={ isOverlay ? () => {} : ( id: number ) => onToggleCollapse?.( id ) }
 								item={ item }
 							/>
 						</Action>

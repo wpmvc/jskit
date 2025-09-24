@@ -2,7 +2,6 @@
  * WordPress dependencies
  */
 import { memo } from 'react';
-import { __ } from '@wordpress/i18n';
 
 /**
  * External dependencies
@@ -13,8 +12,8 @@ import styled from 'styled-components';
 /**
  * Internal dependencies
  */
-import { CommonFieldProps } from '../types/field';
 import Label from '../components/label';
+import { CommonFieldProps } from '../types/field';
 import { getValue, isDisabled, memoCallback, updateAttribute } from '../utils';
 
 const StyledSwitch = styled( SwitchComponent )`

@@ -29,10 +29,10 @@ export const ItemList = styled.div`
 		.repeater-item-list__top-title,
 		.repeater-item-list__top-field-title{
 			flex: 1;
-			padding: 10px;
+			padding: 15px 10px;
 		}
 		.repeater-item-list__top-action{
-			padding: 10px;
+			padding: 15px 10px;
 		}
 	}
 `;
@@ -43,6 +43,7 @@ export const ItemContainer = styled.div< { $dragging: number } >`
 	position: relative;
 	background: #fff;
 	border: 1px solid #e0e0e0;
+
 	z-index: ${ ( props ) => ( props.$dragging ? 999 : 1 ) };
 	transition: all 0.2s ease;
 	&.repeater-item--compact {
@@ -71,6 +72,13 @@ export const ItemContainer = styled.div< { $dragging: number } >`
 	.repeater-item{
 		&:not(:last-child){
 			margin-bottom: 8px;
+		}
+	}
+	.repeater-item-content{
+		.wpmvc-field{
+			&:not(:last-child){
+				margin-bottom: 15px;
+			}
 		}
 	}
 `;
@@ -105,10 +113,10 @@ export const ItemHeaderContent = styled.div`
 		box-sizing: border-box;
 		width: 100%;
 		gap: 15px;
+		padding: 8px 0;
 		.repeater-item-label {
 			display: flex;
 			align-items: center;
-			// flex: none;
 		}
 	}
 	.repeater-item-label {

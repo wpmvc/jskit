@@ -48,6 +48,7 @@ export type SortableItemProps = {
 export type ActionsProps = {
 	onDuplicate: ( id: number ) => void;
 	onRemove: ( id: number ) => void;
+	onToggleCollapse: ( id: number ) => void;
 	item: Item;
 };
 
@@ -60,6 +61,7 @@ export type RepeaterItemHeaderProps = {
 	actionsComponent?: React.ComponentType< ActionsProps >;
 	onDuplicate?: ( id: number ) => void;
 	onRemove?: ( id: number ) => void;
+	onToggleCollapse?: ( id: number ) => void;
 	isDisabledRemove?: boolean;
 	isOverlay?: boolean;
 	dragAttributes?: any;
