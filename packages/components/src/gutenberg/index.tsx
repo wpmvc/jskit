@@ -7,6 +7,7 @@ export { default as Modal } from './modal';
 export { default as Notice } from './notice';
 export { default as Number } from './number';
 export { default as Radio } from './radio';
+export { default as Select } from './select';
 export { default as Slider } from './slider';
 export { default as Switch } from './switch';
 export { default as Table } from './table';

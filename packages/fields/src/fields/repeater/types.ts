@@ -22,6 +22,7 @@ export type RepeaterFieldType = BaseField & {
 	allowDuplication?: boolean;
 	hideLabel?: boolean;
 	showHeader?: boolean;
+	isHeaderClickable?: boolean;
 	labelField?: string;
 	addButtonText?: boolean;
 	preventEmpty?: boolean; // default: true
@@ -43,6 +44,7 @@ export type SortableItemProps = {
 	onToggleCollapse: ( id: number ) => void;
 	repeaterProps: RepeaterFieldProps;
 	isDisabledRemove: boolean;
+	isHeaderClickable: boolean;
 };
 
 export type ActionsProps = {

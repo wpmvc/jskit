@@ -261,6 +261,7 @@ export default function Repeater( props: RepeaterFieldProps ) {
 									onDuplicate={ duplicateItem }
 									onToggleCollapse={ toggleCollapse }
 									isDisabledRemove={ isDisabledRemove }
+									isHeaderClickable={ field?.isHeaderClickable }
 								/>
 								</Fragment>
 							) ) }

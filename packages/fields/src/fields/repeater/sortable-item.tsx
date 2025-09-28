@@ -27,6 +27,7 @@ const SortableItem = ({
   onToggleCollapse,
   repeaterProps,
   isDisabledRemove,
+  isHeaderClickable= true
 }: SortableItemProps) => {
   const {
     attributes: dragAttributes,
@@ -80,7 +81,7 @@ const SortableItem = ({
     >
       <ItemHeader
         $fixed={field?.fixed ? field.fixed.toString() : "false"}
-        onClick={(e) => {e.preventDefault();onToggleCollapse(item.id)}}
+        onClick={ isHeaderClickable ? (e) => {e.preventDefault();onToggleCollapse(item.id)} : undefined}
         className={clsx("repeater-header", {
           "repeater-header--has-clone":
             field?.allowDuplication === undefined || field?.allowDuplication,

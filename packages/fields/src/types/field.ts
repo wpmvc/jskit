@@ -2,27 +2,27 @@ import { CSSProperties } from 'react';
 import { BorderFieldProps, BorderFieldType } from '../fields/border/types';
 import { ColorsFieldProps, ColorsFieldType } from '../fields/colors/types';
 import { GroupFieldProps, GroupFieldType } from '../fields/group/types';
+import {
+    ImageChoiceProps,
+    ImageChoiceType,
+} from '../fields/image-choice/types';
 import { NoticeFieldProps, NoticeFieldType } from '../fields/notice/types';
 import { NumberFieldProps, NumberFieldType } from '../fields/number/types';
 import { PanelFieldProps, PanelFieldType } from '../fields/panel/types';
 import { RadioFieldProps, RadioFieldType } from '../fields/radio/types';
 import {
-	RepeaterFieldProps,
-	RepeaterFieldType,
+    RepeaterFieldProps,
+    RepeaterFieldType,
 } from '../fields/repeater/types';
 import { RowFieldProps, RowFieldType } from '../fields/row/types';
 import { SelectFieldProps, SelectFieldType } from '../fields/select/types';
 import { SliderFieldProps, SliderFieldType } from '../fields/slider/types';
 import { TabsFieldProps, TabsFieldType } from '../fields/tabs/types';
-import {
-	ToggleGroupFieldProps,
-	ToggleGroupFieldType,
-} from '../fields/toggle-group/types';
 import { TextFieldProps, TextFieldType } from '../fields/text/types';
 import {
-	ImageChoiceProps,
-	ImageChoiceType,
-} from '../fields/image-choice/types';
+    ToggleGroupFieldProps,
+    ToggleGroupFieldType,
+} from '../fields/toggle-group/types';
 
 // Field types
 export type FieldType =
