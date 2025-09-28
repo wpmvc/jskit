@@ -43,6 +43,7 @@
     "@wpmvc/colors": "^0.0.12",
     "clsx": "^2.1.1",
     "lodash": "^4.17.21",
+    "react-select": "^5.10.2",
     "styled-components": "^6.1.19",
     "vite-plugin-dts": "^4.5.4"
   },
