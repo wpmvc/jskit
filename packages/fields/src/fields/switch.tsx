@@ -1,7 +1,6 @@
 /**
  * WordPress dependencies
  */
-import { memo } from 'react';
 
 /**
  * External dependencies
@@ -14,7 +13,7 @@ import styled from 'styled-components';
  */
 import Label from '../components/label';
 import { CommonFieldProps } from '../types/field';
-import { getValue, isDisabled, memoCallback, updateAttribute } from '../utils';
+import { getValue, isDisabled, updateAttribute } from '../utils';
 
 const StyledSwitch = styled( SwitchComponent )`
 	.components-toggle-control__label {
@@ -22,7 +21,7 @@ const StyledSwitch = styled( SwitchComponent )`
 	}
 `;
 
-const Switch = memo( ( props: CommonFieldProps ) => {
+const Switch = ( props: CommonFieldProps ) => {
 	const { field } = props;
 	return (
 		<StyledSwitch
@@ -35,6 +34,6 @@ const Switch = memo( ( props: CommonFieldProps ) => {
 			required={ field?.required }
 		/>
 	);
-}, memoCallback );
+}
 
 export default Switch;
