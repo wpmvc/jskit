@@ -14,7 +14,7 @@ import { findIndex, isEmpty, isFunction, isPlainObject } from "lodash";
 /**
  * Internal dependencies
  */
-import { PrivateFields } from '..';
+import { PrivateFields } from "..";
 import { useQuickFields } from "./hooks";
 import { RepeaterItemHeader } from "./RepeaterItemHeader";
 import { ItemContainer, ItemHeader } from "./styles";
@@ -27,7 +27,7 @@ const SortableItem = ({
   onToggleCollapse,
   repeaterProps,
   isDisabledRemove,
-  isHeaderClickable= true
+  isHeaderClickable = true,
 }: SortableItemProps) => {
   const {
     attributes: dragAttributes,
@@ -81,7 +81,14 @@ const SortableItem = ({
     >
       <ItemHeader
         $fixed={field?.fixed ? field.fixed.toString() : "false"}
-        onClick={ isHeaderClickable ? (e) => {e.preventDefault();onToggleCollapse(item.id)} : undefined}
+        onClick={
+          isHeaderClickable
+            ? (e) => {
+                e.preventDefault();
+                onToggleCollapse(item.id);
+              }
+            : undefined
+        }
         className={clsx("repeater-header", {
           "repeater-header--has-clone":
             field?.allowDuplication === undefined || field?.allowDuplication,
@@ -103,14 +110,21 @@ const SortableItem = ({
           dragAttributes={dragAttributes}
         />
       </ItemHeader>
-      {!(
-        (
-          (isFunction(field.fields) && !item.collapsed) ||
-          (isPlainObject(field.fields) &&
-            !isEmpty(field.fields) &&
-            !item.collapsed)
-        )
-      ) && (
+
+      {(() => {
+        // Check if fields are missing
+        if (!field?.fields) return false;
+            
+        // Get fields object (either from function call or direct object)
+        const fieldsObject = isFunction(field.fields) 
+        ? field.fields(attribute[itemIndex]) 
+        : field.fields;
+      
+      // Validate fields object is a non-empty plain object
+      return isPlainObject(fieldsObject) && 
+            !isEmpty(fieldsObject) && 
+            !item.collapsed;
+      })() && (
         <div
           style={{
             padding: "15px 25px",

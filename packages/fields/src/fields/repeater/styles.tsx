@@ -7,6 +7,7 @@ export const Container = styled.div`
 		.repeater-item-list{
 			gap: 0px;
 			max-height: 100%;
+			overflow-y: auto;
 		}
 		.repeater-item{
 			border: 0px;
@@ -122,7 +123,7 @@ export const ItemHeaderContent = styled.div`
 	.repeater-item-label {
 		font-weight: 500;
 		color: #1e1e1e;
-		padding: 9px 9px 9px 0;
+		padding: 0;
 		word-wrap: break-word;
 		word-break: break-word;
 		flex: 1;
@@ -161,7 +162,6 @@ export const ButtonBase = styled.div`
 	cursor: pointer;
 	display: flex;
 	align-items: center;
-	padding: 6px;
 	color: #888;
 	transition: color 0.2s ease;
 
@@ -177,7 +177,6 @@ export const SortButton = styled( ButtonBase )`
 `;
 
 export const Action = styled( ButtonBase )`
-	padding: 10px;
 	&.copy {
 		border-left: 1px solid #e0e0e0;
 	}
