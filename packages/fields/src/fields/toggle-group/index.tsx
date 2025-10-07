@@ -14,9 +14,9 @@ import { ToggleGroupFieldProps } from './types';
  * External dependencies
  */
 import { isFunction } from 'lodash';
-import { ToggleGroup } from '@wpmvc/components';
+import { ToggleGroup as WPMVCToggleGroup } from '@wpmvc/components';
 
-export default function ToggleGroupd(
+export default function ToggleGroup(
 	props: ToggleGroupFieldProps
 ): JSX.Element {
 	const { field, attributes } = props;
@@ -27,7 +27,7 @@ export default function ToggleGroupd(
 		: options;
 
 	return (
-		<ToggleGroup
+		<WPMVCToggleGroup
 			{ ...field }
 			//@ts-ignore
 			label={ <Label { ...props } /> }
