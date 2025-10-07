@@ -6,7 +6,7 @@ export type SelectFieldType = BaseField & {
 	options: Options;
 	isMulti?: boolean;
 	menuPosition?: 'fixed' | 'absolute';
-    optionsApi?: string;
+	optionsApi?: string | ( ( attributes: Record< string, any > ) => string);
     mapOptions?: (
         data: any,
         attributes: Record< string, any >

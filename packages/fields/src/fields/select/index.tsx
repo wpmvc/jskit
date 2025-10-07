@@ -42,7 +42,8 @@ export default function SelectComponent( props: SelectFieldProps ) {
     const { options, description, label, styles } = field || {};
     const [ menuIsOpen, setMenuIsOpen ] = useState( false );
     const { options: fetchedOptions, isLoading } = useApiOptions( {
-        optionsApi: field?.optionsApi
+        optionsApi: field?.optionsApi,
+        attributes: attributes
     } );
     const isMulti = Boolean( field?.isMulti );
     const normalizedOptions = useMemo( () => {

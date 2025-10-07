@@ -2,15 +2,18 @@
  * WordPress dependencies
  */
 import { useEffect, useState } from '@wordpress/element';
+import { isFunction } from 'lodash';
 
 type Option = { label: string; value: any };
 
 type UseApiOptionsArgs = {
-	optionsApi?: string;
+	optionsApi?: string | ( ( attributes: Record< string, any > ) => string);
+	attributes: Record< string, any >;
 };
 
 export function useApiOptions( {
-	optionsApi
+	optionsApi,
+	attributes
 }: UseApiOptionsArgs ) {
 	const [ options, setOptions ] = useState< Option[] | null >( null );
 	const [ isLoading, setIsLoading ] = useState( false );
@@ -37,7 +40,7 @@ export function useApiOptions( {
 			return;
 		}
 
-		apiFetch( { path: optionsApi } )
+		apiFetch( { path: isFunction( optionsApi ) ? optionsApi( attributes ) : optionsApi } )
 			.then( ( data: any ) => {
 				if ( isCancelled ) return;
 				setOptions( data );
@@ -56,7 +59,7 @@ export function useApiOptions( {
 		return () => {
 			isCancelled = true;
 		};
-	}, [ optionsApi ] );
+	}, [ optionsApi, attributes ] );
 
 	return { options, isLoading };
 }
