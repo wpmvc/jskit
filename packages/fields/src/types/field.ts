@@ -44,7 +44,8 @@ export type FieldType =
 	| 'toggleGroup'
 	| 'repeater'
 	| 'imageChoice'
-	| 'row';
+	| 'row'
+	| 'classicEditor';
 
 export type Option = { label: string; value: string; description?: string };
 
@@ -71,7 +72,7 @@ export type BaseField = {
 
 // All other field types (no options, no isMulti)
 export type OtherFieldType = BaseField & {
-	type: 'color' | 'checkbox' | 'dimension' | 'slider' | 'switch';
+	type: 'color' | 'checkbox' | 'dimension' | 'slider' | 'switch' | 'classicEditor';
 };
 
 // Union of all field types
