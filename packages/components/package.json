@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.3",
+    "@wordpress/api-fetch": "^7.32.0",
     "@wordpress/components": "^30.4.0",
     "@wordpress/compose": "^7.31.0",
     "@wordpress/dataviews": "^9.0.0",
