@@ -30,14 +30,6 @@ export default function getValuesConfig( { path }: StoreConfig ) {
 			return produce( state, ( draft: any ) => {
 				switch ( action.type ) {
 					case 'SET':
-						// console.log( JSON.parse(JSON.stringify(draft.values)), action.values, state);
-						// draft.values = {
-						// 	...state.values,
-
-						// }
-						// draft.values = {
-						// 	...action.values,
-						// }
 						Object.assign( draft.values, action.values );
 						break;
 
