@@ -1,6 +1,6 @@
 {
   "name": "@wpmvc/data",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "author": "Md Al Amin",
   "type": "module",
   "main": "build/data.umd.js",
