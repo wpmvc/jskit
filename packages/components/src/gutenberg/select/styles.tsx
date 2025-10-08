@@ -24,3 +24,9 @@ export const StyledHelpText = styled.p`
 	font-size: 12px;
 	color: rgb( 117, 117, 117 );
 `;
+
+export const Chevron = styled.svg< { $open?: boolean } >`
+	transition: transform 0.2s ease;
+	transform: ${ ( { $open } ) =>
+		$open ? 'rotate(180deg)' : 'rotate(0deg)' };
+`;

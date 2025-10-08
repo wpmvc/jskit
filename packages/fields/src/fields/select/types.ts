@@ -6,6 +6,13 @@ export type SelectFieldType = BaseField & {
 	options: Options;
 	isMulti?: boolean;
 	menuPosition?: 'fixed' | 'absolute';
+	optionsApi?: string | ( ( attributes: Record< string, any > ) => string );
+	onFetchSuccess?: ( options: Options ) => void;
+	select?: {
+		className?: string;
+		classNamePrefix?: string;
+		styles?: any;
+	};
 };
 
 // Typed props for each specific field

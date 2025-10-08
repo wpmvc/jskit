@@ -1,7 +1,7 @@
 import apiFetch from '@wordpress/api-fetch';
 import { produce } from 'immer';
-import { Actions, RemoveAction, SetAction, StoreState } from './types';
 import { StoreConfig } from '../types';
+import { Actions, RemoveAction, SetAction, StoreState } from './types';
 
 export default function getValuesConfig( { path }: StoreConfig ) {
 	const INITIAL_STATE: StoreState = {

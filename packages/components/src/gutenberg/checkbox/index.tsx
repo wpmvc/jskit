@@ -1,5 +1,5 @@
-import { CheckboxProps } from './types';
 import { StyledCheckbox } from './styles';
+import { CheckboxProps } from './types';
 
 export default function Checkbox( props: CheckboxProps ): JSX.Element {
 	return (
