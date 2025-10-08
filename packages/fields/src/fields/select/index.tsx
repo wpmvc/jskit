@@ -2,7 +2,6 @@
  * External dependencies
  */
 import { isFunction } from 'lodash';
-import { MultiValue, SingleValue } from 'react-select';
 import { Select as SelectComponent } from '@wpmvc/components';
 
 /**
