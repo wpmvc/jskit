@@ -2,6 +2,7 @@
  * WordPress dependencies
  */
 import { useEffect, useState } from '@wordpress/element';
+import apiFetch from '@wordpress/api-fetch';
 
 type Option = { label: string; value: any };
 
@@ -26,18 +27,6 @@ export function useApiOptions( {
 
 		let isCancelled = false;
 		setIsLoading( true );
-
-		const apiFetch = ( window as any )?.wp?.apiFetch as
-			| ( ( options: any ) => Promise< any > )
-			| undefined;
-
-		if ( ! apiFetch ) {
-			// eslint-disable-next-line no-console
-			console.error( 'wp.apiFetch is not available' );
-			setIsLoading( false );
-			setOptions( [] );
-			return;
-		}
 
 		apiFetch( { path: optionsApi } )
 			.then( ( data: any ) => {
