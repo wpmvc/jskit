@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import ClassicEditor  from '@wpmvc/classic-editor';
+import ClassicEditor from '@wpmvc/classic-editor';
 
 /**
  * Internal dependencies
@@ -24,6 +24,6 @@ const _ClassicEditor = ( props: CommonFieldProps ) => {
 			/>
 		</>
 	);
-}
+};
 
 export default _ClassicEditor;

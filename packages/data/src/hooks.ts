@@ -28,6 +28,7 @@ export function useCrudStore( { name }: StoreConfig ) {
 		create,
 		update,
 		updateItem,
+		setItem,
 		destroy,
 	} = useDispatch( name );
 	return {
@@ -36,6 +37,7 @@ export function useCrudStore( { name }: StoreConfig ) {
 		create,
 		update,
 		updateItem,
+		setItem,
 		destroy,
 	};
 }

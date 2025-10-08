@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { BadgeVariant } from './type';
 
-export const BadgeStyle = styled.div<{ $variant?: BadgeVariant }>`
+export const BadgeStyle = styled.div< { $variant?: BadgeVariant } >`
 	display: inline-flex;
 	align-items: center;
 	padding: 2px 8px;
@@ -14,8 +14,8 @@ export const BadgeStyle = styled.div<{ $variant?: BadgeVariant }>`
 	vertical-align: baseline;
 
 	/* Variant-specific styles */
-	${({ $variant }) => {
-		switch ($variant) {
+	${ ( { $variant } ) => {
+		switch ( $variant ) {
 			case 'info':
 				return `
 					background-color: var(--wpmvc-primary-200);
@@ -42,7 +42,7 @@ export const BadgeStyle = styled.div<{ $variant?: BadgeVariant }>`
 					color: #2f2f2f;
 				`;
 		}
-	}}
+	} }
 `;
 
 export const BadgeContent = styled.div`

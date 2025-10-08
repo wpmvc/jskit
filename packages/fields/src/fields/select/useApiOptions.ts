@@ -7,13 +7,15 @@ import { isFunction } from 'lodash';
 type Option = { label: string; value: any };
 
 type UseApiOptionsArgs = {
-	optionsApi?: string | ( ( attributes: Record< string, any > ) => string);
+	optionsApi?: string | ( ( attributes: Record< string, any > ) => string );
 	attributes: Record< string, any >;
+	onFetchSuccess?: ( options: Option[] ) => void;
 };
 
 export function useApiOptions( {
 	optionsApi,
-	attributes
+	attributes,
+	onFetchSuccess,
 }: UseApiOptionsArgs ) {
 	const [ options, setOptions ] = useState< Option[] | null >( null );
 	const [ isLoading, setIsLoading ] = useState( false );
@@ -29,7 +31,7 @@ export function useApiOptions( {
 		setIsLoading( true );
 
 		const apiFetch = ( window as any )?.wp?.apiFetch as
-			| ( ( options: any ) => Promise<any> )
+			| ( ( options: any ) => Promise< any > )
 			| undefined;
 
 		if ( ! apiFetch ) {
@@ -40,10 +42,15 @@ export function useApiOptions( {
 			return;
 		}
 
-		apiFetch( { path: isFunction( optionsApi ) ? optionsApi( attributes ) : optionsApi } )
+		apiFetch( {
+			path: isFunction( optionsApi )
+				? optionsApi( attributes )
+				: optionsApi,
+		} )
 			.then( ( data: any ) => {
 				if ( isCancelled ) return;
 				setOptions( data );
+				onFetchSuccess?.( data );
 			} )
 			.catch( ( err: any ) => {
 				if ( isCancelled ) return;
@@ -63,5 +70,3 @@ export function useApiOptions( {
 
 	return { options, isLoading };
 }
-
-

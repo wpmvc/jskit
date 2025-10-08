@@ -1,14 +1,14 @@
 import { BadgeContent, BadgeStyle } from './style';
 import { BadgeProps } from './type';
 
-export default function Badge({
+export default function Badge( {
 	children,
 	className,
 	variant = 'default',
-}: BadgeProps) {
+}: BadgeProps ) {
 	return (
-		<BadgeStyle $variant={variant} className={className}>
-			<BadgeContent>{children}</BadgeContent>
+		<BadgeStyle $variant={ variant } className={ className }>
+			<BadgeContent>{ children }</BadgeContent>
 		</BadgeStyle>
 	);
 }

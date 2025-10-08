@@ -7,10 +7,12 @@ type Option = { label: string; value: any };
 
 type UseApiOptionsArgs = {
 	optionsApi?: string;
+	onFetchSuccess?: ( options: any[] ) => void;
 };
 
 export function useApiOptions( {
-	optionsApi
+	optionsApi,
+	onFetchSuccess,
 }: UseApiOptionsArgs ) {
 	const [ options, setOptions ] = useState< Option[] | null >( null );
 	const [ isLoading, setIsLoading ] = useState( false );
@@ -26,7 +28,7 @@ export function useApiOptions( {
 		setIsLoading( true );
 
 		const apiFetch = ( window as any )?.wp?.apiFetch as
-			| ( ( options: any ) => Promise<any> )
+			| ( ( options: any ) => Promise< any > )
 			| undefined;
 
 		if ( ! apiFetch ) {
@@ -41,6 +43,7 @@ export function useApiOptions( {
 			.then( ( data: any ) => {
 				if ( isCancelled ) return;
 				setOptions( data );
+				onFetchSuccess?.( data );
 			} )
 			.catch( ( err: any ) => {
 				if ( isCancelled ) return;
@@ -60,5 +63,3 @@ export function useApiOptions( {
 
 	return { options, isLoading };
 }
-
-

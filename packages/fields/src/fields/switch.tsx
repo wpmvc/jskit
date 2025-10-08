@@ -1,8 +1,4 @@
 /**
- * WordPress dependencies
- */
-
-/**
  * External dependencies
  */
 import { Switch as SwitchComponent } from '@wpmvc/components';
@@ -34,6 +30,6 @@ const Switch = ( props: CommonFieldProps ) => {
 			required={ field?.required }
 		/>
 	);
-}
+};
 
 export default Switch;
