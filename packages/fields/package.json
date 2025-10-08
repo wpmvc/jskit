@@ -44,6 +44,7 @@
     "@wordpress/element": "^6.31.0",
     "@wordpress/i18n": "^6.4.0",
     "@wordpress/icons": "^10.31.0",
+    "@wpmvc/classic-editor": "^0.0.5",
     "@wpmvc/components": "^0.0.24",
     "clsx": "^2.1.1",
     "lodash": "^4.17.21",

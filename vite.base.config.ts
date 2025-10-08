@@ -57,6 +57,7 @@ export const sharedConfig = {
           "@dnd-kit/utilities": "utilities",
           "@wpmvc/components": "wpmvc.Components",
           "@wpmvc/colors": "wpmvc.Colors",
+          "@wpmvc/classic-editor": "wpmvc.ClassicEditor",
         },
       },
     },

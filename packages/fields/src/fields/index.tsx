@@ -34,6 +34,7 @@ import Switch from './switch';
 import Tabs from './tabs';
 import Text from './text';
 import ToggleGroup from './toggle-group';
+import ClassicEditor from './classic-editor';
 
 /**
  * Mapping of field types to their respective components
@@ -63,6 +64,7 @@ const defaultComponents: {
 	row: Row,
 	imageChoice: ImageChoice,
 	label: Label,
+	classicEditor: ClassicEditor,
 };
 
 const StyledFields = styled.div`
