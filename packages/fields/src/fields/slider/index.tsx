@@ -11,13 +11,11 @@ import Label from '../../components/label';
 import {
 	getValue,
 	isDisabled,
-	memoCallback,
 	updateAttribute,
 } from '../../utils';
-import { memo } from 'react';
 import { SliderFieldProps } from './types';
 
-const Slider = memo( ( props: SliderFieldProps ) => {
+const Slider =  ( props: SliderFieldProps ) => {
 	const { field } = props;
 
 	const { max = 100, min = 0 } = field;
@@ -37,6 +35,6 @@ const Slider = memo( ( props: SliderFieldProps ) => {
 			description={ field.description }
 		/>
 	);
-}, memoCallback );
+}
 
 export default Slider;

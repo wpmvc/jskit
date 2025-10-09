@@ -23,6 +23,7 @@ export const ItemList = styled.div`
 	flex-direction: column;
 	gap: 6px;
 	max-height: 300px;
+	overflow-y: auto;
 	.repeater-item-list__top {
 		display: flex;
 		gap: 15px;
