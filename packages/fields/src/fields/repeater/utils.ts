@@ -13,7 +13,10 @@ export function getMaxId( attribute: Item[] ) {
 	);
 }
 
-export function getItemLabel( field: RepeaterFieldType, item: Item ): string | null {
+export function getItemLabel(
+	field: RepeaterFieldType,
+	item: Item
+): string | null {
 	if ( field?.hideLabel ) return null;
 	const key = field?.labelField ?? 'defaultField';
 	return ( item[ key ] ?? `Item #${ item.id }` ) as string;

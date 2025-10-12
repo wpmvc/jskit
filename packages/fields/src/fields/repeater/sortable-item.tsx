@@ -9,7 +9,7 @@ import { memo } from '@wordpress/element';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import clsx from 'clsx';
-import { findIndex } from 'lodash';
+import { findIndex, isEmpty, isFunction, isPlainObject } from 'lodash';
 
 /**
  * Internal dependencies
@@ -27,6 +27,7 @@ const SortableItem = ( {
 	onToggleCollapse,
 	repeaterProps,
 	isDisabledRemove,
+	isHeaderClickable = true,
 }: SortableItemProps ) => {
 	const {
 		attributes: dragAttributes,
@@ -42,7 +43,7 @@ const SortableItem = ( {
 	const itemIndex = findIndex( attribute, { id: item.id } );
 	const quickFields = useQuickFields( field );
 
-	const ActionsComponent = ( field?.actions as unknown ) as
+	const ActionsComponent = field?.actions as unknown as
 		| React.ComponentType< ActionsProps >
 		| undefined;
 
@@ -80,12 +81,19 @@ const SortableItem = ( {
 		>
 			<ItemHeader
 				$fixed={ field?.fixed ? field.fixed.toString() : 'false' }
-				onClick={ () => onToggleCollapse( item.id ) }
+				onClick={
+					isHeaderClickable
+						? ( e ) => {
+								e.preventDefault();
+								onToggleCollapse( item.id );
+						  }
+						: undefined
+				}
 				className={ clsx( 'repeater-header', {
 					'repeater-header--has-clone':
 						field?.allowDuplication === undefined ||
 						field?.allowDuplication,
-					'repeater-top-header-active': field?.showHeader
+					'repeater-top-header-active': field?.showHeader,
 				} ) }
 			>
 				<RepeaterItemHeader
@@ -97,16 +105,32 @@ const SortableItem = ( {
 					actionsComponent={ ActionsComponent }
 					onDuplicate={ onDuplicate }
 					onRemove={ onRemove }
+					onToggleCollapse={ onToggleCollapse }
 					isDisabledRemove={ isDisabledRemove }
 					dragListeners={ listeners }
 					dragAttributes={ dragAttributes }
 				/>
-				
 			</ItemHeader>
-			{ ( field.fields && ! item.collapsed ) && (
+
+			{ ( () => {
+				// Check if fields are missing
+				if ( ! field?.fields ) return false;
+
+				// Get fields object (either from function call or direct object)
+				const fieldsObject = isFunction( field.fields )
+					? field.fields( attribute[ itemIndex ] )
+					: field.fields;
+
+				// Validate fields object is a non-empty plain object
+				return (
+					isPlainObject( fieldsObject ) &&
+					! isEmpty( fieldsObject ) &&
+					! item.collapsed
+				);
+			} )() && (
 				<div
 					style={ {
-						padding: 10,
+						padding: '15px 25px',
 						borderTop: '1px solid #e0e0e0',
 					} }
 					className="repeater-item-content"
@@ -115,7 +139,11 @@ const SortableItem = ( {
 						{ ...repeaterProps }
 						attributes={ attribute[ itemIndex ] }
 						setAttributes={ updateAttributes }
-						fields={ field?.fields }
+						fields={
+							isFunction( field.fields )
+								? field?.fields( attribute[ itemIndex ] )
+								: field?.fields
+						}
 					/>
 				</div>
 			) }

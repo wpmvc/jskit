@@ -12,7 +12,7 @@ import { memo } from 'react';
 import { TextFieldProps } from './types';
 import { Text as TextComponent } from '@wpmvc/components';
 
-const Text = memo( ( props: TextFieldProps ) => {
+const Text =  ( props: TextFieldProps ) => {
 	const { field } = props;
 
 	return (
@@ -28,6 +28,6 @@ const Text = memo( ( props: TextFieldProps ) => {
 			labelPosition={ field?.labelPosition }
 		/>
 	);
-}, memoCallback );
+};
 
 export default Text;

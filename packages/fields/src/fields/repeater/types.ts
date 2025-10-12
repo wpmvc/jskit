@@ -22,6 +22,7 @@ export type RepeaterFieldType = BaseField & {
 	allowDuplication?: boolean;
 	hideLabel?: boolean;
 	showHeader?: boolean;
+	isHeaderClickable?: boolean;
 	labelField?: string;
 	addButtonText?: boolean;
 	preventEmpty?: boolean; // default: true
@@ -43,11 +44,13 @@ export type SortableItemProps = {
 	onToggleCollapse: ( id: number ) => void;
 	repeaterProps: RepeaterFieldProps;
 	isDisabledRemove: boolean;
+	isHeaderClickable: boolean;
 };
 
 export type ActionsProps = {
 	onDuplicate: ( id: number ) => void;
 	onRemove: ( id: number ) => void;
+	onToggleCollapse: ( id: number ) => void;
 	item: Item;
 };
 
@@ -60,6 +63,7 @@ export type RepeaterItemHeaderProps = {
 	actionsComponent?: React.ComponentType< ActionsProps >;
 	onDuplicate?: ( id: number ) => void;
 	onRemove?: ( id: number ) => void;
+	onToggleCollapse?: ( id: number ) => void;
 	isDisabledRemove?: boolean;
 	isOverlay?: boolean;
 	dragAttributes?: any;

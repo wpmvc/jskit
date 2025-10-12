@@ -3,15 +3,16 @@ import styled from 'styled-components';
 export const Container = styled.div`
 	width: 100%;
 	max-width: 100%;
-	&.repeater-container-header-active{
-		.repeater-item-list{
+	&.repeater-container-header-active {
+		.repeater-item-list {
 			gap: 0px;
 			max-height: 100%;
+			overflow-y: auto;
 		}
-		.repeater-item{
+		.repeater-item {
 			border: 0px;
-			&:not(:last-child){
-				border-bottom: 1px solid #F0F0F0;
+			&:not( :last-child ) {
+				border-bottom: 1px solid #f0f0f0;
 			}
 		}
 	}
@@ -22,17 +23,18 @@ export const ItemList = styled.div`
 	flex-direction: column;
 	gap: 6px;
 	max-height: 300px;
-	.repeater-item-list__top{
+	overflow-y: auto;
+	.repeater-item-list__top {
 		display: flex;
-    	gap: 15px;
-		background-color: #F9FAFB;
+		gap: 15px;
+		background-color: #f9fafb;
 		.repeater-item-list__top-title,
-		.repeater-item-list__top-field-title{
+		.repeater-item-list__top-field-title {
 			flex: 1;
-			padding: 10px;
+			padding: 15px 10px;
 		}
-		.repeater-item-list__top-action{
-			padding: 10px;
+		.repeater-item-list__top-action {
+			padding: 15px 10px;
 		}
 	}
 `;
@@ -43,34 +45,42 @@ export const ItemContainer = styled.div< { $dragging: number } >`
 	position: relative;
 	background: #fff;
 	border: 1px solid #e0e0e0;
+
 	z-index: ${ ( props ) => ( props.$dragging ? 999 : 1 ) };
 	transition: all 0.2s ease;
 	&.repeater-item--compact {
-		.repeater-item-label{
+		.repeater-item-label {
 			position: absolute;
 			left: 0;
 			top: 50%;
-			transform: translateY(-50%);
+			transform: translateY( -50% );
 		}
-		.repeater-header-content__inner{
-			.repeater-item-label + div{
+		.repeater-header-content__inner {
+			.repeater-item-label + div {
 				position: relative;
 				left: 30px;
 			}
 		}
-		.wpmvc-field:not( .panel-field ){
+		.wpmvc-field:not( .panel-field ) {
 			padding-bottom: 0;
 		}
 	}
-	&.repeater-item--overlay{
-		background-color: #F1F1F1;
+	&.repeater-item--overlay {
+		background-color: #f1f1f1;
 	}
-	&.repeater-item--dragging{
-		opacity: .4;
+	&.repeater-item--dragging {
+		opacity: 0.4;
 	}
-	.repeater-item{
-		&:not(:last-child){
+	.repeater-item {
+		&:not( :last-child ) {
 			margin-bottom: 8px;
+		}
+	}
+	.repeater-item-content {
+		.wpmvc-field {
+			&:not( :last-child ) {
+				margin-bottom: 15px;
+			}
 		}
 	}
 `;
@@ -87,10 +97,10 @@ export const ItemHeader = styled.div< { $fixed: string } >`
 			width: 102px;
 		}
 	}
-	&.repeater-top-header-active{
-		.repeater-header-content__inner{
-			.wpmvc-field{
-				flex: 1
+	&.repeater-top-header-active {
+		.repeater-header-content__inner {
+			.wpmvc-field {
+				flex: 1;
 			}
 		}
 	}
@@ -98,23 +108,23 @@ export const ItemHeader = styled.div< { $fixed: string } >`
 
 export const ItemHeaderContent = styled.div`
 	flex: 1;
-	.repeater-header-content__inner{
+	.repeater-header-content__inner {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		box-sizing: border-box;
 		width: 100%;
 		gap: 15px;
+		padding: 8px 0;
 		.repeater-item-label {
 			display: flex;
 			align-items: center;
-			// flex: none;
 		}
 	}
 	.repeater-item-label {
 		font-weight: 500;
 		color: #1e1e1e;
-		padding: 9px 9px 9px 0;
+		padding: 0;
 		word-wrap: break-word;
 		word-break: break-word;
 		flex: 1;
@@ -153,7 +163,6 @@ export const ButtonBase = styled.div`
 	cursor: pointer;
 	display: flex;
 	align-items: center;
-	padding: 6px;
 	color: #888;
 	transition: color 0.2s ease;
 
@@ -169,7 +178,6 @@ export const SortButton = styled( ButtonBase )`
 `;
 
 export const Action = styled( ButtonBase )`
-	padding: 10px;
 	&.copy {
 		border-left: 1px solid #e0e0e0;
 	}
