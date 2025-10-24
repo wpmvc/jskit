@@ -120,6 +120,11 @@ export default function SelectComponent( props: props ) {
 				IndicatorSeparator: () => null,
 			} }
 			styles={ {
+				menu: ( base ) => ( {
+					...base,
+					zIndex: 10,
+					...styles?.menu,
+				} ),
 				menuPortal: ( base ) => ( {
 					...base,
 					zIndex: 100000,

@@ -9,6 +9,7 @@ import { ColorWrapper } from '@wpmvc/colors';
 export default function Modal( {
 	isOpen,
 	title,
+	className = '',
 	onClose,
 	size,
 	children,
@@ -40,6 +41,7 @@ export default function Modal( {
 		isOpen && (
 			<StyledModal
 				title={ title }
+				className={ className }
 				onRequestClose={ onClose }
 				size={ size }
 				headerActions={ <ModalHeaderActions /> }

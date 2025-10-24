@@ -2,6 +2,7 @@ export type ModalTypes = {
 	isOpen: boolean;
 	onClose: () => void;
 	title: string;
+	className?: string;
 	children: React.ReactNode;
 	size?: 'small' | 'medium' | 'large' | 'fill';
 	footer?: React.ReactNode | null | JSX.Element;
