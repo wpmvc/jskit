@@ -1,6 +1,6 @@
 {
   "name": "@wpmvc/fields",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "Reusable fields package for WordPress MVC JSKit.",
   "author": "Md Al Amin",
   "license": "MIT",
@@ -45,7 +45,7 @@
     "@wordpress/i18n": "^6.6.0",
     "@wordpress/icons": "^11.0.0",
     "@wpmvc/classic-editor": "^0.0.5",
-    "@wpmvc/components": "^0.0.26",
+    "@wpmvc/components": "^0.0.27",
     "clsx": "^2.1.1",
     "lodash": "^4.17.21",
     "react-select": "^5.10.2",

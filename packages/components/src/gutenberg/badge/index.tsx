@@ -5,9 +5,14 @@ export default function Badge( {
 	children,
 	className,
 	variant = 'default',
+	style,
 }: BadgeProps ) {
 	return (
-		<BadgeStyle $variant={ variant } className={ className }>
+		<BadgeStyle
+			$variant={ variant }
+			className={ className }
+			style={ style }
+		>
 			<BadgeContent>{ children }</BadgeContent>
 		</BadgeStyle>
 	);
