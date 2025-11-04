@@ -98,6 +98,7 @@ export default function SelectComponent( props: props ) {
 			onChange( ( newValue as any )?.value ?? null );
 		}
 	};
+	
 
 	return (
 		<Select
@@ -108,10 +109,8 @@ export default function SelectComponent( props: props ) {
 			isLoading={ isLoading }
 			menuIsOpen={ menuIsOpen || undefined }
 			classNamePrefix={ props.classNamePrefix || 'wpmvc' }
-			menuPosition={ props?.menuPosition }
-			menuPortalTarget={
-				props?.menuPosition === 'fixed' ? document.body : undefined
-			}
+			menuPosition={ props?.menuPosition || 'fixed' }
+			menuPortalTarget={ document.body }
 			onMenuOpen={ () => setMenuIsOpen( true ) }
 			onMenuClose={ () => setMenuIsOpen( false ) }
 			components={ {
