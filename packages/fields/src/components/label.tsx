@@ -1,11 +1,21 @@
-// @ts-ignore
-import { DropdownMenu } from '@wordpress/components';
-import styled from 'styled-components';
+/**
+ * WordPress dependencies
+ */
 import { __ } from '@wordpress/i18n';
-import { values, omit } from 'lodash';
-import { CommonFieldProps, Device } from '../types/field';
+import { DropdownMenu } from '@wordpress/components';
 import { DropdownOption } from '@wordpress/components/build-types/dropdown-menu/types';
+
+/**
+ * External dependencies
+ */
 import { Badge } from '@wpmvc/components';
+import styled from 'styled-components';
+import { values, omit } from 'lodash';
+
+/**
+ * Internal dependencies
+ */
+import { CommonFieldProps, Device } from '../types/field';
 
 type ResponsiveProps = {
 	device?: Device;
