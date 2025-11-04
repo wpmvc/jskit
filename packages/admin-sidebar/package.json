@@ -41,6 +41,7 @@
 	"dependencies": {
 		"@wordpress/data": "^10.26.0",
 		"@wordpress/viewport": "^6.26.0",
-		"react-router-dom": "^7.6.3"
+		"react-router-dom": "^7.6.3",
+		"vite": "^7.1.10"
 	}
 }

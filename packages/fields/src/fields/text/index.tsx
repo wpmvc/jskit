@@ -12,7 +12,7 @@ import { memo } from 'react';
 import { TextFieldProps } from './types';
 import { Text as TextComponent } from '@wpmvc/components';
 
-const Text =  ( props: TextFieldProps ) => {
+const Text = ( props: TextFieldProps ) => {
 	const { field } = props;
 
 	return (

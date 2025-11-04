@@ -22,30 +22,30 @@ export default function PickColor( {
 	}
 
 	return (
-		<div className="formgent-field-color-picker">
-			<span className="formgent-field-label">{ field.label }</span>
+		<div className="wpmvc-field-color-picker">
+			<span className="wpmvc-field-label">{ field.label }</span>
 
 			<Dropdown
-				className="formgent-field-color-picker-dropdown"
-				contentClassName="formgent-field-color-picker-dropdown-content"
+				className="wpmvc-field-color-picker-dropdown"
+				contentClassName="wpmvc-field-color-picker-dropdown-content"
 				popoverProps={ dropdownProps() }
 				renderToggle={ ( { isOpen, onToggle }: any ) => (
 					<Button
 						onClick={ onToggle }
 						aria-expanded={ isOpen }
-						className="formgent-field-color-picker-trigger"
+						className="wpmvc-field-color-picker-trigger"
 					>
-						<span className="formgent-field-color-picker-value">
+						<span className="wpmvc-field-color-picker-value">
 							{ attributes[ attrKey ] }
 						</span>
 						<span
-							className="formgent-field-color-picker-color"
+							className="wpmvc-field-color-picker-color"
 							style={ { background: attributes[ attrKey ] } }
 						></span>
 					</Button>
 				) }
 				renderContent={ () => (
-					<div className="formgent-field-color-picker-input">
+					<div className="wpmvc-field-color-picker-input">
 						<ColorPicker
 							color={ attributes[ attrKey ] }
 							onChange={ ( value: string ) => {
