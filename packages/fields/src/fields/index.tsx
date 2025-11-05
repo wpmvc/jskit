@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { ComponentType, Fragment } from '@wordpress/element';
+import { Fragment } from '@wordpress/element';
 
 /**
  * External dependencies
@@ -40,10 +40,7 @@ import ClassicEditor from './classic-editor';
  * Mapping of field types to their respective components
  * Sorted by field type for consistent rendering order
  */
-const defaultComponents: {
-	//@ts-ignore
-	[ key: string ]: ComponentType< FieldProps >;
-} = {
+const defaultComponents = {
 	text: Text,
 	number: Number,
 	switch: Switch,

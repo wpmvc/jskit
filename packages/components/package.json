@@ -1,6 +1,6 @@
 {
   "name": "@wpmvc/components",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "description": "Reusable components package for WordPress MVC JSKit.",
   "author": "Md Al Amin",
   "license": "MIT",
@@ -55,6 +55,6 @@
     "@wordpress/scripts": "^30.27.0",
     "path": "^0.12.7",
     "typescript": "^5.9.3",
-    "vite": "^7.1.12"
+    "vite": "^7.2.0"
   }
 }

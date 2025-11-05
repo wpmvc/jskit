@@ -2,9 +2,14 @@
  * WordPress dependencies
  */
 import { Dropdown, MenuItem } from '@wordpress/components';
+
+/**
+ * Internal dependencies
+ */
 import { StyledInputContainer, StyledInputField, StyledMenuGroup } from './styles';
 import { InputProps } from './types';
 import EllipseHIcon from './ellipse-h-icon';
+
 export default function Text( props: InputProps ) {
 	const { variables = [], onChange, value, ...rest } = props;
 	

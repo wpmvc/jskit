@@ -66,14 +66,14 @@ export function isDisabled( fieldProps: FieldProps ): boolean {
 	return !! field.disabled;
 }
 
-export function memoCallback(
-	prevProps: FieldProps,
-	nextProps: FieldProps
-): boolean {
-	return (
-		prevProps.attributes[ prevProps.attrKey ] ===
-			nextProps.attributes[ nextProps.attrKey ] &&
-		prevProps.device === nextProps.device &&
-		isDisabled( prevProps ) === isDisabled( nextProps )
-	);
-}
+// export function memoCallback(
+// 	prevProps: FieldProps,
+// 	nextProps: FieldProps
+// ): boolean {
+// 	return (
+// 		prevProps.attributes[ prevProps.attrKey ] ===
+// 			nextProps.attributes[ nextProps.attrKey ] &&
+// 		prevProps.device === nextProps.device &&
+// 		isDisabled( prevProps ) === isDisabled( nextProps )
+// 	);
+// }

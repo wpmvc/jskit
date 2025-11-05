@@ -4,11 +4,9 @@
 import {
 	getValue,
 	isDisabled,
-	memoCallback,
 	updateAttribute,
 } from '../../utils';
 import Label from '../../components/label';
-import { memo } from 'react';
 import { TextFieldProps } from './types';
 import { Text as TextComponent } from '@wpmvc/components';
 
