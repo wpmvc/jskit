@@ -26,6 +26,10 @@ const Text =  ( props: TextFieldProps ) => {
 			onClick={ ( event: React.MouseEvent ) => event.stopPropagation() }
 			required={ field?.required }
 			labelPosition={ field?.labelPosition }
+			variables={ field.variables }
+			onVariableSelect={ ( variableValue: string ) => {
+				console.log( 'Variable selected:', variableValue );
+			} }
 		/>
 	);
 };
