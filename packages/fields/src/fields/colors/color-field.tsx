@@ -1,18 +1,23 @@
 /**
  * WordPress dependencies
  */
+import { __ } from '@wordpress/i18n';
 import {
 	BaseControl,
 	ColorPalette,
 	GradientPicker,
 	__experimentalVStack as VStack,
+	__experimentalToggleGroupControl as ToggleGroupControl,
+	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from '@wordpress/components';
 
-export default function ColorField( { onChange, value, colors }: any ) {
-	const showTitle = false;
-	const label = 'Hello';
-	const isGradient = false;
-
+export default function ColorField( {
+	onChange,
+	value,
+	colors,
+	isGradientEnabled,
+}: any ) {
+	const isGradient = value.search( 'gradient' ) !== -1;
 	return (
 		<BaseControl
 			__nextHasNoMarginBottom
@@ -20,38 +25,45 @@ export default function ColorField( { onChange, value, colors }: any ) {
 		>
 			<fieldset className="block-editor-color-gradient-control__fieldset">
 				<VStack spacing={ 1 }>
-					{ showTitle && (
-						<legend>
-							<div className="block-editor-color-gradient-control__color-indicator">
-								<BaseControl.VisualLabel>
-									{ label }
-								</BaseControl.VisualLabel>
-							</div>
-						</legend>
-					) }
 					<div className="block-editor-color-gradient-control__panel">
-						{ isGradient ? (
+						{ isGradientEnabled && (
+							<ToggleGroupControl
+								label=""
+								onChange={ ( value: any ) => {
+									if ( value === 'gradient' ) {
+										onChange(
+											'linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%)'
+										);
+									} else {
+										onChange( '#ffffff' );
+									}
+								} }
+								value={ isGradient ? 'gradient' : 'solid' }
+								style={ {
+									border: '1px solid var(--wp-components-color-gray-600, #0003)',
+									marginTop: '-12px',
+								} }
+							>
+								<ToggleGroupControlOption
+									value="solid"
+									label={ __( 'Solid' ) }
+								/>
+								<ToggleGroupControlOption
+									value="gradient"
+									label={ __( 'Gradient' ) }
+								/>
+							</ToggleGroupControl>
+						) }
+						{ isGradientEnabled && isGradient ? (
 							<GradientPicker
 								onChange={ onChange }
 								value={ value }
-								__experimentalIsRenderedInSidebar={ true }
-								headingLevel={ 3 }
-								clearable={ true }
 							/>
 						) : (
 							<ColorPalette
 								__experimentalIsRenderedInSidebar={ true }
 								onChange={ onChange }
 								value={ value }
-								// onChange={
-								// 	canChooseAGradient
-								// 		? (newColor) => {
-								// 				onColorChange(newColor);
-								// 				onGradientChange();
-								// 			}
-								// 		: onColorChange
-								// }
-								// {...{ colors, disableCustomColors }}
 								colors={ colors }
 								clearable={ true }
 								enableAlpha={ true }

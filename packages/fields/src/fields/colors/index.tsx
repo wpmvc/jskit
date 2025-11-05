@@ -102,9 +102,7 @@ export default function Colors( {
 			<div className="color-block-support-panel__inner-wrapper">
 				{ Object.keys( field.items ).map( ( name ) => {
 					const element = field.items[ name ];
-					element.name = name;
-					const elementColors =
-						attributes[ attrKey ]?.[ element.name ] ?? {};
+					const elementColors = attributes[ attrKey ]?.[ name ] ?? {};
 					const { label } = element;
 
 					return (
@@ -143,6 +141,7 @@ export default function Colors( {
 									return (
 										<Popover
 											element={ element }
+											variationKey={ name }
 											attrKey={ attrKey }
 											attributes={ attributes }
 											setAttributes={ setAttributes }
