@@ -6,10 +6,9 @@ import { StyledInputContainer, StyledInputField, StyledMenuGroup } from './style
 import { InputProps } from './types';
 import EllipseHIcon from './ellipse-h-icon';
 export default function Text( props: InputProps ) {
-	const { variables = [], onVariableSelect, onChange, value, ...rest } = props;
+	const { variables = [], onChange, value, ...rest } = props;
 	
 	const handleSelect = ( variableValue: string ) => {
-		onVariableSelect?.( variableValue );
 		// Optional: append variable to input value
 		if ( onChange ) {
 			onChange( value ? `${ value } ${ variableValue }` : variableValue );

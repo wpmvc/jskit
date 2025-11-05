@@ -8,5 +8,4 @@ export type InputProps = Omit<InputControlProps, 'help'> & {
 		label: string;
 		value: string;
 	}[];
-	onVariableSelect?: (variableValue: string) => void;
 };

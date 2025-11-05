@@ -27,9 +27,6 @@ const Text = ( props: TextFieldProps ) => {
 			required={ field?.required }
 			labelPosition={ field?.labelPosition }
 			variables={ field.variables }
-			onVariableSelect={ ( variableValue: string ) => {
-				console.log( 'Variable selected:', variableValue );
-			} }
 		/>
 	);
 };
