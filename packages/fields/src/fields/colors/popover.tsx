@@ -10,15 +10,25 @@ import { useMemo } from '@wordpress/element';
  */
 import ColorField from './color-field';
 import TabPanel from './style';
+import { ColorItem } from './types';
 
 export default function Popover( {
 	element,
 	attrKey,
+	variationKey,
 	attributes,
 	setAttributes,
 	elementColors,
 	preset,
-}: any ) {
+}: {
+	element: ColorItem;
+	attrKey: string;
+	variationKey: string;
+	attributes: Record< string, any >;
+	setAttributes: ( attributes: Record< string, any > ) => void;
+	elementColors: Record< string, any >;
+	preset: Record< string, any >;
+} ) {
 	const { colors } = element;
 
 	const tabs = useMemo( () => {
@@ -33,15 +43,11 @@ export default function Popover( {
 		return tabs;
 	}, [] );
 
-	// const onSelect = (tabName) => {
-	// 	console.log('Selecting tab', tabName);
-	// };
-
 	const onChange = ( colorKey: any, value: any ) => {
 		setAttributes( {
 			[ attrKey ]: {
 				...attributes[ attrKey ],
-				[ element.name ]: {
+				[ variationKey ]: {
 					...elementColors,
 					[ colorKey ]: value ?? '',
 				},
@@ -59,6 +65,7 @@ export default function Popover( {
 						}
 						value={ elementColors?.[ tabs[ 0 ].name ] }
 						colors={ preset }
+						isGradientEnabled={ element.isGradient }
 					/>
 				) : (
 					<TabPanel
@@ -75,6 +82,7 @@ export default function Popover( {
 								}
 								value={ elementColors?.[ tab.name ] }
 								colors={ preset }
+								isGradientEnabled={ element.isGradient }
 							/>
 						) }
 					</TabPanel>

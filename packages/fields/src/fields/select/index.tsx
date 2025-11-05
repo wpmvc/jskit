@@ -36,7 +36,9 @@ export default function Select( props: SelectFieldProps ) {
 				<SelectComponent
 					value={ value }
 					options={ normalizedOptions }
-					onChange={ ( value: any ) => updateAttribute( value, props ) }
+					onChange={ ( value: any ) =>
+						updateAttribute( value, props )
+					}
 					className={ field?.select?.className }
 					classNamePrefix={ field?.select?.classNamePrefix }
 					isDisabled={ isDisabled( props ) }

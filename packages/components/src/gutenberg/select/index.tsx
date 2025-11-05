@@ -98,7 +98,6 @@ export default function SelectComponent( props: props ) {
 			onChange( ( newValue as any )?.value ?? null );
 		}
 	};
-	
 
 	return (
 		<Select

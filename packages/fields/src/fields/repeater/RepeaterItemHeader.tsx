@@ -44,20 +44,20 @@ export function RepeaterItemHeader( props: RepeaterItemHeaderProps ) {
 					) }
 				</span>
 
-			{ quickFields && (
-				<div
-					onClick={ ( e ) => e.stopPropagation() }
-					onMouseDown={ ( e ) => e.stopPropagation() }
-					style={ { display: 'contents' } }
-				>
-					<PrivateFields
-						{ ...repeaterProps }
-						attributes={ item }
-						setAttributes={ setAttributes }
-						fields={ quickFields }
-					/>
-				</div>
-			) }
+				{ quickFields && (
+					<div
+						onClick={ ( e ) => e.stopPropagation() }
+						onMouseDown={ ( e ) => e.stopPropagation() }
+						style={ { display: 'contents' } }
+					>
+						<PrivateFields
+							{ ...repeaterProps }
+							attributes={ item }
+							setAttributes={ setAttributes }
+							fields={ quickFields }
+						/>
+					</div>
+				) }
 
 				{ ActionsComponent && (
 					<ItemHeaderActions className="header-actions">
