@@ -8,14 +8,10 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import Label from '../../components/label';
-import {
-	getValue,
-	isDisabled,
-	updateAttribute,
-} from '../../utils';
+import { getValue, isDisabled, updateAttribute } from '../../utils';
 import { SliderFieldProps } from './types';
 
-const Slider =  ( props: SliderFieldProps ) => {
+const Slider = ( props: SliderFieldProps ) => {
 	const { field } = props;
 
 	const { max = 100, min = 0 } = field;
@@ -35,6 +31,6 @@ const Slider =  ( props: SliderFieldProps ) => {
 			description={ field.description }
 		/>
 	);
-}
+};
 
 export default Slider;

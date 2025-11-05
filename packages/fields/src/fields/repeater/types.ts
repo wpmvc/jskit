@@ -30,6 +30,7 @@ export type RepeaterFieldType = BaseField & {
 	actions?: () => React.ReactElement;
 	className?: string;
 	showActionTooltip?: boolean;
+	quickFields?: FieldsType;
 };
 
 export type RepeaterFieldProps = BaseFieldProps & {
@@ -44,7 +45,7 @@ export type SortableItemProps = {
 	onToggleCollapse: ( id: number ) => void;
 	repeaterProps: RepeaterFieldProps;
 	isDisabledRemove: boolean;
-	isHeaderClickable: boolean;
+	isHeaderClickable?: boolean;
 };
 
 export type ActionsProps = {
@@ -58,7 +59,7 @@ export type RepeaterItemHeaderProps = {
 	item: Item;
 	field: RepeaterFieldType;
 	repeaterProps: RepeaterFieldProps;
-	quickFields?: any;
+	quickFields?: FieldsType;
 	setAttributes: ( attrs: any ) => void;
 	actionsComponent?: React.ComponentType< ActionsProps >;
 	onDuplicate?: ( id: number ) => void;

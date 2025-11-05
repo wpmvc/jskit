@@ -63,16 +63,6 @@ export default function Repeater( props: RepeaterFieldProps ) {
 	const [ newItemAdded, setNewItemAdded ] = useState( false );
 	const [ activeId, setActiveId ] = useState< number | null >( null );
 	const [ overlayWidth, setOverlayWidth ] = useState< number | null >( null );
-	const noop = useCallback( () => {}, [] );
-	const getLabel = useCallback(
-		( it: Item ) =>
-			field?.hideLabel
-				? null
-				: it[ field?.labelField ?? 'defaultField' ] ??
-				  `Item #${ it.id }`,
-		[ field ]
-	);
-
 	const quickFields = useQuickFields( field );
 
 	const ActionsComponent = field?.actions as unknown as
@@ -113,6 +103,7 @@ export default function Repeater( props: RepeaterFieldProps ) {
 		},
 		[ attribute, setAttributes, attrKey ]
 	);
+
 	const handleDragCancel = useCallback( () => {
 		setActiveId( null );
 		setOverlayWidth( null );
@@ -144,14 +135,14 @@ export default function Repeater( props: RepeaterFieldProps ) {
 						field={ field }
 						repeaterProps={ props }
 						quickFields={ quickFields }
-						setAttributes={ noop }
+						setAttributes={ () => {} }
 						actionsComponent={ ActionsComponent }
 						isOverlay={ true }
 					/>
 				</ItemHeader>
 			</ItemContainer>
 		);
-	}, [ activeId, attribute, quickFields, overlayWidth, field, noop, props ] );
+	}, [ activeId, attribute, quickFields, overlayWidth, field, props ] );
 
 	useEffect( () => {
 		if ( newItemAdded && itemListRef.current ) {

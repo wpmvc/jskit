@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n';
 import { values, omit } from 'lodash';
 import { CommonFieldProps, Device } from '../types/field';
 import { DropdownOption } from '@wordpress/components/build-types/dropdown-menu/types';
-import ProBadge from './pro-badge';
+import { Badge } from '@wpmvc/components';
 
 type ResponsiveProps = {
 	device?: Device;
@@ -87,12 +87,20 @@ const StyledLabel = styled.span`
 	padding: 0px;
 `;
 
-export default function Label( { field, ...props }: CommonFieldProps ) {
+export default function Label( {
+	field,
+	isProAvailable,
+	...props
+}: CommonFieldProps ) {
 	return (
 		<div>
 			<StyledLabel>{ field.label }</StyledLabel>
 			{ field?.isResponsive && <Responsive { ...props } /> }
-			{ field?.isPro && <ProBadge /> }
+			{ field?.isPro && ! isProAvailable && (
+				<Badge variant="warning" style={ { marginLeft: '6px' } }>
+					{ __( 'Pro' ) }
+				</Badge>
+			) }
 		</div>
 	);
 }
