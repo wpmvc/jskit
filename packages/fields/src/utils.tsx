@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { has } from 'lodash';
+import { has, isEmpty, isObject } from 'lodash';
 import { FieldProps } from './types/field';
 
 export function isResponsive( fieldProps: FieldProps ): boolean {
@@ -17,9 +17,16 @@ export function getValue(
 	// @ts-ignore
 	if ( isResponsive( fieldProps ) ) {
 		if ( device !== undefined && device !== null ) {
-			return attributes[ attrKey ]?.[ device ] ?? defaultValue;
+			return (
+				attributes[ attrKey ]?.[ device ] ??
+				attributes[ attrKey ] ??
+				defaultValue
+			);
 		}
-		return defaultValue;
+
+		return ! isEmpty( attributes[ attrKey ] )
+			? attributes[ attrKey ]
+			: defaultValue;
 	}
 	return attributes[ attrKey ];
 }
@@ -29,11 +36,50 @@ export function updateAttribute( value: any, fieldProps: FieldProps ) {
 		return;
 	}
 
-	const { attrKey, setAttributes, attributes, device, field } = fieldProps;
+	const { attrKey, setAttributes, attributes, device, field, metaData } =
+		fieldProps;
+	const defaultValues = metaData?.attributes[ attrKey ]?.default;
 
-	const updatedValues = isResponsive( fieldProps )
-		? { ...attributes[ attrKey ], [ device as string ]: value }
-		: value;
+	let updatedValues = {} as any;
+
+	if ( isResponsive( fieldProps ) ) {
+		if ( ! defaultValues?.desktop ) {
+			if ( isObject( value ) ) {
+				value = {
+					...( defaultValues || {} ),
+					...value,
+				};
+			} else {
+				value = defaultValues;
+			}
+		}
+
+		let attribute = attributes[ attrKey ] || {};
+
+		if ( isObject( value ) ) {
+			updatedValues = {
+				desktop: attribute?.desktop ?? {},
+				tablet: attribute?.tablet ?? {},
+				mobile: attribute?.mobile ?? {},
+				[ device as string ]: value ?? {},
+			};
+		} else {
+			updatedValues = {
+				desktop: attribute?.desktop ?? null,
+				tablet: attribute?.tablet ?? null,
+				mobile: attribute?.mobile ?? null,
+				[ device as string ]: value ?? null,
+			};
+		}
+	} else {
+		if ( isObject( value ) ) {
+			value = {
+				...( defaultValues || {} ),
+				...value,
+			};
+		}
+		updatedValues = value;
+	}
 
 	setAttributes( {
 		[ attrKey ]: updatedValues,

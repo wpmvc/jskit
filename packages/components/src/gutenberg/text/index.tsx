@@ -6,13 +6,17 @@ import { Dropdown, MenuItem } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { StyledInputContainer, StyledInputField, StyledMenuGroup } from './styles';
+import {
+	StyledInputContainer,
+	StyledInputField,
+	StyledMenuGroup,
+} from './styles';
 import { InputProps } from './types';
 import EllipseHIcon from './ellipse-h-icon';
 
 export default function Text( props: InputProps ) {
 	const { variables = [], onChange, value, ...rest } = props;
-	
+
 	const handleSelect = ( variableValue: string ) => {
 		// Optional: append variable to input value
 		if ( onChange ) {
@@ -31,24 +35,40 @@ export default function Text( props: InputProps ) {
 				size="default"
 				__next40pxDefaultSize
 			/>
-			{ !!variables.length && (
+			{ !! variables.length && (
 				<Dropdown
-					popoverProps={{ placement: 'bottom-end' }}
+					popoverProps={ { placement: 'bottom-end' } }
 					renderToggle={ ( { onToggle } ) => (
-						<span className="wpmvc-text-toggle" onClick={ onToggle }><EllipseHIcon /></span>
+						<span
+							className="wpmvc-text-toggle"
+							onClick={ onToggle }
+						>
+							<EllipseHIcon />
+						</span>
 					) }
 					renderContent={ () => (
-							<StyledMenuGroup>
-								{ variables.map( ( variable: { value: string, label: string } ) => (
+						<StyledMenuGroup>
+							{ variables.map(
+								( variable: {
+									value: string;
+									label: string;
+								} ) => (
 									<MenuItem
 										key={ variable.value }
-										onClick={ () => handleSelect( variable.value ?? '' ) }
+										onClick={ () =>
+											handleSelect( variable.value ?? '' )
+										}
 									>
-										<span className="components-menu-item__item-label">{ variable.label ?? '' }</span>
-										<span className="components-menu-item__item-value">{ variable.value ?? '' }</span>
+										<span className="components-menu-item__item-label">
+											{ variable.label ?? '' }
+										</span>
+										<span className="components-menu-item__item-value">
+											{ variable.value ?? '' }
+										</span>
 									</MenuItem>
-								) ) }
-							</StyledMenuGroup>
+								)
+							) }
+						</StyledMenuGroup>
 					) }
 				/>
 			) }

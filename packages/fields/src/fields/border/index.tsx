@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import {
-	__experimentalBorderBoxControl as BorderBoxControl,
+	BorderBoxControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 } from '@wordpress/components';

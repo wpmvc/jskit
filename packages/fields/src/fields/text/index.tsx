@@ -1,11 +1,7 @@
 /**
  * Internal dependencies
  */
-import {
-	getValue,
-	isDisabled,
-	updateAttribute,
-} from '../../utils';
+import { getValue, isDisabled, updateAttribute } from '../../utils';
 import Label from '../../components/label';
 import { TextFieldProps } from './types';
 import { Text as TextComponent } from '@wpmvc/components';
