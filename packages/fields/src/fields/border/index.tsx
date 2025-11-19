@@ -78,8 +78,6 @@ export default function Border( props: BorderFieldProps ): JSX.Element {
 					? {
 							paddingLeft: 0,
 							paddingRight: 0,
-							paddingTop: 0,
-							border: 0,
 					  }
 					: {}
 			}
