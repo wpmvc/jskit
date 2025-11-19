@@ -56,7 +56,7 @@ export function updateAttribute( value: any, fieldProps: FieldProps ) {
 
 		let attribute = attributes[ attrKey ] || {};
 
-		if ( isObject( value ) ) {
+		if ( isObject( value ) && ! Array.isArray( value ) ) {
 			updatedValues = {
 				desktop: attribute?.desktop ?? {},
 				tablet: attribute?.tablet ?? {},
@@ -72,7 +72,7 @@ export function updateAttribute( value: any, fieldProps: FieldProps ) {
 			};
 		}
 	} else {
-		if ( isObject( value ) ) {
+		if ( isObject( value ) && ! Array.isArray( value ) ) {
 			value = {
 				...( defaultValues || {} ),
 				...value,
