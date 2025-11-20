@@ -1,6 +1,6 @@
 {
   "name": "@wpmvc/fields",
-  "version": "0.0.36",
+  "version": "0.0.37",
   "description": "Reusable fields package for WordPress MVC JSKit.",
   "author": "Md Al Amin",
   "license": "MIT",
