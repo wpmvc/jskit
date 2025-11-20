@@ -157,9 +157,9 @@ export default function Repeater( props: RepeaterFieldProps ) {
 
 	const addItem = useCallback( () => {
 		const newItem = {
-			id: getMaxId( attribute ) + 1,
 			label: 'New Item',
-			value: Date.now(),
+			...field?.itemDefaultAttributes,
+			id: getMaxId( attribute ) + 1,
 			collapsed: true,
 		};
 		const newAttributes = [ ...attribute, newItem ];

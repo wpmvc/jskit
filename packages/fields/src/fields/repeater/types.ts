@@ -31,6 +31,7 @@ export type RepeaterFieldType = BaseField & {
 	className?: string;
 	showActionTooltip?: boolean;
 	quickFields?: FieldsType;
+	itemDefaultAttributes?: Record<string, any>;
 };
 
 export type RepeaterFieldProps = BaseFieldProps & {
