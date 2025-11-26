@@ -49,8 +49,6 @@ export function updateAttribute( value: any, fieldProps: FieldProps ) {
 					...( defaultValues || {} ),
 					...value,
 				};
-			} else {
-				value = defaultValues;
 			}
 		}
 
@@ -65,10 +63,10 @@ export function updateAttribute( value: any, fieldProps: FieldProps ) {
 			};
 		} else {
 			updatedValues = {
-				desktop: attribute?.desktop ?? null,
-				tablet: attribute?.tablet ?? null,
-				mobile: attribute?.mobile ?? null,
-				[ device as string ]: value ?? null,
+				desktop: attribute?.desktop,
+				tablet: attribute?.tablet,
+				mobile: attribute?.mobile,
+				[ device as string ]: value,
 			};
 		}
 	} else {
